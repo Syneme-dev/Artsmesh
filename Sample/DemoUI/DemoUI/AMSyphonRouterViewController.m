@@ -27,6 +27,7 @@
     NSMutableArray*         _serverNames;
     NSMutableArray*         _selectedNamesByClients;
     NSMutableDictionary*    _serverNamesChannels;
+    NSMutableArray*         _clientChannels;
 }
 
 
@@ -119,7 +120,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 {
     _serverNamesChannels = [[NSMutableDictionary alloc] initWithCapacity:10];
     
-    int interval = 4;
+    int interval = 5;
     _serverNames = [[NSMutableArray alloc] initWithCapacity:10];
     [AMSyphonUtility getSyphonDeviceList:_serverNames];
     
@@ -167,8 +168,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     _selectedNamesByClients = [[NSMutableArray alloc] initWithCapacity:10];
     [AMSyphonClientsManager selectedSyphonServerNames:_selectedNamesByClients];
     
-    NSMutableArray* clientChannels = [[NSMutableArray alloc] initWithCapacity:5];
-
+    _clientChannels = [[NSMutableArray alloc] initWithCapacity:5];
     
     //SELF Area of placeholder.
     for(int i = 0; i < [_selectedNamesByClients count]; i++){
@@ -186,13 +186,41 @@ shouldRemoveDevice:(NSString *)deviceID;
             clientChannel.channelName  = serverName;
             clientChannel.type         = AMSourceChannel;
         }
-        [clientChannels addObject:clientChannel];
+        
+        [_clientChannels addObject:clientChannel];
     }
     
-    [routeView associateChannels:clientChannels
+    [routeView associateChannels:_clientChannels
                       withDevice:@"Mixer Channel"
                             name:@"Mixer Channel"
                        removable:NO];
+
+    [self clientsConnectServers];
+}
+
+
+-(void) clientsConnectServers
+{
+    if(_selectedNamesByClients == nil || _serverNamesChannels == nil)
+        return;
+    
+    AMSyphonRouterView* routeView = (AMSyphonRouterView*)self.view;
+    
+    for (int i = 0; i < [_clientChannels count]; i++) {
+        AMChannel* clientChannel = [_clientChannels objectAtIndex:i];
+        
+        NSString* serverName = clientChannel.deviceID;
+        NSArray* serverChannels = [_serverNamesChannels objectForKey:serverName];
+        if(clientChannel != nil || serverChannels != nil){
+            if(i >= [serverChannels count])
+                continue;
+            AMChannel* serverChannel = [serverChannels objectAtIndex:i];
+            if(serverChannel != nil){
+                [routeView connectChannel:clientChannel toChannel:serverChannel];
+            }
+        }
+ 
+    }
 }
 
 

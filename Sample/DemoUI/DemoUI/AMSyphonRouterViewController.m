@@ -16,6 +16,7 @@
 #import "AMSyphonClientsManager.h"
 
 
+
 @interface AMSyphonRouterViewController ()  <NSPopoverDelegate>
 @end
 
@@ -118,10 +119,10 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void) refreshSyphonServers
 {
-    _serverNamesChannels = [[NSMutableDictionary alloc] initWithCapacity:10];
+    _serverNamesChannels = [[NSMutableDictionary alloc] initWithCapacity:syphonServerCount];
     
     int interval = 5;
-    _serverNames = [[NSMutableArray alloc] initWithCapacity:10];
+    _serverNames = [[NSMutableArray alloc] initWithCapacity:syphonServerCount];
     [AMSyphonUtility getSyphonDeviceList:_serverNames];
     
     AMSyphonRouterView* routeView = (AMSyphonRouterView*)self.view;
@@ -219,7 +220,6 @@ shouldRemoveDevice:(NSString *)deviceID;
                 [routeView connectChannel:clientChannel toChannel:serverChannel];
             }
         }
- 
     }
 }
 

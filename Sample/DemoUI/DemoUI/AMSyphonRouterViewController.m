@@ -192,8 +192,8 @@ shouldRemoveDevice:(NSString *)deviceID;
     }
     
     [routeView associateChannels:_clientChannels
-                      withDevice:@"Mixer Channel"
-                            name:@"Mixer Channel"
+                      withDevice:@"AM-SYPHON"
+                            name:@"AM-SYPHON"
                        removable:NO];
 
     [self clientsConnectServers];

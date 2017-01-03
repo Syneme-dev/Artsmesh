@@ -5,12 +5,11 @@
 //  Copyright (c) 2016 AM. All rights reserved.
 //
 
-#import "AMVideoRouteViewController.h"
-#import "AMVideoConfigWindow.h"
+
+
 #import "AMChannel.h"
 #import "AMSyphonRouterViewController.h"
 #import "AMPreferenceManager/AMPreferenceManager.h"
-#import "AMFFmpeg.h"
 #import "AMVideoDeviceManager.h"
 #import "AMSyphonUtility.h"
 #import "AMSyphonClientsManager.h"
@@ -58,36 +57,30 @@ shouldDisonnectChannel:(AMChannel *)channel1
 disconnectChannel:(AMChannel *)channel1
       fromChannel:(AMChannel *)channel2
 {
+    
+    
     return YES;
 }
 
-- (void)stopChannelFFmpegProcess: (NSString*) processID {
-    // Kill ffmpeg connection by process id
-//    [_ffmpegManager stopFFmpegInstance:processID];
-}
-
-- (void)stopAllChannelProcesses {
-    /** Kill all processes by process id **/
-}
 
 
 - (BOOL)routeView:(AMVideoRouteView *)routeView
 shouldRemoveDevice:(NSString *)deviceID;
 {
-    return YES;
+    return NO;
 }
 
 - (BOOL)routeView:(AMVideoRouteView *)routeView
      removeAllDevice:(BOOL)check
 {
-    return YES;
+    return NO;
 }
 
 
 - (BOOL)routeView:(AMVideoRouteView *)routeView
      removeDevice:(NSString *)deviceID
 {
-    return YES;
+    return NO;
 }
 
 -(void)awakeFromNib
@@ -104,6 +97,9 @@ shouldRemoveDevice:(NSString *)deviceID;
                                               forKeyPath:@"servers"
                                                  options:NSKeyValueObservingOptionNew
                                                  context:nil];
+    
+    AMSyphonRouterView* view = (AMSyphonRouterView*)self.view;
+    view.delegate = self;
 }
 
 
@@ -228,6 +224,5 @@ shouldRemoveDevice:(NSString *)deviceID;
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 
 @end

@@ -13,6 +13,7 @@
 #import "AMVideoDeviceManager.h"
 #import "AMSyphonUtility.h"
 #import "AMSyphonClientsManager.h"
+#import "AMSyphonCommon.h"
 
 
 
@@ -57,7 +58,22 @@ shouldDisonnectChannel:(AMChannel *)channel1
 disconnectChannel:(AMChannel *)channel1
       fromChannel:(AMChannel *)channel2
 {
+    if(_clientChannels == nil)
+        return NO;
     
+    NSUInteger index = [_clientChannels indexOfObject:channel1];
+    if(index == NSNotFound)
+        return NO;
+    
+    NSDictionary* userInfo = [[NSDictionary alloc]
+                                initWithObjectsAndKeys:
+                                    [NSNumber numberWithUnsignedInteger:index], @"INDEX",
+                                            nil];
+    NSNotification* notif = [[NSNotification alloc] initWithName:AMSyphonClientDisconnected
+                                                          object:nil
+                                                        userInfo:userInfo];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:notif];
     
     return YES;
 }
@@ -115,28 +131,27 @@ shouldRemoveDevice:(NSString *)deviceID;
 
 -(void) refreshSyphonServers
 {
-    _serverNamesChannels = [[NSMutableDictionary alloc] initWithCapacity:syphonServerCount];
-    
+     AMSyphonRouterView* routeView = (AMSyphonRouterView*)self.view;
     int interval = 5;
-    _serverNames = [[NSMutableArray alloc] initWithCapacity:syphonServerCount];
-    [AMSyphonUtility getSyphonDeviceList:_serverNames];
     
-    AMSyphonRouterView* routeView = (AMSyphonRouterView*)self.view;
+    _serverNamesChannels = [[NSMutableDictionary alloc] initWithCapacity:syphonServerCount];
+    _serverNames         = [[NSMutableArray      alloc] initWithCapacity:syphonServerCount];
+    
     
     //1st step: Remove deleted devices from device manager.
     [routeView removeALLDevice];
-    [_serverNamesChannels removeAllObjects];
-    
     
     //2nd step: Add all syphon servers.
-    for (NSUInteger i = 0; i < [_serverNames count]; i++) {
+    [AMSyphonUtility getSyphonDeviceList:_serverNames];
+    
+    for(NSUInteger i = 0; i < [_serverNames count]; i++) {
         NSMutableArray *channels = [[NSMutableArray alloc] initWithCapacity:interval];
         
         NSString* syphonName = [_serverNames objectAtIndex:i];
         
-        int channelIndex = START_INDEX + i* interval;
+        NSUInteger channelIndex = START_INDEX + i* interval;
         
-        for (int j = 0; j < interval; j++) {
+        for(NSUInteger j = 0; j < interval; j++) {
             AMChannel *channel = [[AMChannel alloc] initWithIndex:j+channelIndex];
                 channel.type    =  AMDestinationChannel;
                 channel.deviceID     = syphonName;
@@ -149,7 +164,6 @@ shouldRemoveDevice:(NSString *)deviceID;
                                 name:syphonName
                             removable:NO];
         
-        //???
         [_serverNamesChannels setObject:channels forKey:syphonName];
     }
     

@@ -8,7 +8,7 @@
 
 #import "AMSyphonClientsManager.h"
 
-NSString* AMSyphonMixerClientChanged = @"AMSyphonMixerClientChanged";
+
 
 #pragma mark -
 #pragma   mark AMSyphonName implementation

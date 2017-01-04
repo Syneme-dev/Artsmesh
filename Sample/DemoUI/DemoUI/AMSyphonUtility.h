@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <Syphon/Syphon.h>
 
-
+NSString* AMSyphonClientDisconnected;
 
 @interface AMSyphonUtility : NSObject
 //Get a array of all syphon devices' name

@@ -12,8 +12,9 @@
 #import "AMSyphonViewController.h"
 #import "AMP2PViewController.h"
 #import "AMSyphonView.h"
+#import "AMSyphonCommon.h"
 
-extern NSString* AMSyphonMixerClientChanged;
+
 
 @interface AMP2PViewManager : NSObject
 -(id)initWithClientCount:(NSUInteger) cnt;

@@ -271,6 +271,7 @@
 		4F2D8D801C0FEBB000C8F41B /* AMVideoConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2D8D7F1C0FEBB000C8F41B /* AMVideoConfig.m */; };
 		4F2E48D71C0DA29000B48708 /* AMVideoConfigWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E48D51C0DA29000B48708 /* AMVideoConfigWindow.m */; };
 		4F2E48D81C0DA29000B48708 /* AMVideoConfigWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2E48D61C0DA29000B48708 /* AMVideoConfigWindow.xib */; };
+		4F2E5A011E1C9C3A00A9BEFA /* AMSyphonCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E5A001E1C9C3A00A9BEFA /* AMSyphonCommon.m */; };
 		4F3F16781E1B73D40007FDFA /* AMRouterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F16771E1B73D40007FDFA /* AMRouterView.m */; };
 		4F61FF701CB6688900D11143 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F61FF6F1CB6688900D11143 /* AVKit.framework */; };
 		4F69C3971BB3D5C9001E7644 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */; };
@@ -978,6 +979,8 @@
 		4F2E48D41C0DA29000B48708 /* AMVideoConfigWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMVideoConfigWindow.h; sourceTree = "<group>"; };
 		4F2E48D51C0DA29000B48708 /* AMVideoConfigWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMVideoConfigWindow.m; sourceTree = "<group>"; };
 		4F2E48D61C0DA29000B48708 /* AMVideoConfigWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMVideoConfigWindow.xib; sourceTree = "<group>"; };
+		4F2E59FF1E1C9C3A00A9BEFA /* AMSyphonCommon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonCommon.h; sourceTree = "<group>"; };
+		4F2E5A001E1C9C3A00A9BEFA /* AMSyphonCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonCommon.m; sourceTree = "<group>"; };
 		4F3F16761E1B73D40007FDFA /* AMRouterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRouterView.h; sourceTree = "<group>"; };
 		4F3F16771E1B73D40007FDFA /* AMRouterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRouterView.m; sourceTree = "<group>"; };
 		4F61FF6F1CB6688900D11143 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
@@ -2133,6 +2136,8 @@
 		4FE1DD381DE83CCF00B91AF4 /* Syphon Utility */ = {
 			isa = PBXGroup;
 			children = (
+				4F2E59FF1E1C9C3A00A9BEFA /* AMSyphonCommon.h */,
+				4F2E5A001E1C9C3A00A9BEFA /* AMSyphonCommon.m */,
 				CE486A951A280CB900D35B82 /* AMSyphonClientsManager.h */,
 				CE486A961A280CB900D35B82 /* AMSyphonClientsManager.m */,
 				4FE1DD3B1DE83D9400B91AF4 /* AMSyphonUtility.h */,
@@ -2672,6 +2677,7 @@
 				AFC77F8E1900C91A003543CF /* AMSocialViewController.m in Sources */,
 				4FBE6A7F1C04447500C854EA /* AMVideoRouteViewController.m in Sources */,
 				2DCA33F31A15DEC7003CA372 /* AMFlippedView.m in Sources */,
+				4F2E5A011E1C9C3A00A9BEFA /* AMSyphonCommon.m in Sources */,
 				4F9677781ADF8D200037BB64 /* AMClockTabVC.m in Sources */,
 				2D6D76F119C16B4400201106 /* AMWorldMap.m in Sources */,
 				4F8251291B257E2D00224513 /* AMPingTabVC.m in Sources */,

@@ -11,7 +11,6 @@
 #import "AMVideoRouteView.h"
 #import "AMChannel.h"
 
-
 #define syphonServerCount 10
 
 @interface AMSyphonRouterViewController : NSViewController<AMRouterViewDelegate>

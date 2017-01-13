@@ -76,6 +76,10 @@
                name:AMP2PVideoInfoNotification
              object:nil];
 
+    [nc   addObserver:self
+             selector:@selector(AMSyphonUnselect:)
+                 name:AMSyphonRouterDisconnected
+               object:nil];
 }
 
 -(void) startP2PVideo;
@@ -263,7 +267,19 @@
         popupController.maxSizeButton.hidden = YES;
     }
 }
-
+-(void) AMSyphonUnselect : (NSNotification*)notification
+{
+    NSDictionary* userInfo = [notification userInfo];
+    NSNumber* indexNumber = [userInfo objectForKey:@"INDEX"];
+    if(indexNumber == nil)
+        return;
+    NSUInteger index = [indexNumber integerValue];
+    AMSyphonViewController*  syphonCtrl = [self.syphonManager clientViewControllerByIndex:index];
+    if(syphonCtrl == nil)
+        return;
+    
+    [syphonCtrl unselected];
+}
 
 @end
 

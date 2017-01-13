@@ -69,7 +69,7 @@ disconnectChannel:(AMChannel *)channel1
                                 initWithObjectsAndKeys:
                                     [NSNumber numberWithUnsignedInteger:index], @"INDEX",
                                             nil];
-    NSNotification* notif = [[NSNotification alloc] initWithName:AMSyphonClientDisconnected
+    NSNotification* notif = [[NSNotification alloc] initWithName:AMSyphonRouterDisconnected
                                                           object:nil
                                                         userInfo:userInfo];
     

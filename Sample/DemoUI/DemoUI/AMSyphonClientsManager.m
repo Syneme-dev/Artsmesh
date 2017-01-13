@@ -120,6 +120,16 @@ static id sharedInstance = nil;
     }
 }
 
+-(AMSyphonViewController*) clientViewControllerByIndex:(NSUInteger)index
+{
+    if(index >= [_syClients count]){
+        return nil;
+    }
+    
+    AMSyphonViewController* syphonContorller = [_syClients objectAtIndex:index];
+    return syphonContorller;
+}
+
 -(NSView*)clientViewByIndex:(NSUInteger)index
 {
     if(index >= [_syClients count]){

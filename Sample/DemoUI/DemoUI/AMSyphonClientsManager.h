@@ -37,7 +37,7 @@
 +(void) selectedSyphonServerNames : (NSMutableArray*) names;
 
 -(id)initWithClientCount:(NSUInteger) cnt;
-
+-(AMSyphonViewController*) clientViewControllerByIndex:(NSUInteger)index;
 -(NSView*)clientViewByIndex:(NSUInteger)index;
 -(NSView*)outputView;
 -(NSView*)tearOffView;

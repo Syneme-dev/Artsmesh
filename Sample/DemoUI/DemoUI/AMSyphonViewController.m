@@ -61,6 +61,12 @@ NSString* kNonServer = @"    --    ";
     self.glView.drawTriangle = YES;
 }
 
+-(void) unselected
+{
+    [self stop ];
+    [self.serverNamePopUpButton selectItemWithTitle: kNonServer];
+}
+
 -(void)updateServerList
 {
     [self.serverNamePopUpButton removeAllItems];

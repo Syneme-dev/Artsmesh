@@ -8,6 +8,11 @@
 
 #import "AMChannel.h"
 
+
+@implementation AMDevice
+
+@end
+
  NSString* kSenderRole     = @"SENDER";
  NSString* kReceiverRole   = @"RECEIVER";
  NSString* kDualRole       = @"DUAL";
@@ -52,4 +57,6 @@
 }
 
 @end
+
+
 

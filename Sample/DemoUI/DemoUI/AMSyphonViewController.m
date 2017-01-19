@@ -35,9 +35,6 @@ NSString* kNonServer = @"    --    ";
 }
 
 - (void)viewDidLoad {
-    // [super viewDidLoad];
-    // Do view setup here
-    
     AMSyphonView *subView = [[AMSyphonView alloc] initWithFrame:NSMakeRect(0, 0, 300, 300)];
     self.glView = subView;
     [self.view addSubview:subView];
@@ -59,6 +56,13 @@ NSString* kNonServer = @"    --    ";
     
     [self updateServerList];
     self.glView.drawTriangle = YES;
+}
+
+-(void) unselected
+{
+    [self stop ];
+    _currSelection = kNonServer;
+    [self.serverNamePopUpButton selectItemWithTitle: _currSelection];
 }
 
 -(void)updateServerList

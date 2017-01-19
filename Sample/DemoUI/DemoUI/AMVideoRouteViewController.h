@@ -13,6 +13,6 @@
 NSString* kAMMyself;
 NSString *const AMP2PVideoReceiverChanged;
 
-@interface AMVideoRouteViewController : NSViewController<AMVideoRouterViewDelegate>
+@interface AMVideoRouteViewController : NSViewController<AMRouterViewDelegate>
 
 @end

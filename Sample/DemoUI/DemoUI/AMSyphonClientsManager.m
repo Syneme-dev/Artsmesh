@@ -8,7 +8,7 @@
 
 #import "AMSyphonClientsManager.h"
 
-NSString* AMSyphonMixerClientChanged = @"AMSyphonMixerClientChanged";
+
 
 #pragma mark -
 #pragma   mark AMSyphonName implementation
@@ -118,6 +118,16 @@ static id sharedInstance = nil;
         
         [_syServer updateServerList];
     }
+}
+
+-(AMSyphonViewController*) clientViewControllerByIndex:(NSUInteger)index
+{
+    if(index >= [_syClients count]){
+        return nil;
+    }
+    
+    AMSyphonViewController* syphonContorller = [_syClients objectAtIndex:index];
+    return syphonContorller;
 }
 
 -(NSView*)clientViewByIndex:(NSUInteger)index

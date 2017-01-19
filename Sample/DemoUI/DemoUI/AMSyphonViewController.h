@@ -12,7 +12,7 @@
 @interface AMSyphonViewController : NSViewController
 
 @property NSString* currentServerName;
-
+-(void) unselected;
 -(NSString*) selectedSyphonServerName;
 -(void)updateServerList;
 -(void)stop;

@@ -38,6 +38,15 @@ typedef NS_ENUM(NSUInteger, AMChannelType) {
 #define LAST_INDEX      48  // Beside SELF, the last  index can be used.
 #define INDEX_INTERVAL  2
 
+@interface AMDevice : NSObject
+@property(nonatomic) NSString *deviceID;
+@property(nonatomic) NSString *deviceName;
+@property(nonatomic) BOOL removable;
+@property(nonatomic) NSRange channelIndexRange;
+@property(nonatomic) NSPoint closeButtonCenter;
+@end
+
+
 @interface AMVideoDevice : NSObject
 @property   NSString*           processID;
 @property   NSString*           deviceID;

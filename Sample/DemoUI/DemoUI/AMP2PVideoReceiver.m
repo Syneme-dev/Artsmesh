@@ -281,5 +281,43 @@ withFilterContext:(id)filterContext
     }
 }
 
+/*
+-(NSImage*) convertToNSImage:(CMSampleBufferRef) buffer
+{
+    CVImageBufferRef cvImage = CMSampleBufferGetImageBuffer(buffer);
+    if(CVPixelBufferLockBaseAddress(cvImage, 0) != kCVReturnSuccess)
+        return nil;
+    
+    //从 CVImageBufferRef 取得影像的细部信息
+    uint8_t *base;
+    size_t width, height, bytesPerRow;
+    base = CVPixelBufferGetBaseAddress(cvImage);
+    width = CVPixelBufferGetWidth(cvImage);
+    height = CVPixelBufferGetHeight(cvImage);
+    bytesPerRow = CVPixelBufferGetBytesPerRow(cvImage);
+    
+    //利用取得影像细部信息格式化 CGContextRef
+    CGColorSpaceRef colorSpace;
+    CGContextRef cgContext;
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    cgContext = CGBitmapContextCreate(base, width, height, 8, bytesPerRow, colorSpace, kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
+    CGColorSpaceRelease(colorSpace);
+    
+    //透过 CGImageRef 将 CGContextRef 转换成 UIImage
+    CGImageRef cgImage;
+    NSImage *image;
+    cgImage = CGBitmapContextCreateImage(cgContext);
+//    image = [NSImage imageWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    CGContextRelease(cgContext);
+    
+    CVPixelBufferUnlockBaseAddress(cvImage, 0);
+    
+    //成功转换成 UIImage
+    //[myImageView setImage:image];
+    return image;
+}
+*/
+
 
 @end

@@ -282,4 +282,43 @@ withFilterContext:(id)filterContext
 }
 
 
+-(void) sendToSyphon:(CMSampleBufferRef) buffer
+{
+    //Convert CMSampleBufferRef into cvImage for later processing.
+    CVImageBufferRef cvImage = CMSampleBufferGetImageBuffer(buffer);
+    if(CVPixelBufferLockBaseAddress(cvImage, 0) != kCVReturnSuccess)
+        return;
+    
+    // Get detailed info of cvImage.
+    uint8_t* baseAddress = CVPixelBufferGetBaseAddress(cvImage);
+    size_t   width       = CVPixelBufferGetWidth(cvImage);
+    size_t   height      = CVPixelBufferGetHeight(cvImage);
+    size_t   bytesPerRow = CVPixelBufferGetBytesPerRow(cvImage);
+    
+    //use info from last step convert into CGContextRef
+    CGColorSpaceRef colorSpace;
+    CGContextRef cgContext;
+    colorSpace = CGColorSpaceCreateDeviceRGB();
+    cgContext = CGBitmapContextCreate(baseAddress,       width,     height,
+                                                8, bytesPerRow, colorSpace,
+                                kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
+    
+    CGColorSpaceRelease(colorSpace);
+    
+    //Convert into NSImage, which we don't know yet.
+    CGImageRef cgImage;
+    cgImage = CGBitmapContextCreateImage(cgContext);
+    //image = [NSImage imageWithCGImage:cgImage];
+    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:cgImage];
+    CGImageRelease(cgImage);
+    CGContextRelease(cgContext);
+    CVPixelBufferUnlockBaseAddress(cvImage, 0);
+    
+    if(imageRep != nil){
+        
+    }
+    //[myImageView setImage:image];
+    return ;
+}
+
 @end

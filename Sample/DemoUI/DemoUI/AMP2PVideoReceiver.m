@@ -13,6 +13,9 @@
 //#import "AMP2PVideoView.h"
 #import "AMP2PVideoCommon.h"
 #include "AMLogger/AMLogger.h"
+#import <OpenGL/OpenGL.h>
+#import <OpenGL/gl.h>
+#import <Syphon/Syphon.h>
 
 @interface AMP2PVideoReceiver ()
 @property (strong, nonatomic) NSMutableData*  lastNALUData;
@@ -32,6 +35,11 @@
     BOOL                            _searchForSPSAndPPS;
     BOOL                            _ableToDecodeFrame;
     NSInteger                       _port;
+    
+    SyphonServer*                   _server;
+    NSOpenGLContext*                _glContext;
+    CGLContextObj                   _cglContext;
+
 }
 
 -(BOOL) registerP2PVideoLayer:(AVSampleBufferDisplayLayer*) layer
@@ -66,14 +74,35 @@
         return NO;
     }
     
+    NSOpenGLPixelFormatAttribute attrs[] = {
+        NSOpenGLPFADepthSize, 32,
+        0
+    };
+    NSOpenGLPixelFormat *format = [[NSOpenGLPixelFormat alloc] initWithAttributes:attrs];
+    _glContext = [[NSOpenGLContext alloc] initWithFormat:format shareContext:nil];
+    
+    _cglContext = [_glContext CGLContextObj];
+    
+    NSString* serverName = [[NSString alloc] initWithFormat:@"P2P %ld", (long)port];
+    _server = [[SyphonServer alloc] initWithName:serverName context:_cglContext options:nil];
 
+    [_server addObserver:self forKeyPath:@"hasClients" options:NSKeyValueObservingOptionNew context:nil];
+    
     return YES;
 }
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)contex{
+    
+}
+
+
 
 -(BOOL) unregisterP2PVideoLayer:(AVSampleBufferDisplayLayer*) layer
                        withPort:(NSInteger) port
 {
     [_udpSocket close];
+    [_server stop];
+    _server = nil;
     return true;
 }
 
@@ -102,8 +131,6 @@ withFilterContext:(id)filterContext
     NSRange nextRange = [recvData rangeOfData:startCode
                                       options:0
                                         range:NSMakeRange(0, [recvData length])];
-    
-    
     
     if(nextRange.location != NSNotFound){
         while(nextRange.location != NSNotFound) {
@@ -273,6 +300,7 @@ withFilterContext:(id)filterContext
             
             dispatch_async(dispatch_get_main_queue(),^{
                 if([self.videoLayer isReadyForMoreMediaData]){
+                    [self sendToSyphon:sampleBuffer];
                     [self.videoLayer enqueueSampleBuffer:sampleBuffer];
                     [self.videoLayer setNeedsDisplay];
                 }
@@ -317,7 +345,8 @@ withFilterContext:(id)filterContext
     if(imageRep != nil){
         
     }
-    //[myImageView setImage:image];
+    
+    
     return ;
 }
 

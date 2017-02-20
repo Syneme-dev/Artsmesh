@@ -36,6 +36,31 @@
 shouldConnectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2
 {
+    //Check connection condition
+    NSUInteger clientIndex = [_clientChannels indexOfObject:channel1];
+    if(clientIndex == NSNotFound)
+        return NO;
+    
+    NSArray* serverChannels = [_serverNamesChannels objectForKey:channel2.deviceID];
+    if(serverChannels == nil)
+        return NO;
+    
+    NSUInteger serverIndex = [serverChannels indexOfObject:channel2];
+    if(clientIndex == NSNotFound)
+        return NO;
+    
+    if(clientIndex != serverIndex)
+        return NO;
+    
+    
+    int oldServerIndex =(int)[channel1.peerIndexes firstIndex];
+    
+    
+    //Remove existing connection.
+    AMSyphonRouterView* syphonView = (AMSyphonRouterView*)routeView;
+    AMChannel* oldServerChannel = [syphonView channelAtIndex:oldServerIndex];
+    [syphonView disconnectChannel:channel1 fromChannel:oldServerChannel];
+    
     return YES;
 }
 
@@ -43,6 +68,8 @@ shouldConnectChannel:(AMChannel *)channel1
    connectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2
 {
+    
+    
     return YES;
 }
 
@@ -209,6 +236,10 @@ shouldRemoveDevice:(NSString *)deviceID;
     [self clientsConnectServers];
 }
 
+-(void) getServerChannel:(NSString*) serverName
+{
+   
+}
 
 -(void) clientsConnectServers
 {

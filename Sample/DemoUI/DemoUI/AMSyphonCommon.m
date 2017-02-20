@@ -9,4 +9,5 @@
 #import "AMSyphonCommon.h"
 
 NSString* AMSyphonMixerClientChanged = @"AMSyphonMixerClientChanged";
+NSString* AMSyphonMixerChangeServer  = @"AMSyphonMixerChangeServer";
 NSString* AMSyphonRouterDisconnected = @"AMSyphonRouterDisconnected";

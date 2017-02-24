@@ -36,32 +36,56 @@
 shouldConnectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2
 {
-    //Check connection condition
+    // Check connection conditions
+    
+    // Methods arguments should be valid.
+    if(channel1 == nil || channel2 == nil)
+        return NO;
+    
+    // Client index should be valid.
     NSUInteger clientIndex = [_clientChannels indexOfObject:channel1];
     if(clientIndex == NSNotFound)
         return NO;
     
+    // The server to connect should be a syphon server which still exists.
     NSArray* serverChannels = [_serverNamesChannels objectForKey:channel2.deviceID];
     if(serverChannels == nil)
         return NO;
     
+    // Server index should be valid.
     NSUInteger serverIndex = [serverChannels indexOfObject:channel2];
     if(serverIndex == NSNotFound)
         return NO;
     
+    // Server and client index should be matched.
     if(clientIndex != serverIndex)
         return NO;
     
     
+    // Remove existing connection, if there is any.
     int oldServerIndex =(int)[channel1.peerIndexes firstIndex];
-    
-    
-    //Remove existing connection, if there is any.
     if(oldServerIndex >= 0){
         AMSyphonRouterView* syphonView = (AMSyphonRouterView*)routeView;
         AMChannel* oldServerChannel = [syphonView channelAtIndex:oldServerIndex];
         [syphonView disconnectChannel:channel1 fromChannel:oldServerChannel];
     }
+    
+    // Send messge to Mixer, to select the new server.
+    NSUInteger index = [_clientChannels indexOfObject:channel1];
+    if(index == NSNotFound)
+        return NO;
+    
+    NSDictionary* userInfo = [[NSDictionary alloc]
+                              initWithObjectsAndKeys:
+                              [NSNumber numberWithUnsignedInteger:index], @"INDEX",
+                              channel2.deviceID, @"SYPHON SERVER",
+                              nil];
+    
+    NSNotification* notif = [[NSNotification alloc] initWithName:AMSyphonMixerChangeServer
+                                                          object:nil
+                                                        userInfo:userInfo];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:notif];
     
     return YES;
 }
@@ -147,7 +171,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     AMSyphonRouterView* view = (AMSyphonRouterView*)self.view;
     view.delegate = self;
     
-    // Add clients channel first
+    // Add some clients channel first
     for(int i = 0; i < 5; i++){
         
         AMChannel* clientChannel    = [[AMChannel alloc] init];
@@ -237,11 +261,6 @@ shouldRemoveDevice:(NSString *)deviceID;
         clientChannel.index       = i;
         
         NSString* serverName = [_selectedNamesByClients objectAtIndex:i];
-        /*if([serverName isEqualToString:@""]){
-            clientChannel.deviceID     = @"";
-            clientChannel.channelName  = @"";
-        }
-        else*/
         if(![serverName isEqualToString:@""])
         {
             clientChannel.deviceID     = serverName;
@@ -249,9 +268,6 @@ shouldRemoveDevice:(NSString *)deviceID;
             clientChannel.type         = AMSourceChannel;
             [_clientChannels replaceObjectAtIndex:i withObject:clientChannel];
         }
-        
-        //[_clientChannels addObject:clientChannel];
-        
     }
     
     [routeView associateChannels:_clientChannels

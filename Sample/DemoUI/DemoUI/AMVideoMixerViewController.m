@@ -77,8 +77,13 @@
              object:nil];
 
     [nc   addObserver:self
-             selector:@selector(AMSyphonUnselect:)
+             selector:@selector(AMUnselectSyphonServer:)
                  name:AMSyphonRouterDisconnected
+               object:nil];
+    
+    [nc   addObserver:self
+             selector:@selector(AMSelectNewSyphonServer:)
+                 name:AMSyphonRouterChangeServer
                object:nil];
 }
 
@@ -267,7 +272,7 @@
         popupController.maxSizeButton.hidden = YES;
     }
 }
--(void) AMSyphonUnselect : (NSNotification*)notification
+-(void) AMUnselectSyphonServer : (NSNotification*)notification
 {
     NSDictionary* userInfo = [notification userInfo];
     NSNumber* indexNumber = [userInfo objectForKey:@"INDEX"];
@@ -279,6 +284,11 @@
         return;
     
     [syphonCtrl unselected];
+}
+
+-(void) AMSelectNewSyphonServer : (NSNotification*)notification
+{
+    
 }
 
 @end

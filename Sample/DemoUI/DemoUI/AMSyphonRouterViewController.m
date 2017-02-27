@@ -81,7 +81,7 @@ shouldConnectChannel:(AMChannel *)channel1
                               channel2.deviceID, @"SYPHON SERVER",
                               nil];
     
-    NSNotification* notif = [[NSNotification alloc] initWithName:AMSyphonMixerChangeServer
+    NSNotification* notif = [[NSNotification alloc] initWithName:AMSyphonRouterChangeServer
                                                           object:nil
                                                         userInfo:userInfo];
     

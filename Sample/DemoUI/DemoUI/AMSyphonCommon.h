@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 
 extern NSString* AMSyphonMixerClientChanged;
-extern NSString* AMSyphonMixerChangeServer;
+extern NSString* AMSyphonRouterChangeServer;
 extern NSString* AMSyphonRouterDisconnected;
 

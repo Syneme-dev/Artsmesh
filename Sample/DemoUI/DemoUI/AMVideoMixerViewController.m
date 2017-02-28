@@ -288,7 +288,20 @@
 
 -(void) AMSelectNewSyphonServer : (NSNotification*)notification
 {
+    NSDictionary* userInfo = [notification userInfo];
+    NSNumber* indexNumber = [userInfo objectForKey:@"INDEX"];
+    if(indexNumber == nil)
+        return;
+    NSUInteger index = [indexNumber integerValue];
+    AMSyphonViewController*  syphonCtrl = [self.syphonManager clientViewControllerByIndex:index];
+    if(syphonCtrl == nil)
+        return;
     
+     NSString* serverName = [userInfo objectForKey:@"SYPHON SERVER"];
+    if(serverName == nil)
+        return;
+    
+    [syphonCtrl selectNewSyphonServer:serverName];
 }
 
 @end

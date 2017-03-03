@@ -42,18 +42,26 @@ shouldConnectChannel:(AMChannel *)channel1
     if(channel1 == nil || channel2 == nil)
         return NO;
     
+    // Couldn't connect the same type channel(both clients/servers) or placeholder channel.
+    if(channel1.type == AMPlaceholderChannel || channel1.type == AMPlaceholderChannel
+       || channel1.type == channel2.type)
+        return NO;
+    
+    AMChannel* clientChannel = channel1.type == AMSourceChannel      ? channel1 : channel2;
+    AMChannel* serverChannel = channel1.type == AMDestinationChannel ? channel1 : channel2;
+    
     // Client index should be valid.
-    NSUInteger clientIndex = [_clientChannels indexOfObject:channel1];
+    NSUInteger clientIndex = [_clientChannels indexOfObject:clientChannel];
     if(clientIndex == NSNotFound)
         return NO;
     
     // The server to connect should be a syphon server which still exists.
-    NSArray* serverChannels = [_serverNamesChannels objectForKey:channel2.deviceID];
+    NSArray* serverChannels = [_serverNamesChannels objectForKey:serverChannel.deviceID];
     if(serverChannels == nil)
         return NO;
     
     // Server index should be valid.
-    NSUInteger serverIndex = [serverChannels indexOfObject:channel2];
+    NSUInteger serverIndex = [serverChannels indexOfObject:serverChannel];
     if(serverIndex == NSNotFound)
         return NO;
     
@@ -71,14 +79,14 @@ shouldConnectChannel:(AMChannel *)channel1
     }
     
     // Send messge to Mixer, to select the new server.
-    NSUInteger index = [_clientChannels indexOfObject:channel1];
+    NSUInteger index = [_clientChannels indexOfObject:clientChannel];
     if(index == NSNotFound)
         return NO;
     
     NSDictionary* userInfo = [[NSDictionary alloc]
                               initWithObjectsAndKeys:
                               [NSNumber numberWithUnsignedInteger:index], @"INDEX",
-                              channel2.deviceID, @"SYPHON SERVER",
+                              serverChannel.deviceID, @"SYPHON SERVER",
                               nil];
     
     NSNotification* notif = [[NSNotification alloc] initWithName:AMSyphonRouterChangeServer

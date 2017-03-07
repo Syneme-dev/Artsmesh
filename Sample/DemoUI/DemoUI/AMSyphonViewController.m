@@ -65,6 +65,13 @@ NSString* kNonServer = @"    --    ";
     [self.serverNamePopUpButton selectItemWithTitle: _currSelection];
 }
 
+-(void) selectNewSyphonServer:(NSString*) serverName
+{
+    _currSelection = serverName;
+    [self.serverNamePopUpButton selectItemWithTitle: serverName];
+    [self serverSelected:self.serverNamePopUpButton];
+}
+
 -(void)updateServerList
 {
     [self.serverNamePopUpButton removeAllItems];

@@ -13,6 +13,7 @@
 
 @property NSString* currentServerName;
 -(void) unselected;
+-(void) selectNewSyphonServer:(NSString*) serverName;
 -(NSString*) selectedSyphonServerName;
 -(void)updateServerList;
 -(void)stop;

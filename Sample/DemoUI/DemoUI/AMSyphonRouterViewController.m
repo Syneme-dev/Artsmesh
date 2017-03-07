@@ -36,6 +36,65 @@
 shouldConnectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2
 {
+    // Check connection conditions
+    
+    // Methods arguments should be valid.
+    if(channel1 == nil || channel2 == nil)
+        return NO;
+    
+    // Couldn't connect the same type channel(both clients/servers) or placeholder channel.
+    if(channel1.type == AMPlaceholderChannel || channel1.type == AMPlaceholderChannel
+       || channel1.type == channel2.type)
+        return NO;
+    
+    AMChannel* clientChannel = channel1.type == AMSourceChannel      ? channel1 : channel2;
+    AMChannel* serverChannel = channel1.type == AMDestinationChannel ? channel1 : channel2;
+    
+    // Client index should be valid.
+    NSUInteger clientIndex = [_clientChannels indexOfObject:clientChannel];
+    if(clientIndex == NSNotFound)
+        return NO;
+    
+    // The server to connect should be a syphon server which still exists.
+    NSArray* serverChannels = [_serverNamesChannels objectForKey:serverChannel.deviceID];
+    if(serverChannels == nil)
+        return NO;
+    
+    // Server index should be valid.
+    NSUInteger serverIndex = [serverChannels indexOfObject:serverChannel];
+    if(serverIndex == NSNotFound)
+        return NO;
+    
+    // Server and client index should be matched.
+    if(clientIndex != serverIndex)
+        return NO;
+    
+    
+    // Remove existing connection, if there is any.
+    int oldServerIndex =(int)[channel1.peerIndexes firstIndex];
+    if(oldServerIndex >= 0){
+        AMSyphonRouterView* syphonView = (AMSyphonRouterView*)routeView;
+        AMChannel* oldServerChannel = [syphonView channelAtIndex:oldServerIndex];
+        [syphonView disconnectChannel:channel1 fromChannel:oldServerChannel];
+    }
+    
+    // Send messge to Mixer, to select the new server.
+    NSUInteger index = [_clientChannels indexOfObject:clientChannel];
+    if(index == NSNotFound)
+        return NO;
+    
+    NSDictionary* userInfo = [[NSDictionary alloc]
+                              initWithObjectsAndKeys:
+                              [NSNumber numberWithUnsignedInteger:index], @"INDEX",
+                              serverChannel.deviceID, @"SYPHON SERVER",
+                              nil];
+    
+    NSNotification* notif = [[NSNotification alloc] initWithName:AMSyphonRouterChangeServer
+                                                          object:nil
+                                                        userInfo:userInfo];
+    
+    [[NSNotificationCenter defaultCenter] postNotification:notif];
+    
     return YES;
 }
 
@@ -43,6 +102,8 @@ shouldConnectChannel:(AMChannel *)channel1
    connectChannel:(AMChannel *)channel1
         toChannel:(AMChannel *)channel2
 {
+    
+    
     return YES;
 }
 
@@ -102,6 +163,7 @@ shouldRemoveDevice:(NSString *)deviceID;
 -(void)awakeFromNib
 {
     _syphonServers = [[AMVideoDeviceManager alloc] init];
+    _clientChannels = [[NSMutableArray alloc] initWithCapacity:5];
     
     NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
@@ -116,6 +178,25 @@ shouldRemoveDevice:(NSString *)deviceID;
     
     AMSyphonRouterView* view = (AMSyphonRouterView*)self.view;
     view.delegate = self;
+    
+    // Add some clients channel first
+    for(int i = 0; i < 5; i++){
+        
+        AMChannel* clientChannel    = [[AMChannel alloc] init];
+        clientChannel.index         = i;
+        clientChannel.deviceID      = @"SYPHON-CLIENTS";
+        clientChannel.channelName   = @"SYPHON-CLIENTS";
+        clientChannel.type          = AMSourceChannel;
+        
+        [_clientChannels addObject:clientChannel];
+    }
+    [view associateChannels:_clientChannels
+                      withDevice:@"AM-SYPHON"
+                            name:@"AM-SYPHON"
+                       removable:NO];
+    
+    [self refreshSyphonServers];
+
 }
 
 
@@ -179,7 +260,7 @@ shouldRemoveDevice:(NSString *)deviceID;
     _selectedNamesByClients = [[NSMutableArray alloc] initWithCapacity:10];
     [AMSyphonClientsManager selectedSyphonServerNames:_selectedNamesByClients];
     
-    _clientChannels = [[NSMutableArray alloc] initWithCapacity:5];
+   // _clientChannels = [[NSMutableArray alloc] initWithCapacity:5];
     
     //SELF Area of placeholder.
     for(int i = 0; i < [_selectedNamesByClients count]; i++){
@@ -188,17 +269,13 @@ shouldRemoveDevice:(NSString *)deviceID;
         clientChannel.index       = i;
         
         NSString* serverName = [_selectedNamesByClients objectAtIndex:i];
-        if([serverName isEqualToString:@""]){
-            clientChannel.deviceID     = @"";
-            clientChannel.channelName  = @"";
-        }
-        else{
+        if(![serverName isEqualToString:@""])
+        {
             clientChannel.deviceID     = serverName;
             clientChannel.channelName  = serverName;
             clientChannel.type         = AMSourceChannel;
+            [_clientChannels replaceObjectAtIndex:i withObject:clientChannel];
         }
-        
-        [_clientChannels addObject:clientChannel];
     }
     
     [routeView associateChannels:_clientChannels
@@ -209,6 +286,10 @@ shouldRemoveDevice:(NSString *)deviceID;
     [self clientsConnectServers];
 }
 
+-(void) getServerChannel:(NSString*) serverName
+{
+   
+}
 
 -(void) clientsConnectServers
 {

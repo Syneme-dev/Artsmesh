@@ -115,9 +115,10 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
             
             NSTimeInterval startTime = [NSDate timeIntervalSinceReferenceDate];
             
+            //?
             struct timeval timeout;
-            timeout.tv_sec = self.receiveTimeout;
-            timeout.tv_usec = (self.receiveTimeout - timeout.tv_sec) * 1000;
+            timeout.tv_sec = 120; //self.receiveTimeout;
+            timeout.tv_usec = 0; // (self.receiveTimeout - timeout.tv_sec) * 1000;
             if (setsockopt(sockfd,SOL_SOCKET,SO_RCVTIMEO,&timeout,
                            sizeof(timeout)) == -1) {
                 [self reportError:AMHeartBeatErrorSetSocketTimoutFailed];

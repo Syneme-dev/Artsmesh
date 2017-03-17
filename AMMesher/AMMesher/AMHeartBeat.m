@@ -117,7 +117,7 @@ NSString * const AMHeartBeatErrorDomain = @"AMHeartBeatErrorDomain";
             
             //?
             struct timeval timeout;
-            timeout.tv_sec = 12; //self.receiveTimeout;
+            timeout.tv_sec = 120; //self.receiveTimeout;
             timeout.tv_usec = 0; // (self.receiveTimeout - timeout.tv_sec) * 1000;
             if (setsockopt(sockfd,SOL_SOCKET,SO_RCVTIMEO,&timeout,
                            sizeof(timeout)) == -1) {

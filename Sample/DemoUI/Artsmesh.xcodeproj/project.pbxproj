@@ -16,7 +16,6 @@
 		2023E8EC1A50F1970034FB68 /* AMTimerTableCellVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2023E8EA1A50F1970034FB68 /* AMTimerTableCellVC.xib */; };
 		209BD2131A60D79B00CBC55A /* AMMetronomeBackgroundView.m in Sources */ = {isa = PBXBuildFile; fileRef = 209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */; };
 		2615E96F1978B32F00A7CBF0 /* AMCoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */; };
-		2686C35D19DA4E9200352DFF /* LocalServer in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 2686C35C19DA4E9200352DFF /* LocalServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		268E7DD918D1861000B0F710 /* AMNotificationManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DD818D1861000B0F710 /* AMNotificationManager.framework */; };
 		268E7DDD18D1861600B0F710 /* AMPreferenceManager.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */; };
 		2692DB8E18E9459600553924 /* AMPreferenceVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2692DB8D18E9459600553924 /* AMPreferenceVC.xib */; };
@@ -183,7 +182,6 @@
 		2D7BCE0B19FF70470000F18A /* AMLiveMapProgramViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BCE0919FF70470000F18A /* AMLiveMapProgramViewController.xib */; };
 		2D813F6D1AFC10C5006C063D /* AMEventsManagerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D813F6B1AFC10C5006C063D /* AMEventsManagerViewController.m */; };
 		2D813F6E1AFC10C5006C063D /* AMEventsManagerViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D813F6C1AFC10C5006C063D /* AMEventsManagerViewController.xib */; };
-		2D8930B61D9F826C00D30354 /* LocalServer in Resources */ = {isa = PBXBuildFile; fileRef = 2686C35C19DA4E9200352DFF /* LocalServer */; };
 		2D8D7B4C1AFF125300FF26FE /* AMLiveEventCheckBoxView.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D8D7B4B1AFF125300FF26FE /* AMLiveEventCheckBoxView.m */; };
 		2D9D73401CB758B60042EC40 /* AMVideoSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D9D733F1CB758B60042EC40 /* AMVideoSettingsVC.xib */; };
 		2D9D73421CB758E00042EC40 /* AMVideoSettingsVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D9D73411CB758E00042EC40 /* AMVideoSettingsVC.m */; };
@@ -318,6 +316,8 @@
 		4FD3727D1B416ABF006566A6 /* AMTraceRouteTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FD3727B1B416ABF006566A6 /* AMTraceRouteTabVC.xib */; };
 		4FDB99A01C3F973400D89619 /* AMNetworkingToolVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB999F1C3F973400D89619 /* AMNetworkingToolVC.m */; };
 		4FE1DD3D1DE83D9400B91AF4 /* AMSyphonUtility.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE1DD3C1DE83D9400B91AF4 /* AMSyphonUtility.m */; };
+		4FE1F1B01E7BBBC000DB0D89 /* LocalServer in Resources */ = {isa = PBXBuildFile; fileRef = 4FE1F1AF1E7BBBC000DB0D89 /* LocalServer */; };
+		4FE1F1B11E7BC72700DB0D89 /* LocalServer in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4FE1F1AF1E7BBBC000DB0D89 /* LocalServer */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4FE511421AC0377400D6ABD2 /* AMScoreCollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */; };
 		AF1D228119985ED600CB6665 /* shot_staticGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AF1D228019985ED600CB6665 /* shot_staticGroup.png */; };
 		AF200643194585F6008630C8 /* AMMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AF200641194585F6008630C8 /* AMMapViewController.m */; };
@@ -443,6 +443,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 6;
 			files = (
+				4FE1F1B11E7BC72700DB0D89 /* LocalServer in Copy Files (7 items) */,
 				4FC0802A1C9B9FCE0072559B /* OscGroupClient in Copy Files (7 items) */,
 				4FC080271C9B9F760072559B /* OscGroupServer in Copy Files (7 items) */,
 				2DD36DF01C49958C00C43CB6 /* ffplay in Copy Files (7 items) */,
@@ -450,7 +451,6 @@
 				2DAB319D1BE856CB00C1BD5A /* ffmpeg in Copy Files (7 items) */,
 				4FC6316A1B46635200BD02AB /* iperf in Copy Files (7 items) */,
 				4A6D4B7A1A12F8EC00B5D26B /* jacktrip in Copy Files (7 items) */,
-				2686C35D19DA4E9200352DFF /* LocalServer in Copy Files (7 items) */,
 			);
 			name = "Copy Files (7 items)";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -524,7 +524,6 @@
 		209BD2111A60D79B00CBC55A /* AMMetronomeBackgroundView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMMetronomeBackgroundView.h; sourceTree = "<group>"; };
 		209BD2121A60D79B00CBC55A /* AMMetronomeBackgroundView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMMetronomeBackgroundView.m; sourceTree = "<group>"; };
 		2615E96E1978B32F00A7CBF0 /* AMCoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMCoreData.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMCoreData.framework; sourceTree = "<group>"; };
-		2686C35C19DA4E9200352DFF /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
 		268E7DD818D1861000B0F710 /* AMNotificationManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMNotificationManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMNotificationManager.framework; sourceTree = "<group>"; };
 		268E7DDC18D1861600B0F710 /* AMPreferenceManager.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMPreferenceManager.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMPreferenceManager.framework; sourceTree = "<group>"; };
 		2692DB8D18E9459600553924 /* AMPreferenceVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMPreferenceVC.xib; sourceTree = "<group>"; };
@@ -1043,6 +1042,7 @@
 		4FDB999F1C3F973400D89619 /* AMNetworkingToolVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMNetworkingToolVC.m; sourceTree = "<group>"; };
 		4FE1DD3B1DE83D9400B91AF4 /* AMSyphonUtility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMSyphonUtility.h; sourceTree = "<group>"; };
 		4FE1DD3C1DE83D9400B91AF4 /* AMSyphonUtility.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonUtility.m; sourceTree = "<group>"; };
+		4FE1F1AF1E7BBBC000DB0D89 /* LocalServer */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = LocalServer; sourceTree = "<group>"; };
 		4FE511401AC0377400D6ABD2 /* AMScoreCollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMScoreCollectionView.h; sourceTree = "<group>"; };
 		4FE511411AC0377400D6ABD2 /* AMScoreCollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMScoreCollectionView.m; sourceTree = "<group>"; };
 		AF1D228019985ED600CB6665 /* shot_staticGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shot_staticGroup.png; sourceTree = "<group>"; };
@@ -1758,9 +1758,9 @@
 				4FC080281C9B9FB30072559B /* OscGroupClient */,
 				2DB5337A1AF3085A00CC61B6 /* GTMOAuth2Window.nib */,
 				2DD36DEE1C49955700C43CB6 /* ffplay */,
+				4FE1F1AF1E7BBBC000DB0D89 /* LocalServer */,
 				2DAB319B1BE8569C00C1BD5A /* ffmpeg */,
 				4FC631681B465D6000BD02AB /* iperf */,
-				2686C35C19DA4E9200352DFF /* LocalServer */,
 				4A6D4B781A12F8DA00B5D26B /* jacktrip */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C2316E187A8FFD00554AFD /* Frameworks */,
@@ -2417,7 +2417,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D8930B61D9F826C00D30354 /* LocalServer in Resources */,
 				CE7216CD19A19C9F00504E28 /* logo-02.png in Resources */,
 				4A4511801A8B62E6001E7328 /* AMAccountSettingsVC.xib in Resources */,
 				AFAEBDBA19611AD900B7FB51 /* map.css in Resources */,
@@ -2477,6 +2476,7 @@
 				4F2C4D321A34260D004DF021 /* AMSyphonTearOffController.xib in Resources */,
 				AFAEBDB119610BEA00B7FB51 /* Profile.png in Resources */,
 				2DE439C81A37C58700650692 /* new-event.css in Resources */,
+				4FE1F1B01E7BBBC000DB0D89 /* LocalServer in Resources */,
 				4A45117B1A8B629D001E7328 /* AMGeneralSettingsVC.xib in Resources */,
 				AFB5C6EB19988CA6005D3727 /* shot_archiveWithMap.png in Resources */,
 				AFD7575A195D048E0057976D /* shot_mainOutput.png in Resources */,

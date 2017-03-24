@@ -1028,7 +1028,11 @@
             // Mesher currently stopped - need to start it up!
             [curMesher startMesher];
             break;
+        //In default state, most of them are between start but not yet successfuly finished.
+        // In the case of start, there is two seconds sleep after executing bash command,
+        // it wouldn't success during this time.
         default:
+            [curMesher stopMesher];
             break;
     }
 }

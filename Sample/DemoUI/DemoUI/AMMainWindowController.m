@@ -745,7 +745,7 @@
     float panelWidth = 600.0f;
     float panelHeight = 720.0f;
 
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"CHAT"
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"OSCHAT"
                                                              width:panelWidth height:panelHeight relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     panelView.minSizeConstraint = NSMakeSize(600.0f, 300.0f);

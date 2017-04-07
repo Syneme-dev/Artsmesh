@@ -21,7 +21,6 @@
 {
     BOOL _useIPV6;
 }
-@property (weak) IBOutlet AMCheckBoxView *useOSC;
 
 - (void)showChatRecord:(NSDictionary *)record;
 
@@ -76,15 +75,6 @@
     [self userGroupsChanged:nil];
     [self onlineStatusChanged:nil];
     
-    
-    self.useOSC.delegate = self;
-    self.useOSC.title = @"USE OSC";
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:Preference_Key_General_UseOSCForChat]) {
-        self.useOSC.checked = YES;
-    }else{
-        self.useOSC.checked = NO;
-    }
-
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(userGroupsChanged:) name: AM_LIVE_GROUP_CHANDED object:nil];
     
@@ -236,17 +226,24 @@
     NSData *msgData = [NSKeyedArchiver archivedDataWithRootObject:
                        @{@"sender":nickName, @"message":msg, @"time":[NSDate date]}];
     
-    BOOL useOSC = [[[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Key_General_UseOSCForChat] boolValue];
-    if (useOSC) {
+    //We need read from preference panel to determine whether we should use OSC.
+    BOOL useOSCFromPref = [[[AMPreferenceManager standardUserDefaults]
+                            stringForKey:Preference_Key_General_UseOSCForChat] boolValue];
+    
+    if(useOSCFromPref){
         if(![[AMOSCGroups sharedInstance] isOSCGroupClientStarted]){
-            NSAlert *alert = [NSAlert alertWithMessageText:@"OSC Client hasn't Started!" defaultButton:@"OK" alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+            NSAlert *alert = [NSAlert alertWithMessageText:@"OSC Client hasn't Started!"
+                                             defaultButton:@"OK"
+                                           alternateButton:nil otherButton:nil
+                                 informativeTextWithFormat:@""];
+            
             [alert runModal];
             return;
-        }else{
-            [[AMOSCGroups sharedInstance] broadcastMessage:AM_CHAT_MESSAGE params:@[@{@"BLOB":msgData}]];
         }
-    }else{
-        if (_socket) {
+        [[AMOSCGroups sharedInstance] broadcastMessage:AM_CHAT_MESSAGE
+                                                    params:@[@{@"BLOB":msgData}]];
+    }else{  // In local network.
+        if (_socket){
             [_socket sendPacketToPeers:msgData];
         }
     }
@@ -379,22 +376,5 @@ doCommandBySelector:(SEL)commandSelector {
     
     [self sendMsg:self.chatMsgField];
 }
-
-#pragma mark AMCheckBoxDelegeate
--(void)onChecked:(AMCheckBoxView*)sender
-{
-    if (sender == self.useOSC) {
-        
-        if (self.useOSC.checked) {
-            [[NSUserDefaults standardUserDefaults]
-             setObject:@"YES" forKey:Preference_Key_General_UseOSCForChat];
-        }else{
-            [[NSUserDefaults standardUserDefaults]
-             setObject:@"NO" forKey:Preference_Key_General_UseOSCForChat];
-        }
-    }
-    return;
-}
-
 
 @end

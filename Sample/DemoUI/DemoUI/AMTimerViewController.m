@@ -45,6 +45,8 @@
 
     [self.clockBtn performClick:nil];
     [self.addNewOne performClick:nil];
+    [self.timerBtn performClick:nil];
+    
 }
 
 -(void)registerTabButtons{

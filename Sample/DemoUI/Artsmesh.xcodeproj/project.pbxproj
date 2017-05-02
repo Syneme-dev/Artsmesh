@@ -271,6 +271,7 @@
 		4F2E48D81C0DA29000B48708 /* AMVideoConfigWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4F2E48D61C0DA29000B48708 /* AMVideoConfigWindow.xib */; };
 		4F2E5A011E1C9C3A00A9BEFA /* AMSyphonCommon.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F2E5A001E1C9C3A00A9BEFA /* AMSyphonCommon.m */; };
 		4F3F16781E1B73D40007FDFA /* AMRouterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F3F16771E1B73D40007FDFA /* AMRouterView.m */; };
+		4F52EBCC1EB75A34004FD758 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F52EBCB1EB75A34004FD758 /* GLKit.framework */; };
 		4F61FF701CB6688900D11143 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F61FF6F1CB6688900D11143 /* AVKit.framework */; };
 		4F69C3971BB3D5C9001E7644 /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */; };
 		4F6E21C11CC097B80043C7E8 /* VideoToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4F6E21C01CC097B80043C7E8 /* VideoToolbox.framework */; };
@@ -982,6 +983,7 @@
 		4F2E5A001E1C9C3A00A9BEFA /* AMSyphonCommon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMSyphonCommon.m; sourceTree = "<group>"; };
 		4F3F16761E1B73D40007FDFA /* AMRouterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMRouterView.h; sourceTree = "<group>"; };
 		4F3F16771E1B73D40007FDFA /* AMRouterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMRouterView.m; sourceTree = "<group>"; };
+		4F52EBCB1EB75A34004FD758 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		4F61FF6F1CB6688900D11143 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
 		4F69C3961BB3D5C9001E7644 /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		4F6E21C01CC097B80043C7E8 /* VideoToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoToolbox.framework; path = System/Library/Frameworks/VideoToolbox.framework; sourceTree = SDKROOT; };
@@ -1186,6 +1188,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F52EBCC1EB75A34004FD758 /* GLKit.framework in Frameworks */,
 				4F6E21C11CC097B80043C7E8 /* VideoToolbox.framework in Frameworks */,
 				4F61FF701CB6688900D11143 /* AVKit.framework in Frameworks */,
 				4FA1E69F1C00959D0007E33C /* CoreVideo.framework in Frameworks */,
@@ -1780,6 +1783,7 @@
 		37C2316E187A8FFD00554AFD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4F52EBCB1EB75A34004FD758 /* GLKit.framework */,
 				4F6E21C01CC097B80043C7E8 /* VideoToolbox.framework */,
 				4F61FF6F1CB6688900D11143 /* AVKit.framework */,
 				4FA1E69E1C00959D0007E33C /* CoreVideo.framework */,

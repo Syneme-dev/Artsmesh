@@ -16,6 +16,7 @@
 #import <OpenGL/OpenGL.h>
 #import <OpenGL/gl.h>
 #import <Syphon/Syphon.h>
+#import <GLKit/GLKit.h>
 
 @interface AMP2PVideoReceiver ()
 @property (strong, nonatomic) NSMutableData*  lastNALUData;
@@ -313,15 +314,20 @@ withFilterContext:(id)filterContext
 -(void) sendToSyphon:(CMSampleBufferRef) buffer
 {
     //Convert CMSampleBufferRef into cvImage for later processing.
-    CVImageBufferRef cvImage = CMSampleBufferGetImageBuffer(buffer);
-    if(CVPixelBufferLockBaseAddress(cvImage, 0) != kCVReturnSuccess)
+    if(buffer == nil)
         return;
+    CVImageBufferRef cvImage = CMSampleBufferGetImageBuffer(buffer);
+    if(cvImage == nil)
+        return;
+//    if(CVPixelBufferLockBaseAddress(cvImage, 0) != kCVReturnSuccess)
+//        return;
     
     // Get detailed info of cvImage.
     uint8_t* baseAddress = CVPixelBufferGetBaseAddress(cvImage);
     size_t   width       = CVPixelBufferGetWidth(cvImage);
     size_t   height      = CVPixelBufferGetHeight(cvImage);
     size_t   bytesPerRow = CVPixelBufferGetBytesPerRow(cvImage);
+    const int bitsPerComponent = 8;
     
     //use info from last step convert into CGContextRef
     CGColorSpaceRef colorSpace;
@@ -338,15 +344,32 @@ withFilterContext:(id)filterContext
     cgImage = CGBitmapContextCreateImage(cgContext);
     //image = [NSImage imageWithCGImage:cgImage];
     NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:cgImage];
-    CGImageRelease(cgImage);
-    CGContextRelease(cgContext);
+    if(imageRep == nil)
+        return;
+   
     CVPixelBufferUnlockBaseAddress(cvImage, 0);
     
     if(imageRep != nil){
+        CGImageRef pixelData = [imageRep CGImage];
         
+        CGContextRef gtx = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast);
+        
+        CGContextDrawImage(gtx, CGRectMake(0, 0, width, height), pixelData);
+        CGContextFlush(gtx);
+
+        GLKTextureInfo* texture = [GLKTextureLoader textureWithCGImage:pixelData options:NULL error:NULL];
+        
+        NSLog(@"texture: %i %ix%i", texture.name, texture.width, texture.height);
+        [_server publishFrameTexture:texture.name
+                            textureTarget:GL_TEXTURE_2D
+                              imageRegion:NSMakeRect(0, 0, texture.width, texture.height)
+                        textureDimensions:NSMakeSize(texture.width, texture.height)
+                                  flipped:YES];
+ 
     }
     
-    
+    CGImageRelease(cgImage);
+    CGContextRelease(cgContext);
     return ;
 }
 

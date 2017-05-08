@@ -17,14 +17,16 @@
 #import <OpenGL/gl.h>
 #import <Syphon/Syphon.h>
 #import <GLKit/GLKit.h>
+#import <VideoToolbox/VideoToolbox.h>
 
 @interface AMP2PVideoReceiver ()
 @property (strong, nonatomic) NSMutableData*  lastNALUData;
 @property (nonatomic, weak) AVSampleBufferDisplayLayer* videoLayer;
 @property (nonatomic, strong) NSData * spsData;
 @property (nonatomic, strong) NSData * ppsData;
-@property (nonatomic) CMVideoFormatDescriptionRef videoFormatDescr;
-@property (nonatomic, retain) AVSampleBufferDisplayLayer *avsbDisplayLayer;
+@property (nonatomic) VTDecompressionSessionRef     decompressionSession;
+@property (nonatomic) CMVideoFormatDescriptionRef   videoFormatDescr;
+@property (nonatomic, retain) AVSampleBufferDisplayLayer*       avsbDisplayLayer;
 @end
 
 
@@ -372,5 +374,120 @@ withFilterContext:(id)filterContext
     CGContextRelease(cgContext);
     return ;
 }
+
+
+
+-(void) createDecompSession
+{
+    // make sure to destroy the old VTD session
+    _decompressionSession = NULL;
+    VTDecompressionOutputCallbackRecord callBackRecord;
+    callBackRecord.decompressionOutputCallback = decompressionSessionDecodeFrameCallback;
+    
+    // this is necessary if you need to make calls to Objective C "self" from within in the callback method.
+    callBackRecord.decompressionOutputRefCon = (__bridge void *)self;
+    
+    OSStatus status =  VTDecompressionSessionCreate(NULL, _formatDesc, NULL,
+                                                    NULL, // (__bridge CFDictionaryRef)(destinationImageBufferAttributes)
+                                                    &callBackRecord, &_decompressionSession);
+    NSLog(@"Video Decompression Session Create: \t %@", (status == noErr) ? @"successful!" : @"failed...");
+    if(status != noErr) NSLog(@"\t\t VTD ERROR type: %d", (int)status);
+}
+
+void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
+                                             void *sourceFrameRefCon,
+                                             OSStatus status,
+                                             VTDecodeInfoFlags infoFlags,
+                                             CVImageBufferRef imageBuffer,
+                                             CMTime presentationTimeStamp,
+                                             CMTime presentationDuration)
+{
+    //    THISCLASSNAME *streamManager = (__bridge THISCLASSNAME *)decompressionOutputRefCon;
+    
+    if (status != noErr)
+    {
+        NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil];
+        NSLog(@"Decompressed error: %@", error);
+    }
+    else
+    {
+        NSLog(@"Decompressed sucessfully");
+        
+        // do something with your resulting CVImageBufferRef that is your decompressed frame
+        //[streamManager displayDecodedFrame:imageBuffer];
+    }
+}
+
+- (void) render:(CMSampleBufferRef)sampleBuffer
+{
+    VTDecodeFrameFlags flags = kVTDecodeFrame_EnableAsynchronousDecompression;
+    VTDecodeInfoFlags flagOut;
+    NSDate* currentTime = [NSDate date];
+    VTDecompressionSessionDecodeFrame(_decompressionSession, sampleBuffer, flags,
+                                      (void*)CFBridgingRetain(currentTime), &flagOut);
+    if(sampleBuffer == nil)
+        return;
+    
+    CVImageBufferRef cvImage = CMSampleBufferGetImageBuffer(sampleBuffer);
+    if(cvImage == nil)
+        return;
+    
+    //    if(CVPixelBufferLockBaseAddress(cvImage, 0) != kCVReturnSuccess)
+    //        return;
+    
+    
+    // Get detailed info of cvImage.
+    uint8_t* baseAddress = CVPixelBufferGetBaseAddress(cvImage);
+    size_t   width       = CVPixelBufferGetWidth(cvImage);
+    size_t   height      = CVPixelBufferGetHeight(cvImage);
+    size_t   bytesPerRow = CVPixelBufferGetBytesPerRow(cvImage);
+    const int bitsPerComponent = 8;
+    
+    //use info from last step convert into CGContextRef
+    CGColorSpaceRef     colorSpace;
+    CGContextRef        cgContext;
+    colorSpace  = CGColorSpaceCreateDeviceRGB( );
+    cgContext   = CGBitmapContextCreate(baseAddress,       width,     height,
+                                        8, bytesPerRow, colorSpace,
+                                        kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
+    
+    CGColorSpaceRelease(colorSpace);
+    
+    //Convert into NSImage, which we don't know yet.
+    CGImageRef cgImage;
+    cgImage = CGBitmapContextCreateImage(cgContext);
+    //image = [NSImage imageWithCGImage:cgImage];
+    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:cgImage];
+    if(imageRep == nil)
+        return;
+    
+    CVPixelBufferUnlockBaseAddress(cvImage, 0);
+    
+    if(imageRep != nil){
+        CGImageRef pixelData = [imageRep CGImage];
+        
+        CGContextRef gtx = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast);
+        
+        CGContextDrawImage(gtx, CGRectMake(0, 0, width, height), pixelData);
+        CGContextFlush(gtx);
+        
+        GLKTextureInfo* texture = [GLKTextureLoader textureWithCGImage:pixelData options:NULL error:NULL];
+        
+        NSLog(@"texture: %i %ix%i", texture.name, texture.width, texture.height);
+        [_server publishFrameTexture:texture.name
+                       textureTarget:GL_TEXTURE_2D
+                         imageRegion:NSMakeRect(0, 0, texture.width, texture.height)
+                   textureDimensions:NSMakeSize(texture.width, texture.height)
+                             flipped:YES];
+        
+    }
+    
+    CGImageRelease(cgImage);
+    CGContextRelease(cgContext);
+    CFRelease(sampleBuffer);
+    
+    return;
+}
+
 
 @end

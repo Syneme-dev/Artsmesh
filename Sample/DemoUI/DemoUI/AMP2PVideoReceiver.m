@@ -24,7 +24,7 @@
 @property (nonatomic, weak) AVSampleBufferDisplayLayer* videoLayer;
 @property (nonatomic, strong) NSData * spsData;
 @property (nonatomic, strong) NSData * ppsData;
-@property (nonatomic) VTDecompressionSessionRef     decompressionSession;
+@property (nonatomic, assign) VTDecompressionSessionRef     decompressionSession;
 @property (nonatomic) CMVideoFormatDescriptionRef   videoFormatDescr;
 @property (nonatomic, retain) AVSampleBufferDisplayLayer*       avsbDisplayLayer;
 @end
@@ -229,6 +229,11 @@ withFilterContext:(id)filterContext
             }
         }
     }
+    // Create the VTDecompressionSession.
+    if((status == noErr) && (_decompressionSession == NULL))
+    {
+        [self createDecompSession];
+    }
     
     if(_ableToDecodeFrame && ( nalu_type == 5 || nalu_type == 1))
     {
@@ -303,7 +308,8 @@ withFilterContext:(id)filterContext
             
             dispatch_async(dispatch_get_main_queue(),^{
                 if([self.videoLayer isReadyForMoreMediaData]){
-                    [self sendToSyphon:sampleBuffer];
+                    //[self sendToSyphon:sampleBuffer];
+                    [self render:sampleBuffer];
                     [self.videoLayer enqueueSampleBuffer:sampleBuffer];
                     [self.videoLayer setNeedsDisplay];
                 }
@@ -321,8 +327,8 @@ withFilterContext:(id)filterContext
     CVImageBufferRef cvImage = CMSampleBufferGetImageBuffer(buffer);
     if(cvImage == nil)
         return;
-//    if(CVPixelBufferLockBaseAddress(cvImage, 0) != kCVReturnSuccess)
-//        return;
+   if(CVPixelBufferLockBaseAddress(cvImage, 0) != kCVReturnSuccess)
+       return;
     
     // Get detailed info of cvImage.
     uint8_t* baseAddress = CVPixelBufferGetBaseAddress(cvImage);
@@ -402,7 +408,6 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
                                              CMTime presentationTimeStamp,
                                              CMTime presentationDuration)
 {
-    //    THISCLASSNAME *streamManager = (__bridge THISCLASSNAME *)decompressionOutputRefCon;
     
     if (status != noErr)
     {
@@ -412,9 +417,6 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
     else
     {
         NSLog(@"Decompressed sucessfully");
-        
-        // do something with your resulting CVImageBufferRef that is your decompressed frame
-        //[streamManager displayDecodedFrame:imageBuffer];
     }
 }
 
@@ -432,9 +434,8 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
     if(cvImage == nil)
         return;
     
-    //    if(CVPixelBufferLockBaseAddress(cvImage, 0) != kCVReturnSuccess)
-    //        return;
-    
+    if(CVPixelBufferLockBaseAddress(cvImage, 0) != kCVReturnSuccess)
+        return;
     
     // Get detailed info of cvImage.
     uint8_t* baseAddress = CVPixelBufferGetBaseAddress(cvImage);

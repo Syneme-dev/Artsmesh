@@ -309,7 +309,7 @@ withFilterContext:(id)filterContext
             dispatch_async(dispatch_get_main_queue(),^{
                 if([self.videoLayer isReadyForMoreMediaData]){
                     //[self sendToSyphon:sampleBuffer];
-                    [self render:sampleBuffer];
+                    //[self render:sampleBuffer];
                     [self.videoLayer enqueueSampleBuffer:sampleBuffer];
                     [self.videoLayer setNeedsDisplay];
                 }
@@ -385,19 +385,30 @@ withFilterContext:(id)filterContext
 
 -(void) createDecompSession
 {
-    // make sure to destroy the old VTD session
     _decompressionSession = NULL;
+   
+    CFDictionaryRef attrs = NULL;
+    const void *keys[] = { kCVPixelBufferPixelFormatTypeKey };
+    uint32_t v = kCVPixelFormatType_420YpCbCr8BiPlanarFullRange;
+    const void *values[] = { CFNumberCreate(NULL, kCFNumberSInt32Type, &v) };
+    attrs = CFDictionaryCreate(NULL, keys, values, 1, NULL, NULL);
+    
     VTDecompressionOutputCallbackRecord callBackRecord;
     callBackRecord.decompressionOutputCallback = decompressionSessionDecodeFrameCallback;
+    callBackRecord.decompressionOutputRefCon = (__bridge void *)self;;
     
-    // this is necessary if you need to make calls to Objective C "self" from within in the callback method.
-    callBackRecord.decompressionOutputRefCon = (__bridge void *)self;
+    OSStatus status = VTDecompressionSessionCreate(kCFAllocatorDefault,
+                                          _formatDesc,
+                                          NULL, attrs,
+                                          &callBackRecord,
+                                          &_decompressionSession);
     
-    OSStatus status =  VTDecompressionSessionCreate(NULL, _formatDesc, NULL,
-                                                    NULL, // (__bridge CFDictionaryRef)(destinationImageBufferAttributes)
-                                                    &callBackRecord, &_decompressionSession);
-    NSLog(@"Video Decompression Session Create: \t %@", (status == noErr) ? @"successful!" : @"failed...");
-    if(status != noErr) NSLog(@"\t\t VTD ERROR type: %d", (int)status);
+    NSLog(@"Video Decompression Session Create: \t %@",
+            (status == noErr) ? @"successful!" : @"failed...");
+    if(status != noErr)
+        NSLog(@"\t\t VTD ERROR type: %d", (int)status);
+    
+    CFRelease(attrs);
 }
 
 void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
@@ -489,6 +500,5 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
     
     return;
 }
-
 
 @end

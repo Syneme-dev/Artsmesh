@@ -25,7 +25,7 @@
 @property (nonatomic, strong) NSData * spsData;
 @property (nonatomic, strong) NSData * ppsData;
 @property (nonatomic, assign) VTDecompressionSessionRef     decompressionSession;
-@property (nonatomic) CMVideoFormatDescriptionRef   videoFormatDescr;
+@property (nonatomic) CMFormatDescriptionRef   videoFormatDescr;
 @property (nonatomic, retain) AVSampleBufferDisplayLayer*       avsbDisplayLayer;
 @end
 
@@ -179,8 +179,8 @@ withFilterContext:(id)filterContext
 
 -(void) receivedRawVideoFrame:(uint8_t *)frame withSize:(NSUInteger)frameSize
 {
-    OSStatus  status;
-    uint8_t*  data = NULL;
+    OSStatus  status    = noErr;
+    uint8_t*  data      = NULL;
     
     long blockLength = 0;
     CMSampleBufferRef   sampleBuffer;
@@ -189,7 +189,7 @@ withFilterContext:(id)filterContext
     int nalu_type = (frame[3] & 0x1F);
     NSLog(@"~~~~~~~ Received NALU Type \"%@\" ~~~~~~~~", naluTypesStrings[nalu_type]);
     
-    if (nalu_type == 7 || nalu_type == 8)
+    if(nalu_type == 7 || nalu_type == 8)
     {
         // find what the second NALU type is
         nalu_type = (frame[3] & 0x1F);
@@ -214,12 +214,12 @@ withFilterContext:(id)filterContext
                 _ppsData.length
             };
             
-            CMVideoFormatDescriptionRef videoFormatDescr;
+           
             status = CMVideoFormatDescriptionCreateFromH264ParameterSets(kCFAllocatorDefault, 2,
                                                                          (const uint8_t *const*)parameterSetPointers,
                                                                          parameterSetSizes, 4,
-                                                                         &videoFormatDescr);
-            _formatDesc = videoFormatDescr;
+                                                                         &_formatDesc);
+            //_formatDesc = videoFormatDescr;
             NSLog(@"\t Update CMVideoFormatDescription:%@", (status == noErr) ? @"success" : @"fail");
             
             if(status != noErr){
@@ -308,77 +308,13 @@ withFilterContext:(id)filterContext
             
             dispatch_async(dispatch_get_main_queue(),^{
                 if([self.videoLayer isReadyForMoreMediaData]){
-                    //[self sendToSyphon:sampleBuffer];
-                    //[self render:sampleBuffer];
                     [self.videoLayer enqueueSampleBuffer:sampleBuffer];
                     [self.videoLayer setNeedsDisplay];
+                    //[self render:sampleBuffer];
                 }
             });
         }
     }
-}
-
-
--(void) sendToSyphon:(CMSampleBufferRef) buffer
-{
-    //Convert CMSampleBufferRef into cvImage for later processing.
-    if(buffer == nil)
-        return;
-    CVImageBufferRef cvImage = CMSampleBufferGetImageBuffer(buffer);
-    if(cvImage == nil)
-        return;
-   if(CVPixelBufferLockBaseAddress(cvImage, 0) != kCVReturnSuccess)
-       return;
-    
-    // Get detailed info of cvImage.
-    uint8_t* baseAddress = CVPixelBufferGetBaseAddress(cvImage);
-    size_t   width       = CVPixelBufferGetWidth(cvImage);
-    size_t   height      = CVPixelBufferGetHeight(cvImage);
-    size_t   bytesPerRow = CVPixelBufferGetBytesPerRow(cvImage);
-    const int bitsPerComponent = 8;
-    
-    //use info from last step convert into CGContextRef
-    CGColorSpaceRef colorSpace;
-    CGContextRef cgContext;
-    colorSpace = CGColorSpaceCreateDeviceRGB();
-    cgContext = CGBitmapContextCreate(baseAddress,       width,     height,
-                                                8, bytesPerRow, colorSpace,
-                                kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
-    
-    CGColorSpaceRelease(colorSpace);
-    
-    //Convert into NSImage, which we don't know yet.
-    CGImageRef cgImage;
-    cgImage = CGBitmapContextCreateImage(cgContext);
-    //image = [NSImage imageWithCGImage:cgImage];
-    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:cgImage];
-    if(imageRep == nil)
-        return;
-   
-    CVPixelBufferUnlockBaseAddress(cvImage, 0);
-    
-    if(imageRep != nil){
-        CGImageRef pixelData = [imageRep CGImage];
-        
-        CGContextRef gtx = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast);
-        
-        CGContextDrawImage(gtx, CGRectMake(0, 0, width, height), pixelData);
-        CGContextFlush(gtx);
-
-        GLKTextureInfo* texture = [GLKTextureLoader textureWithCGImage:pixelData options:NULL error:NULL];
-        
-        NSLog(@"texture: %i %ix%i", texture.name, texture.width, texture.height);
-        [_server publishFrameTexture:texture.name
-                            textureTarget:GL_TEXTURE_2D
-                              imageRegion:NSMakeRect(0, 0, texture.width, texture.height)
-                        textureDimensions:NSMakeSize(texture.width, texture.height)
-                                  flipped:YES];
- 
-    }
-    
-    CGImageRelease(cgImage);
-    CGContextRelease(cgContext);
-    return ;
 }
 
 
@@ -428,76 +364,84 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
     else
     {
         NSLog(@"Decompressed sucessfully");
+        if(CVPixelBufferLockBaseAddress(imageBuffer, 0) != kCVReturnSuccess)
+            return;
+        
+        return;
+        // Get detailed info of cvImage.
+        uint8_t* baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
+        size_t   width       = CVPixelBufferGetWidth(imageBuffer);
+        size_t   height      = CVPixelBufferGetHeight(imageBuffer);
+        size_t   bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
+        const int bitsPerComponent = 8;
+        
+        //use info from last step convert into CGContextRef
+        CGColorSpaceRef     colorSpace;
+        CGContextRef        cgContext;
+        colorSpace  = CGColorSpaceCreateDeviceRGB( );
+        cgContext   = CGBitmapContextCreate(baseAddress,       width,     height,
+                                            8, bytesPerRow, colorSpace,
+                                            kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
+        
+        CGColorSpaceRelease(colorSpace);
+        
+        //Convert into NSImage, which we don't know yet.
+        CGImageRef cgImage;
+        cgImage = CGBitmapContextCreateImage(cgContext);
+        //image = [NSImage imageWithCGImage:cgImage];
+        NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:cgImage];
+        if(imageRep == nil)
+            return;
+        
+        CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+        
+        if(imageRep != nil){
+            CGImageRef pixelData = [imageRep CGImage];
+            
+            CGContextRef gtx = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast);
+            
+            CGContextDrawImage(gtx, CGRectMake(0, 0, width, height), pixelData);
+            CGContextFlush(gtx);
+            
+            GLKTextureInfo* texture = [GLKTextureLoader textureWithCGImage:pixelData options:NULL error:NULL];
+            
+            NSLog(@"texture: %i %ix%i", texture.name, texture.width, texture.height);
+            /*[_server publishFrameTexture:texture.name
+                           textureTarget:GL_TEXTURE_2D
+                             imageRegion:NSMakeRect(0, 0, texture.width, texture.height)
+                       textureDimensions:NSMakeSize(texture.width, texture.height)
+                                 flipped:YES];*/
+            
+        }
+        
+        CGImageRelease(cgImage);
+        CGContextRelease(cgContext);
+        //CFRelease(sampleBuffer);
     }
 }
 
 - (void) render:(CMSampleBufferRef)sampleBuffer
 {
-    VTDecodeFrameFlags flags = kVTDecodeFrame_EnableAsynchronousDecompression;
-    VTDecodeInfoFlags flagOut;
-    NSDate* currentTime = [NSDate date];
-    VTDecompressionSessionDecodeFrame(_decompressionSession, sampleBuffer, flags,
-                                      (void*)CFBridgingRetain(currentTime), &flagOut);
     if(sampleBuffer == nil)
         return;
-    
-    CVImageBufferRef cvImage = CMSampleBufferGetImageBuffer(sampleBuffer);
-    if(cvImage == nil)
-        return;
-    
-    if(CVPixelBufferLockBaseAddress(cvImage, 0) != kCVReturnSuccess)
-        return;
-    
-    // Get detailed info of cvImage.
-    uint8_t* baseAddress = CVPixelBufferGetBaseAddress(cvImage);
-    size_t   width       = CVPixelBufferGetWidth(cvImage);
-    size_t   height      = CVPixelBufferGetHeight(cvImage);
-    size_t   bytesPerRow = CVPixelBufferGetBytesPerRow(cvImage);
-    const int bitsPerComponent = 8;
-    
-    //use info from last step convert into CGContextRef
-    CGColorSpaceRef     colorSpace;
-    CGContextRef        cgContext;
-    colorSpace  = CGColorSpaceCreateDeviceRGB( );
-    cgContext   = CGBitmapContextCreate(baseAddress,       width,     height,
-                                        8, bytesPerRow, colorSpace,
-                                        kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
-    
-    CGColorSpaceRelease(colorSpace);
-    
-    //Convert into NSImage, which we don't know yet.
-    CGImageRef cgImage;
-    cgImage = CGBitmapContextCreateImage(cgContext);
-    //image = [NSImage imageWithCGImage:cgImage];
-    NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:cgImage];
-    if(imageRep == nil)
-        return;
-    
-    CVPixelBufferUnlockBaseAddress(cvImage, 0);
-    
-    if(imageRep != nil){
-        CGImageRef pixelData = [imageRep CGImage];
-        
-        CGContextRef gtx = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast);
-        
-        CGContextDrawImage(gtx, CGRectMake(0, 0, width, height), pixelData);
-        CGContextFlush(gtx);
-        
-        GLKTextureInfo* texture = [GLKTextureLoader textureWithCGImage:pixelData options:NULL error:NULL];
-        
-        NSLog(@"texture: %i %ix%i", texture.name, texture.width, texture.height);
-        [_server publishFrameTexture:texture.name
-                       textureTarget:GL_TEXTURE_2D
-                         imageRegion:NSMakeRect(0, 0, texture.width, texture.height)
-                   textureDimensions:NSMakeSize(texture.width, texture.height)
-                             flipped:YES];
-        
+
+    VTDecodeFrameFlags  decodeFlag = 0;//kVTDecodeFrame_EnableAsynchronousDecompression;
+    VTDecodeInfoFlags   flagOut = 0;;
+    CVPixelBufferRef outputPixelBuffer = NULL;
+     NSDate* currentTime = [NSDate date];
+    OSStatus status = VTDecompressionSessionDecodeFrame(_decompressionSession, sampleBuffer,
+                                                        decodeFlag,
+                                                        (void*)CFBridgingRetain(currentTime),
+                                                        &flagOut);
+    if(status == kVTInvalidSessionErr){
+        NSLog(@"Invalid session, reset decoder session");
+    }else if(status == kVTVideoDecoderBadDataErr) {
+        NSLog(@"Decode failed status=%d(Bad data)", status);
+    }else if(status != noErr) {
+        NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil];
+        NSLog(@"VTDecompressionSessionDecodeFrame error: %@", error);
     }
-    
-    CGImageRelease(cgImage);
-    CGContextRelease(cgContext);
-    CFRelease(sampleBuffer);
-    
+
     return;
 }
 

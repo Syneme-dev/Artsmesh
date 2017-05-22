@@ -306,12 +306,15 @@ withFilterContext:(id)filterContext
                      )
                   );
             
+            //[self render:sampleBuffer];
+            
+            
             dispatch_async(dispatch_get_main_queue(),^{
-                if([self.videoLayer isReadyForMoreMediaData]){
+                 if([self.videoLayer isReadyForMoreMediaData]){
                     [self.videoLayer enqueueSampleBuffer:sampleBuffer];
                     [self.videoLayer setNeedsDisplay];
-                    //[self render:sampleBuffer];
                 }
+                 
             });
         }
     }
@@ -366,33 +369,58 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
         NSLog(@"Decompressed sucessfully");
         if(CVPixelBufferLockBaseAddress(imageBuffer, 0) != kCVReturnSuccess)
             return;
+
+      
         
-        return;
+         
+         // Get the number of bytes per row for the plane pixel buffer
+         void *baseAddress = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, 0);
+         
+         // Get the number of bytes per row for the plane pixel buffer
+         size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(imageBuffer,0);
+         // Get the pixel buffer width and height
+         size_t width = CVPixelBufferGetWidth(imageBuffer);
+         size_t height = CVPixelBufferGetHeight(imageBuffer);
+
+        /*
         // Get detailed info of cvImage.
-        uint8_t* baseAddress = CVPixelBufferGetBaseAddress(imageBuffer);
-        size_t   width       = CVPixelBufferGetWidth(imageBuffer);
-        size_t   height      = CVPixelBufferGetHeight(imageBuffer);
-        size_t   bytesPerRow = CVPixelBufferGetBytesPerRow(imageBuffer);
-        const int bitsPerComponent = 8;
+        uint8_t* baseAddress        = CVPixelBufferGetBaseAddress(imageBuffer);
+        size_t   width              = CVPixelBufferGetWidth(imageBuffer);
+        size_t   height             = CVPixelBufferGetHeight(imageBuffer);
         
-        //use info from last step convert into CGContextRef
-        CGColorSpaceRef     colorSpace;
-        CGContextRef        cgContext;
-        colorSpace  = CGColorSpaceCreateDeviceRGB( );
-        cgContext   = CGBitmapContextCreate(baseAddress,       width,     height,
-                                            8, bytesPerRow, colorSpace,
-                                            kCGBitmapByteOrder32Little | kCGImageAlphaPremultipliedFirst);
+        size_t   bytesPerRow        = CVPixelBufferGetBytesPerRow(imageBuffer);
+          */
+        const int bitsPerComponent  = 8;
+        // Create a device-dependent gray color space
+        CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
         
-        CGColorSpaceRelease(colorSpace);
+        // Create a bitmap graphics context with the sample buffer data
+        CGContextRef cgContext = CGBitmapContextCreate(baseAddress, width, height, 8,
+                                                     bytesPerRow, colorSpace, kCGImageAlphaNone);
+        /*
+        //This for RGBA context, but can't create.
+        CGColorSpaceRef colorSpace  = CGColorSpaceCreateDeviceRGB( );
+        CGContextRef    cgContext   = CGBitmapContextCreate(baseAddress,  width,  height,   8,
+                                            bytesPerRow, colorSpace, CGImageAlphaPremultipliedLast);
+        */
         
-        //Convert into NSImage, which we don't know yet.
-        CGImageRef cgImage;
-        cgImage = CGBitmapContextCreateImage(cgContext);
-        //image = [NSImage imageWithCGImage:cgImage];
+        CGImageRef cgImage = CGBitmapContextCreateImage(cgContext);
+        if(cgImage == nil){
+            // Unlock the pixel buffer
+            CVPixelBufferUnlockBaseAddress(imageBuffer,0);
+            // Free up the context and color space
+            CGContextRelease(cgContext);
+            CGColorSpaceRelease(colorSpace);            return;
+        }
+        
         NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:cgImage];
-        if(imageRep == nil)
+        if(imageRep == nil){
+            CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+            CGColorSpaceRelease(colorSpace);
             return;
-        
+        }
+
+        CGColorSpaceRelease(colorSpace);
         CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
         
         if(imageRep != nil){
@@ -406,17 +434,18 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
             GLKTextureInfo* texture = [GLKTextureLoader textureWithCGImage:pixelData options:NULL error:NULL];
             
             NSLog(@"texture: %i %ix%i", texture.name, texture.width, texture.height);
-            /*[_server publishFrameTexture:texture.name
+            /*
+            [_server publishFrameTexture:texture.name
                            textureTarget:GL_TEXTURE_2D
                              imageRegion:NSMakeRect(0, 0, texture.width, texture.height)
                        textureDimensions:NSMakeSize(texture.width, texture.height)
-                                 flipped:YES];*/
+                                 flipped:YES];
+            */
             
         }
         
         CGImageRelease(cgImage);
         CGContextRelease(cgContext);
-        //CFRelease(sampleBuffer);
     }
 }
 

@@ -27,6 +27,7 @@
 @property (nonatomic, assign) VTDecompressionSessionRef     decompressionSession;
 @property (nonatomic) CMFormatDescriptionRef   videoFormatDescr;
 @property (nonatomic, retain) AVSampleBufferDisplayLayer*       avsbDisplayLayer;
+@property (nonatomic, strong) SyphonServer*     server;
 @end
 
 
@@ -38,8 +39,6 @@
     BOOL                            _searchForSPSAndPPS;
     BOOL                            _ableToDecodeFrame;
     NSInteger                       _port;
-    
-    SyphonServer*                   _server;
     NSOpenGLContext*                _glContext;
     CGLContextObj                   _cglContext;
 
@@ -307,7 +306,7 @@ withFilterContext:(id)filterContext
                   );
             
             //[self render:sampleBuffer];
-            
+            //return;
             
             dispatch_async(dispatch_get_main_queue(),^{
                  if([self.videoLayer isReadyForMoreMediaData]){
@@ -358,7 +357,7 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
                                              CMTime presentationTimeStamp,
                                              CMTime presentationDuration)
 {
-    
+    NSError* error;
     if (status != noErr)
     {
         NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil];
@@ -370,39 +369,20 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
         if(CVPixelBufferLockBaseAddress(imageBuffer, 0) != kCVReturnSuccess)
             return;
 
-      
-        
-         
          // Get the number of bytes per row for the plane pixel buffer
-         void *baseAddress = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, 0);
-         
-         // Get the number of bytes per row for the plane pixel buffer
-         size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(imageBuffer,0);
-         // Get the pixel buffer width and height
-         size_t width = CVPixelBufferGetWidth(imageBuffer);
-         size_t height = CVPixelBufferGetHeight(imageBuffer);
-
-        /*
-        // Get detailed info of cvImage.
-        uint8_t* baseAddress        = CVPixelBufferGetBaseAddress(imageBuffer);
-        size_t   width              = CVPixelBufferGetWidth(imageBuffer);
-        size_t   height             = CVPixelBufferGetHeight(imageBuffer);
-        
-        size_t   bytesPerRow        = CVPixelBufferGetBytesPerRow(imageBuffer);
-          */
-        const int bitsPerComponent  = 8;
-        // Create a device-dependent gray color space
+        void *baseAddress  = CVPixelBufferGetBaseAddressOfPlane(imageBuffer, 0);
+        size_t bytesPerRow = CVPixelBufferGetBytesPerRowOfPlane(imageBuffer, 0);
+        size_t bitsPerCompent = 8;
+        size_t width  = CVPixelBufferGetWidthOfPlane(imageBuffer,  0);
+        size_t height = CVPixelBufferGetHeightOfPlane(imageBuffer, 0);
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
+        CGContextRef    cgContext  = CGBitmapContextCreate(baseAddress, width, height, bitsPerCompent,
+                                                           bytesPerRow, colorSpace, kCGImageAlphaNone);
         
-        // Create a bitmap graphics context with the sample buffer data
-        CGContextRef cgContext = CGBitmapContextCreate(baseAddress, width, height, 8,
-                                                     bytesPerRow, colorSpace, kCGImageAlphaNone);
-        /*
-        //This for RGBA context, but can't create.
+        /*//This for RGBA context, but can't create.
         CGColorSpaceRef colorSpace  = CGColorSpaceCreateDeviceRGB( );
         CGContextRef    cgContext   = CGBitmapContextCreate(baseAddress,  width,  height,   8,
-                                            bytesPerRow, colorSpace, CGImageAlphaPremultipliedLast);
-        */
+                                            bytesPerRow, colorSpace, CGImageAlphaPremultipliedLast);*/
         
         CGImageRef cgImage = CGBitmapContextCreateImage(cgContext);
         if(cgImage == nil){
@@ -410,42 +390,27 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
             CVPixelBufferUnlockBaseAddress(imageBuffer,0);
             // Free up the context and color space
             CGContextRelease(cgContext);
-            CGColorSpaceRelease(colorSpace);            return;
-        }
-        
-        NSBitmapImageRep *imageRep = [[NSBitmapImageRep alloc] initWithCGImage:cgImage];
-        if(imageRep == nil){
-            CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
             CGColorSpaceRelease(colorSpace);
             return;
         }
-
-        CGColorSpaceRelease(colorSpace);
-        CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
         
-        if(imageRep != nil){
-            CGImageRef pixelData = [imageRep CGImage];
-            
-            CGContextRef gtx = CGBitmapContextCreate(NULL, width, height, bitsPerComponent, bytesPerRow, colorSpace, kCGImageAlphaPremultipliedLast);
-            
-            CGContextDrawImage(gtx, CGRectMake(0, 0, width, height), pixelData);
-            CGContextFlush(gtx);
-            
-            GLKTextureInfo* texture = [GLKTextureLoader textureWithCGImage:pixelData options:NULL error:NULL];
-            
+        GLKTextureInfo* texture = [GLKTextureLoader textureWithCGImage:cgImage options:NULL error:&error];
+        
+        
+        if(texture != nil){
             NSLog(@"texture: %i %ix%i", texture.name, texture.width, texture.height);
-            /*
-            [_server publishFrameTexture:texture.name
-                           textureTarget:GL_TEXTURE_2D
-                             imageRegion:NSMakeRect(0, 0, texture.width, texture.height)
-                       textureDimensions:NSMakeSize(texture.width, texture.height)
-                                 flipped:YES];
-            */
-            
+            AMP2PVideoReceiver* recv = (__bridge AMP2PVideoReceiver *)decompressionOutputRefCon;
+            [recv.server publishFrameTexture:texture.name
+                               textureTarget:GL_TEXTURE_2D
+                                 imageRegion:NSMakeRect(0, 0, texture.width, texture.height)
+                           textureDimensions:NSMakeSize(texture.width, texture.height)
+                                     flipped:YES];
         }
-        
-        CGImageRelease(cgImage);
+            
+        CVPixelBufferUnlockBaseAddress(imageBuffer, 0);
+        CGColorSpaceRelease(colorSpace);
         CGContextRelease(cgContext);
+        CGImageRelease(cgImage);
     }
 }
 

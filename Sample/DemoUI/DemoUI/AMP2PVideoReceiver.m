@@ -41,7 +41,7 @@
     NSInteger                       _port;
     NSOpenGLContext*                _glContext;
     CGLContextObj                   _cglContext;
-
+    GLuint                          texture;
 }
 
 -(BOOL) registerP2PVideoLayer:(AVSampleBufferDisplayLayer*) layer
@@ -378,6 +378,9 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
         CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceGray();
         CGContextRef    cgContext  = CGBitmapContextCreate(baseAddress, width, height, bitsPerCompent,
                                                            bytesPerRow, colorSpace, kCGImageAlphaNone);
+      
+        //glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imageWidth, imageHeight, GL_BGRA,
+        //                GL_UNSIGNED_INT_8_8_8_8_REV, CVPixelBufferGetBaseAddress(imageBuffer));
         
         /*//This for RGBA context, but can't create.
         CGColorSpaceRef colorSpace  = CGColorSpaceCreateDeviceRGB( );
@@ -437,6 +440,28 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
     }
 
     return;
+}
+
+- (void) setupOffScreenRenderWithWidth:(NSInteger) width height:(NSInteger) height
+{
+    [self cleanupOffScreenRenderer];
+    
+    glEnable(GL_TEXTURE_2D);
+    
+    glGenTextures(1, &texture);
+    glBindTexture(GL_TEXTURE_2D, texture);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    //glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_BGRA, GL_UNSIGNED_INT_8_8_8_8_REV, NULL);
+}
+
+- (void) cleanupOffScreenRenderer{
+    if(texture != 0){
+        glDeleteTextures(1, &texture);
+        texture = 0;
+    }
 }
 
 @end

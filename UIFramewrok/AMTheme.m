@@ -115,6 +115,11 @@
 }
 
 -(void) setTheme: (NSString *)themeName {
+    // Configure variables to match light theme
+    NSColor *lightGrey = [NSColor colorWithCalibratedRed:(221)/255.0f green:(221)/255.0f blue:(221)/255.0f alpha:1.0f];
+    NSColor *lightBlue = [NSColor colorWithCalibratedRed:(60)/255.0f green:(75)/255.0f blue:(95)/255.0f alpha:1.0f];
+    NSColor *lightRed = [NSColor colorWithCalibratedRed:(237)/255.0f green:(28)/255.0f blue:(36)/255.0f alpha:1.0f];
+    
     NSColor *newColorAlert;
     NSColor *newColorError;
     NSColor *newColorSuccess;
@@ -198,16 +203,11 @@
     newColorTextField = UI_Color_White;
     newColorTextFieldLabel = UI_Color_Light_Grey;
     newColorTextPanelTab = UI_Color_Blue;
-    newColorTextPanelTabSelected = UI_Color_Light_Grey;
+    newColorTextPanelTabSelected = lightRed;
     
     
     if ( [themeName isEqualToString:@"light"] ) {
         self.themeType = themeName;
-        
-        // Configure variables to match light theme
-        NSColor *lightGrey = [NSColor colorWithCalibratedRed:(221)/255.0f green:(221)/255.0f blue:(221)/255.0f alpha:1.0f];
-        NSColor *lightBlue = [NSColor colorWithCalibratedRed:(60)/255.0f green:(75)/255.0f blue:(95)/255.0f alpha:1.0f];
-        NSColor *lightRed = [NSColor colorWithCalibratedRed:(237)/255.0f green:(28)/255.0f blue:(36)/255.0f alpha:1.0f];
         
         newColorBackground = lightGrey;
         newColorBackgroundHover = lightBlue;

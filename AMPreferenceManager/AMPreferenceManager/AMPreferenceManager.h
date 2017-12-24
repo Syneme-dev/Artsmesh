@@ -56,7 +56,7 @@
 #define Preference_Key_StatusNet_Password       @"Preference_Key_StatusNet_Password"
 
 //default
-#define Preference_User_Affiliation         @"YourAffiliation"
+#define Preference_User_Affiliation         @"0x1744414EBF930FfaebdA74572Cf5341acEaa9c46"
 #define Preference_User_Description         @"This is my biography."
 #define Preference_User_Status              @"Online"
 #define Preference_User_Location            @"YourLocation"

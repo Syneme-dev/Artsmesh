@@ -87,7 +87,7 @@
              @"30", Preference_OSC_Server_Timeout,
              @"50", Preference_OSC_Server_MaxGroups,
              @"50", Preference_OSC_Server_MaxUsers,
-             @"123.124.145.254", Preference_OSC_Client_ServerAddr,
+             @"74.207.254.213", Preference_OSC_Client_ServerAddr,
              @"22242", Preference_OSC_Client_ServerPort,
              @"22241", Preference_OSC_Client_RemotePort,
              @"22244", Preference_OSC_Client_RxPort,

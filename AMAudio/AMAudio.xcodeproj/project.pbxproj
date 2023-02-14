@@ -20,6 +20,7 @@
 		26A11B2719C143A300796327 /* AMJackTripManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 26A11B2119C143A300796327 /* AMJackTripManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		26A11B2819C143A300796327 /* AMJackTripManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 26A11B2219C143A300796327 /* AMJackTripManager.m */; };
 		26F2C2FE19B9613E001261F0 /* AMRouteViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */; };
+		2A4DD932299B5B2E00237BE6 /* libjack.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2A4DD931299B5B2E00237BE6 /* libjack.dylib */; };
 		4A3D17451A36138600D19720 /* AMAudioMuteButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 4A3D17431A36138600D19720 /* AMAudioMuteButton.h */; };
 		4A3D17461A36138600D19720 /* AMAudioMuteButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A3D17441A36138600D19720 /* AMAudioMuteButton.m */; };
 		4A58332419EBB14E00BFB468 /* UIFramework.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A58332319EBB14E00BFB468 /* UIFramework.framework */; };
@@ -44,7 +45,6 @@
 		4FC0ED391ACE763300ED06AF /* AMJackTripConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 4FC0ED361ACE763300ED06AF /* AMJackTripConfig.m */; };
 		4FC0ED3A1ACE763300ED06AF /* AMJackTripConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4FC0ED371ACE763300ED06AF /* AMJackTripConfig.xib */; };
 		4FD451EA1C1A82CC00679E26 /* AMLogger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FD451E91C1A82CC00679E26 /* AMLogger.framework */; };
-		4FDD11E81BC8B24D003D7896 /* Jackmp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4FDD11E71BC8B24D003D7896 /* Jackmp.framework */; };
 		4FDD11F81BC8B312003D7896 /* control.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11E91BC8B312003D7896 /* control.h */; };
 		4FDD11F91BC8B312003D7896 /* intclient.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EA1BC8B312003D7896 /* intclient.h */; };
 		4FDD11FA1BC8B312003D7896 /* jack.h in Headers */ = {isa = PBXBuildFile; fileRef = 4FDD11EB1BC8B312003D7896 /* jack.h */; };
@@ -111,6 +111,8 @@
 		26A11B2119C143A300796327 /* AMJackTripManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMJackTripManager.h; sourceTree = "<group>"; };
 		26A11B2219C143A300796327 /* AMJackTripManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackTripManager.m; sourceTree = "<group>"; };
 		26F2C2FD19B9613E001261F0 /* AMRouteViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMRouteViewController.xib; sourceTree = "<group>"; };
+		2A4DD92F299B5B1100237BE6 /* jack */ = {isa = PBXFileReference; lastKnownFileType = folder; name = jack; path = ../../../../../../usr/local/lib/jack; sourceTree = "<group>"; };
+		2A4DD931299B5B2E00237BE6 /* libjack.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libjack.dylib; path = ../../../../../../usr/local/lib/libjack.dylib; sourceTree = "<group>"; };
 		4A3D17431A36138600D19720 /* AMAudioMuteButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMAudioMuteButton.h; sourceTree = "<group>"; };
 		4A3D17441A36138600D19720 /* AMAudioMuteButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMAudioMuteButton.m; sourceTree = "<group>"; };
 		4A58332319EBB14E00BFB468 /* UIFramework.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIFramework.framework; path = ../DerivedData/Artsmesh/Build/Products/Debug/UIFramework.framework; sourceTree = "<group>"; };
@@ -135,7 +137,6 @@
 		4FC0ED361ACE763300ED06AF /* AMJackTripConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMJackTripConfig.m; sourceTree = "<group>"; };
 		4FC0ED371ACE763300ED06AF /* AMJackTripConfig.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMJackTripConfig.xib; sourceTree = "<group>"; };
 		4FD451E91C1A82CC00679E26 /* AMLogger.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMLogger.framework; path = ../AMLogger/build/Debug/AMLogger.framework; sourceTree = "<group>"; };
-		4FDD11E71BC8B24D003D7896 /* Jackmp.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Jackmp.framework; path = ../Jackmp.framework; sourceTree = "<group>"; };
 		4FDD11E91BC8B312003D7896 /* control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = control.h; sourceTree = "<group>"; };
 		4FDD11EA1BC8B312003D7896 /* intclient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = intclient.h; sourceTree = "<group>"; };
 		4FDD11EB1BC8B312003D7896 /* jack.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = jack.h; sourceTree = "<group>"; };
@@ -192,11 +193,11 @@
 				4A58332419EBB14E00BFB468 /* UIFramework.framework in Frameworks */,
 				26624DC319C9261C008F3D6D /* AMPreferenceManager.framework in Frameworks */,
 				265A405719BD65C8003D27E5 /* AMCoreData.framework in Frameworks */,
-				4FDD11E81BC8B24D003D7896 /* Jackmp.framework in Frameworks */,
 				D443717D19AACF7A00F49705 /* CoreAudio.framework in Frameworks */,
 				D443717B19AACF6300F49705 /* AudioToolbox.framework in Frameworks */,
 				D4BB010A19AA2E9E00295C54 /* AMTaskLauncher.framework in Frameworks */,
 				D472931219A6E5030034CC34 /* Cocoa.framework in Frameworks */,
+				2A4DD932299B5B2E00237BE6 /* libjack.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,7 +291,6 @@
 				4FDD11F51BC8B312003D7896 /* types.h */,
 				4FDD11F61BC8B312003D7896 /* weakjack.h */,
 				4FDD11F71BC8B312003D7896 /* weakmacros.h */,
-				4FDD11E71BC8B24D003D7896 /* Jackmp.framework */,
 			);
 			path = jack;
 			sourceTree = "<group>";
@@ -315,6 +315,8 @@
 		D472931019A6E5030034CC34 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2A4DD931299B5B2E00237BE6 /* libjack.dylib */,
+				2A4DD92F299B5B1100237BE6 /* jack */,
 				4FD451E91C1A82CC00679E26 /* AMLogger.framework */,
 				D47A184919F21110000A8CCB /* AMLogger.framework */,
 				4A58332319EBB14E00BFB468 /* UIFramework.framework */,
@@ -448,6 +450,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = D472930419A6E5030034CC34;
@@ -626,7 +629,7 @@
 				INFOPLIST_FILE = "AMAudio/AMAudio-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};
@@ -657,7 +660,7 @@
 				INFOPLIST_FILE = "AMAudio/AMAudio-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "@loader_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = "";
+				LIBRARY_SEARCH_PATHS = /usr/local/lib;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};

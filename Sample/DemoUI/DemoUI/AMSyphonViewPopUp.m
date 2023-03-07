@@ -23,6 +23,8 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
+    /*    //!zyw
+    
     [[self openGLContext] makeCurrentContext];
     
     CGLContextObj cgl_ctx = [[self openGLContext] CGLContextObj];
@@ -116,6 +118,8 @@
     //   [[NSColor redColor] set];
     //    [NSBezierPath fillRect:self.bounds];
     //   return;
+     
+     */
 }
 
 @end

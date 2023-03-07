@@ -136,6 +136,7 @@
 
 -(BOOL)start
 {
+    /*    //!zyw 
     if(self.currentServerName == nil){
         return NO;
     }
@@ -169,7 +170,7 @@
                 fpsCount = 0;
             }
             // ...then we check to see if our dimensions display or window shape needs to be updated
-            SyphonImage *frame = [client newFrameImageForContext:[[self.glView openGLContext] CGLContextObj]];
+      SyphonImage *frame = [client newFrameImageForContext:[[self.glView openGLContext] CGLContextObj]];
             
             self.glView.image = frame;
             
@@ -186,6 +187,8 @@
             
             [self.glView drawRect:self.glView.bounds];
             //[self.glView setNeedsDisplay:YES];
+  
+        
         }];
     }];
     
@@ -200,7 +203,7 @@
         [self.glView setNeedsDisplay:YES];
         return NO;
     }
-    
+    */
     return YES;
 }
 

@@ -40,6 +40,7 @@
 
 static void drawAnObject ()
 {
+    /*    //!zyw
     glColor3f(0.0f, 0.0f, 1.0f);
     glBegin(GL_TRIANGLES);
     {
@@ -48,6 +49,8 @@ static void drawAnObject ()
         glVertex3f(  0.9,     -1 ,0.0);
     }
     glEnd();
+     
+     */
 }
 
 -(BOOL)canDraw
@@ -72,6 +75,7 @@ static void drawAnObject ()
 //       [[NSColor redColor] set];
 //        [NSBezierPath fillRect:self.bounds];
 //       return;
+    /*    //!zyw
     if (!canDraw) {
         return;
     }
@@ -179,7 +183,7 @@ static void drawAnObject ()
     
     [self unlockFocus];
     //[[self openGLContext] flushBuffer];
-    
+    */
 }
 
 @end

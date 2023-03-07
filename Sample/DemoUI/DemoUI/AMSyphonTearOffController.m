@@ -65,12 +65,13 @@
                 fpsCount = 0;
             }
             // ...then we check to see if our dimensions display or window shape needs to be updated
-            SyphonImage *frame = [client newFrameImageForContext:[[self.glView openGLContext] CGLContextObj]];
+        //!zyw    SyphonImage *frame = [client newFrameImageForContext:[[self.glView openGLContext]
+            //!zyw CGLContextObj]];
             
-            self.glView.image = frame;
+            //!zyw         self.glView.image = frame;
             // ...then mark our view as needing display, it will get the frame when it's ready to draw
             
-            [self.glView drawRect:self.glView.bounds];
+            //!zyw       [self.glView drawRect:self.glView.bounds];
             
             //[self.glView setNeedsDisplay:YES];
         }];

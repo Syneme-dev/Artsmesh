@@ -152,6 +152,7 @@ NSString* kNonServer = @"    --    ";
 
 - (IBAction)serverSelected:(NSPopUpButton *)sender
 {
+    /*    //!zyw 
     [self stop ];
     _currSelection = sender.selectedItem.title;
     
@@ -214,7 +215,7 @@ NSString* kNonServer = @"    --    ";
     self.currentServerName = sender.selectedItem.title;
     
     //[notifCenter ]
-    
+    */
 }
 
 -(NSString*) selectedSyphonServerName

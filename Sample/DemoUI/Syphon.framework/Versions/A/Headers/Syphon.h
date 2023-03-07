@@ -27,10 +27,19 @@
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-#import "SyphonServerDirectory.h"
-#import "SyphonServer.h"
-#import "SyphonClient.h"
-#import "SyphonImage.h"
+#import <Syphon/SyphonServerDirectory.h>
+#import <Syphon/SyphonMetalServer.h>
+#import <Syphon/SyphonMetalClient.h>
+#import <Syphon/SyphonOpenGLServer.h>
+#import <Syphon/SyphonOpenGLClient.h>
+#import <Syphon/SyphonOpenGLImage.h>
+
+/*
+ Deprecated headers
+ */
+#import <Syphon/SyphonServer.h>
+#import <Syphon/SyphonClient.h>
+#import <Syphon/SyphonImage.h>
 
 /*! \mainpage Syphon Framework
  @section intro_sec Developing with Syphon
@@ -54,10 +63,8 @@
  
  @section introduction Developing with Syphon
  
- The Syphon framework provides the classes necessary to add Syphon support to your application. SyphonServer is used to make frames available to other applications. SyphonServerDirectory is used to discover available servers. SyphonClient is used to connect to and receive frames from a SyphonServer.
- 
- The framework <em>requires</em> MacOS X 10.6 or later. Syphon makes use of IOSurface, which is a 10.6-only technology. Syphon takes advantage of other 10.6 features such as blocks, and is compatible with garbage-collection.
- 
+ The Syphon framework provides the classes necessary to add Syphon support to your application. A Syphon server is used to make frames available to other applications. SyphonServerDirectory is used to discover available servers. A SyphonClient is used to connect to and receive frames from a Syphon server. Servers and clients are available for OpenGL and Metal, and the two are interoperable.
+  
  To include Syphon in your application, follow these steps:
  
  <ol>
@@ -75,21 +82,21 @@
  
  @section servers Servers
  
- Class documentation: SyphonServer
+ Class documentation: SyphonMetalServer, SyphonOpenGLServer
  
  Create a server:
  
  @code
- SyphonServer *myServer = [[SyphonServer alloc] initWithName:@"My Output" context:myContext options:nil];
+ SyphonMetalServer *myServer = [[SyphonMetalServer alloc] initWithName:@"My Output" device:device options:nil];
  @endcode
  
- and then publish new frames (you can also use GL_TEXTURE_2D textures):
+ and then publish new frames:
  
  @code
- [myServer publishFrameTexture:myTex textureTarget:GL_TEXTURE_RECTANGLE_EXT imageRegion:NSMakeRect(0, 0, width, height) textureDimensions:NSMakeSize(width, height) flipped:NO];
+ [myServer publishFrameTexture:myTex onCommandBuffer:commandBuffer imageRegion:NSMakeRect(0, 0, width, height) flipped:NO];
  @endcode
  
- Alternatively there are methods to bind and unbind the server to the OpenGL context, so you can draw into it directly.
+ The OpenGL server has a similar method, plus methods to bind and unbind the server to the OpenGL context, so you can draw into it directly.
  You can publish new frames as often as you like, but if you only publish when you have a frame different from the previous one, then clients can do less work.
  You must stop the server when you are finished with it:
  
@@ -117,12 +124,12 @@
  
  @section clients Clients
 
- Class documentation: SyphonClient, SyphonImage
+ Class documentation: SyphonMetalClient, SyphonOpenGLClient, SyphonOpenGLImage
 
  Usually you create a client with a server description dictionary you obtained from SyphonServerDirectory:
  
  @code
- SyphonClient *myClient = [[SyphonClient alloc] initWithServerDescription:description options:nil newFrameHandler:^(SyphonClient *client) {
+ SyphonMetalClient *myClient = [[SyphonMetalClient alloc] initWithServerDescription:description device:device options:nil newFrameHandler:^(SyphonMetalClient *client) {
 	[myView setNeedsDisplay:YES];
  }];
  @endcode
@@ -132,15 +139,12 @@
  When you are ready to draw:
  
  @code
- SyphonImage *myFrame = [myClient newFrameImageForContext:cgl_ctx];
- if (myFrame)
+ id<MTLTexture> *frame = [myClient newFrameImage];
+ if (frame)
  {
-	GLuint tex = myFrame.textureName;
-	NSSize dimensions = myFrame.textureSize;
+	// YOUR METAL DRAWING CODE HERE
 
-	// YOUR OPENGL DRAWING CODE HERE
-
-	[myFrame release];
+	[frame release]; // (if not using ARC)
  }
  @endcode
  
@@ -165,20 +169,30 @@
  Double click the setting to add SYPHON_UNIQUE_CLASS_NAME_PREFIX=MyPluginName as a macro.
  </p></li>
  <li><h4>Build the framework.</h4>
- <p>The built framework will have custom class names. The headers alias the custom names, so you can use SyphonServer, SyphonClient, SyphonImage and SyphonServerDirectory as normal in your code.<br/>
+ <p>The built framework will have custom class names. The headers alias the custom names, so you can use SyphonOpenGLServer, SyphonOpenGLClient, SyphonOpenGLImage and SyphonServerDirectory as normal in your code.<br/>
  </p></li>
  </ol>
  
  @section help More examples and help
  
- Example projects implementing a server and client are included with the Syphon SDK. You can also examine the source to the provided Syphon implementations at their <a href="http://code.google.com/p/syphon-implementations/"  target="_blank">Google Code project</a>.
- 
- Use the <a href="http://forums.v002.info/forum.php?id=7" target="_blank">Syphon developer forum</a> to ask questions, and for any development related discussion.
+ Example projects implementing a server and client are included with the Syphon SDK. You can also examine the source to some Syphon implementations on <a href="https://github.com/Syphon">GitHub</a>.
  
  Good luck!
- 
+
+ @section extending_syphon Extending Syphon
+
+ Syphon can be extended for any IOSurface-based technology using the Syphon Base classes without modifying the framework at all.
+ Import Syphon/SyphonSubclassing.h in your implementation files to gain access to essential methods for subclasses to use.
+
+ 1. If your new format is not an Objective C class, implement a new SyphonImage subclass by subclassing SyphonImageBase to expose the surface in your new format. This class should be a minimal wrapper to the contained type.
+ 2. Implement a server by subclassing SyphonServerBase. Add methods to your subclass to publish frames. When needed, call -copySurfaceForWidth: height: options: to obtain an IOSurface. When you have updated the surface, call -publish. Add a method named -newFrameImage which returns an instance of your SyphonImageBase subclass (or the new type directly).
+ 3. Implement a client by subclassing SyphonClientBase. Add a method named -newFrameImage which returns an instance of your SyphonImageBase subclass. Implement the -invalidateFrame method, noting this may be called on a background thread.
+ 4. If you override other Syphon Base class methods, be sure to pass them on to the superclass (eg if you override -stop, call [super stop] from your implementation of -stop).
+
+ If your changes are for a well-used API, please consider making a pull-request or otherwise reaching out to us so we can add them to the project.
+
  @section framework_dev Framework development
  
- If you'd like to examine the framework's source code, report a bug, or get involved in development, head on over to the <a href="http://code.google.com/p/syphon-framework/" target="_blank">Syphon framework Google Code project.</a>
+ If you'd like to examine the framework's source code, report a bug, or get involved in development, head on over to the <a href="https://github.com/Syphon/Syphon-Framework">Syphon framework GitHub project.</a>
  
  */

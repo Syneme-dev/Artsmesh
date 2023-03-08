@@ -1,8 +1,8 @@
 /*
-   SyphonServer.h
-   Syphon
+    SyphonImageBase.h
+    Syphon
 
-    Copyright 2010-2020 bangnoise (Tom Butterworth) & vade (Anton Marini).
+    Copyright 2010-2011 bangnoise (Tom Butterworth) & vade (Anton Marini).
     All rights reserved.
 
     Redistribution and use in source and binary forms, with or without
@@ -26,9 +26,16 @@
     (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
     SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
-#import <Syphon/SyphonOpenGLServer.h>
-NS_ASSUME_NONNULL_BEGIN
-DEPRECATED_MSG_ATTRIBUTE("Use SyphonOpenGLServer")
-@interface SyphonServer : SyphonOpenGLServer
+#import <Foundation/Foundation.h>
+#import <IOSurface/IOSurface.h>
+@interface SyphonImageBase : NSObject
+/*!
+ If you implement your own subclass of SyphonImageBase, you must call this designated initializer from your own initializer.
+
+ Creates a new image with the provided IOSurface.
+
+ @param surfaceRef A valid IOSurface with image data.
+ @returns A newly intialized Syphon image. Nil on failure.
+*/
+- (id)initWithSurface:(IOSurfaceRef)surfaceRef NS_DESIGNATED_INITIALIZER;
 @end
-NS_ASSUME_NONNULL_END

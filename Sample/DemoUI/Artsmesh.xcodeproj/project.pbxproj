@@ -26,6 +26,7 @@
 		26E1E6A119023496000BF14C /* AMChatView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 26E1E6A019023496000BF14C /* AMChatView.xib */; };
 		26E1E6A4190234EB000BF14C /* AMChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 26E1E6A3190234EB000BF14C /* AMChatViewController.m */; };
 		26F2BF7C18FCC3CB00DD04A6 /* AMMesher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */; };
+		2A64798829D31146002934AC /* jacktrip in Resources */ = {isa = PBXBuildFile; fileRef = 2A64798729D31146002934AC /* jacktrip */; };
 		2A9CCBE629B7275900A8881A /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2AE1B14A299CB24700181E34 /* CoreLocation.framework */; };
 		2D016D5B1A0C05E50044F0E0 /* AMGroupPreviewPanelController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2D016D591A0C05E50044F0E0 /* AMGroupPreviewPanelController.m */; };
 		2D016D5C1A0C05E50044F0E0 /* AMGroupPreviewPanelController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D016D5A1A0C05E50044F0E0 /* AMGroupPreviewPanelController.xib */; };
@@ -90,7 +91,6 @@
 		4A4511851A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A4511831A8B62FB001E7328 /* AMOSCGroupSettingsVC.xib */; };
 		4A5072011A6B49BE006E09FC /* AMLocalGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */; };
 		4A5072021A6B49BE006E09FC /* AMLocalGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4A5072001A6B49BE006E09FC /* AMLocalGroupViewController.xib */; };
-		4A6D4B7A1A12F8EC00B5D26B /* jacktrip in Copy Files (7 items) */ = {isa = PBXBuildFile; fileRef = 4A6D4B781A12F8DA00B5D26B /* jacktrip */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		4A6D4B8B1A13115100B5D26B /* AMOSCGroups.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; };
 		4A6D4B8C1A13117300B5D26B /* AMOSCGroups.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4A8C69DE1A6FDBF800540694 /* AMOutlineView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4A8C69DD1A6FDBF800540694 /* AMOutlineView.m */; };
@@ -309,7 +309,6 @@
 				4F7E661E1BE1E2FF006606D0 /* libturbojpeg.0.dylib in Copy Files (7 items) */,
 				2DAB319D1BE856CB00C1BD5A /* ffmpeg in Copy Files (7 items) */,
 				4FC6316A1B46635200BD02AB /* iperf in Copy Files (7 items) */,
-				4A6D4B7A1A12F8EC00B5D26B /* jacktrip in Copy Files (7 items) */,
 			);
 			name = "Copy Files (7 items)";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -394,6 +393,7 @@
 		26E1E6A2190234EB000BF14C /* AMChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMChatViewController.h; sourceTree = "<group>"; };
 		26E1E6A3190234EB000BF14C /* AMChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMChatViewController.m; sourceTree = "<group>"; };
 		26F2BF7B18FCC3CB00DD04A6 /* AMMesher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMMesher.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMMesher.framework; sourceTree = "<group>"; };
+		2A64798729D31146002934AC /* jacktrip */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = jacktrip; sourceTree = "<group>"; };
 		2AE1B14A299CB24700181E34 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		2D016D581A0C05E50044F0E0 /* AMGroupPreviewPanelController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMGroupPreviewPanelController.h; sourceTree = "<group>"; };
 		2D016D591A0C05E50044F0E0 /* AMGroupPreviewPanelController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMGroupPreviewPanelController.m; sourceTree = "<group>"; };
@@ -494,7 +494,6 @@
 		4A5071FE1A6B49BE006E09FC /* AMLocalGroupViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMLocalGroupViewController.h; sourceTree = "<group>"; };
 		4A5071FF1A6B49BE006E09FC /* AMLocalGroupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMLocalGroupViewController.m; sourceTree = "<group>"; };
 		4A5072001A6B49BE006E09FC /* AMLocalGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AMLocalGroupViewController.xib; sourceTree = "<group>"; };
-		4A6D4B781A12F8DA00B5D26B /* jacktrip */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = jacktrip; sourceTree = "<group>"; };
 		4A6D4B8A1A13115100B5D26B /* AMOSCGroups.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AMOSCGroups.framework; path = ../../DerivedData/Artsmesh/Build/Products/Debug/AMOSCGroups.framework; sourceTree = "<group>"; };
 		4A8C69DC1A6FDBF800540694 /* AMOutlineView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMOutlineView.h; sourceTree = "<group>"; };
 		4A8C69DD1A6FDBF800540694 /* AMOutlineView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMOutlineView.m; sourceTree = "<group>"; };
@@ -1053,10 +1052,10 @@
 				4FC080231C9B9F5F0072559B /* OscGroupServer */,
 				4FC080281C9B9FB30072559B /* OscGroupClient */,
 				2DD36DEE1C49955700C43CB6 /* ffplay */,
+				2A64798729D31146002934AC /* jacktrip */,
 				4FE1F1AF1E7BBBC000DB0D89 /* LocalServer */,
 				2DAB319B1BE8569C00C1BD5A /* ffmpeg */,
 				4FC631681B465D6000BD02AB /* iperf */,
-				4A6D4B781A12F8DA00B5D26B /* jacktrip */,
 				37C23175187A8FFD00554AFD /* DemoUI */,
 				37C2316E187A8FFD00554AFD /* Frameworks */,
 				37C2316D187A8FFD00554AFD /* Products */,
@@ -1729,6 +1728,7 @@
 				CE60077B1990615C00EF9220 /* AMNetworkToolsViewController.xib in Resources */,
 				4FBE6A801C04447500C854EA /* AMVideoRouteViewController.xib in Resources */,
 				2D016D5C1A0C05E50044F0E0 /* AMGroupPreviewPanelController.xib in Resources */,
+				2A64798829D31146002934AC /* jacktrip in Resources */,
 				AF2890DD198A36BC00D05174 /* shot_visual.png in Resources */,
 				AFD75759195D048E0057976D /* shot_audio.png in Resources */,
 				4F82512A1B257E2D00224513 /* AMPingTabVC.xib in Resources */,

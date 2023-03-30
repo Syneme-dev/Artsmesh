@@ -64,8 +64,10 @@
     [self.closeBtn.layer  setBorderColor: UI_Color_blue.CGColor];
 
     
-    [self.roleSelecter addItemWithTitle:@"SERVER"];
-    [self.roleSelecter addItemWithTitle:@"CLIENT"];
+    [self.roleSelecter addItemWithTitle:@"P2P SERVER"];
+    [self.roleSelecter addItemWithTitle:@"P2P CLIENT"];
+    [self.roleSelecter addItemWithTitle:@"HUB SERVER"];
+    [self.roleSelecter addItemWithTitle:@"HUB CLIENT"];
     
     [self.peerAddress setEnabled:NO];
     [self.peerName setEnabled:NO];
@@ -265,25 +267,29 @@
 
 -(BOOL)checkouJacktripParams
 {
-    if ([self.roleSelecter.stringValue isNotEqualTo:@"SERVER"] &&
-        [self.roleSelecter.stringValue isNotEqualTo:@"CLIENT"]) {
-        return NO;
+    if ([self.roleSelecter.stringValue isNotEqualTo:@"P2P SERVER"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"P2P CLIENT"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"HUB SERVER"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"HUB CLIENT"]) {
+            return NO;
     }
     
-    if ([self.roleSelecter.stringValue isEqualTo:@"SERVER"]){
+    if ([self.roleSelecter.stringValue isEqualTo:@"P2P SERVER"] ||
+        [self.roleSelecter.stringValue isEqualTo:@"HUB SERVER"]){
         if ([self.peerName.stringValue isEqualTo:@""]) {
             NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip server role you must enter clientname."];
             [alert runModal];
             return NO;
         }
         
-    }else if([self.roleSelecter.stringValue isEqualTo:@"CLIENT"]||
-             [self.peerAddress.stringValue isEqualTo:@""]){
-        if([self.peerName.stringValue isEqualTo:@""]){
+    }else if([self.peerAddress.stringValue isEqualTo:@""] &&
+             [self.peerName.stringValue isEqualTo:@""])
+    {
+       
             NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip client role you must enter both ip address and clientname "];
             [alert runModal];
             return NO;
-        }
+        
     }
     
     //check illegal ip address

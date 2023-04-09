@@ -111,7 +111,7 @@ protected:
                 if(arg->IsBlob()){
                     
                     const void *data = NULL;
-                    long size = -1;
+                    int size = -1;
                     arg->AsBlob(data, size);
                     
                     if(data != NULL && size > 0){

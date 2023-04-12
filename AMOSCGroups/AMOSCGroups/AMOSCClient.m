@@ -52,12 +52,13 @@
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"%@", [mainBundle pathForAuxiliaryExecutable:@"OscGroupClient"]];
     
-    [commandline appendFormat:@" %@ %@ %@ %@ %@ %@ %@ %@ %@",
+    [commandline appendFormat:@" %@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@",
      self.serverAddr, self.serverPort,
      self.remotePort, self.txPort,
      self.rxPort, self.userName,
      self.userPwd, self.groupName,
-     self.groupPwd];
+     self.groupPwd, self.monitorAddr,
+    self.monitorPort];
     
     NSString *systemLogPath = AMLogDirectory();
     [commandline appendFormat:@" > %@/OSC_Client.log", systemLogPath];

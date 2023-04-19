@@ -11,7 +11,7 @@
 #import <UIFramework/AMButtonHandler.h>
 #import "AMOSCGroups/AMOSCGroups.h"
 #import "AMVideoRouteViewController.h"
-#import "AMSyphonRouterViewController.h"
+//#import "AMSyphonRouterViewController.h"
 
 
 @interface AMVisualViewController ()
@@ -30,7 +30,6 @@
 {
     NSViewController* _audioRouterVC;
     NSViewController* _videoRouterVC;
-    NSViewController* _syphonRouterVC;
 }
 
 
@@ -44,8 +43,6 @@
 
     [self loadAudioRouterView];
     [self loadVideoRouterView];
-    [self loadSyphonRouterView];
-    
     [self registerTabButtons];
    
     [self pushDownButton:self.audioTab];
@@ -134,39 +131,6 @@
                                                    views:views]];
     }
 }
-
--(void)loadSyphonRouterView
-{
-    
-    _syphonRouterVC = [[AMSyphonRouterViewController alloc]
-                      initWithNibName:@"AMSyphonRouterViewController"
-                      bundle:nil];
-    
-    if (_syphonRouterVC) {
-        NSView* contentView = _syphonRouterVC.view;
-        contentView.frame = NSMakeRect(0, 0, 800, 600);
-        
-        NSView *superView = [self.tabView tabViewItemAtIndex:self.viewControllers.count].view;
-        [superView addSubview:contentView];
-        [self.viewControllers addObject:_syphonRouterVC];
-        
-        
-        [contentView setTranslatesAutoresizingMaskIntoConstraints:NO];
-        NSDictionary *views = NSDictionaryOfVariableBindings(contentView);
-        [superView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"H:|-[contentView]-|"
-                                                 options:0
-                                                 metrics:nil
-                                                   views:views]];
-        [superView addConstraints:
-         [NSLayoutConstraint constraintsWithVisualFormat:@"V:|-[contentView]-|"
-                                                 options:0
-                                                 metrics:nil
-                                                   views:views]];
-    }
-
-}
-
 
 
 - (NSMutableArray *)viewControllers

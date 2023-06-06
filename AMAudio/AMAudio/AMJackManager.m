@@ -157,24 +157,24 @@
         strcpy(stringa,"/usr/local/bin/jackd -R");
 #endif
     }else{
-        strcpy(stringa,"/usr/local/bin/jackd -R");
+        strcpy(stringa,"/usr/local/bin/jackd -v");
     }
 
     if (midi) {
         strcat(stringa, " -X coremidi ");
     }
     
-    strcat(stringa, " -d ");
+    strcat(stringa, " -d");
     strcat(stringa, [driver cStringUsingEncoding:NSUTF8StringEncoding]);
     
-    strcat(stringa, " -r ");
+    strcat(stringa, " -r");
     NSString* sampleRateStr = [NSString stringWithFormat:@"%@", sampleRate];
     strcat(stringa, [sampleRateStr cStringUsingEncoding:NSUTF8StringEncoding]);
     
-    strcat(stringa, " -p ");
+    strcat(stringa, " -p");
     NSString* bufferSizeStr = [NSString stringWithFormat:@"%@", bufferSize];
     strcat(stringa, [bufferSizeStr cStringUsingEncoding:NSUTF8StringEncoding]);
-    
+   /*
     strcat(stringa, " -o ");
     NSString* outchans = [NSString stringWithFormat:@"%@", outChannCount];
     strcat(stringa, [outchans cStringUsingEncoding:NSUTF8StringEncoding]);
@@ -211,6 +211,7 @@
     if (monitoring) {
         strcat(stringa, " -m ");
     }
+    */
     
     NSString *jackLog = [NSString stringWithFormat:@" > %@/Jack_Audio.log", AMLogDirectory()];
     const char *szLogPath = [jackLog cStringUsingEncoding:NSUTF8StringEncoding];

@@ -23,6 +23,7 @@
 
 @interface AMJackTripConfig ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 
+@property (weak) IBOutlet AMPopUpView *backendSelecter;
 @property (weak) IBOutlet AMPopUpView *roleSelecter;
 @property (weak) IBOutlet AMPopUpView *peerSelecter;
 @property (weak) IBOutlet AMFoundryFontView *peerAddress;
@@ -63,6 +64,8 @@
     [self.closeBtn.layer  setBorderWidth:1.0];
     [self.closeBtn.layer  setBorderColor: UI_Color_blue.CGColor];
 
+    [self.backendSelecter addItemWithTitle:@"JACK"];
+    [self.backendSelecter addItemWithTitle:@"RtAudio"];
     
     [self.roleSelecter addItemWithTitle:@"P2P SERVER"];
     [self.roleSelecter addItemWithTitle:@"P2P CLIENT"];
@@ -353,18 +356,19 @@
     
     AMJacktripConfigs* cfgs = [[AMJacktripConfigs alloc] init];
     
-    cfgs.role = self.roleSelecter.stringValue;
-    cfgs.serverAddr = self.peerAddress.stringValue;
-    cfgs.portOffset = self.portOffsetSelector.stringValue;
-    cfgs.channelCount = self.channeCount.stringValue;
-    cfgs.qBufferLen = self.queueBufferLen.stringValue;
-    cfgs.rCount = self.rCount.stringValue;
-    cfgs.bitrateRes = self.bitRateRes.stringValue;
-    cfgs.zerounderrun = self.zerounderrunCheck.checked;
-    cfgs.loopback = self.loopbackCheck.checked;
-    cfgs.jamlink = [jamLink boolValue];
-    cfgs.clientName = self.peerName.stringValue;
-    cfgs.useIpv6 = self.ipv6Check.checked;
+    cfgs.backend        = self.backendSelecter.stringValue;
+    cfgs.role           = self.roleSelecter.stringValue;
+    cfgs.serverAddr     = self.peerAddress.stringValue;
+    cfgs.portOffset     = self.portOffsetSelector.stringValue;
+    cfgs.channelCount   = self.channeCount.stringValue;
+    cfgs.qBufferLen     = self.queueBufferLen.stringValue;
+    cfgs.rCount         = self.rCount.stringValue;
+    cfgs.bitrateRes     = self.bitRateRes.stringValue;
+    cfgs.zerounderrun   = self.zerounderrunCheck.checked;
+    cfgs.loopback       = self.loopbackCheck.checked;
+    cfgs.jamlink        = [jamLink boolValue];
+    cfgs.clientName     = self.peerName.stringValue;
+    cfgs.useIpv6        = self.ipv6Check.checked;
     
     if(![[[AMAudio sharedInstance] audioJacktripManager] startJacktrip:cfgs]){
         

@@ -41,6 +41,12 @@
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"jacktrip"]];
     
+    // RT Audio
+    if([cfgs.backend isEqualToString:@"RtAudio"]){
+        [commandline appendFormat:@" --rtaudio"];
+    }
+    
+    
     //-s or -c
     if([cfgs.role isEqualToString:@"P2P SERVER"]){
         [commandline appendFormat:@" -s"];

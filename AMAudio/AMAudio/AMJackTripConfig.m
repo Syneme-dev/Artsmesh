@@ -35,9 +35,10 @@
 @property (weak) IBOutlet AMCheckBoxView *zerounderrunCheck;
 @property (weak) IBOutlet AMCheckBoxView *loopbackCheck;
 @property (weak) IBOutlet AMCheckBoxView *ipv6Check;
-@property (weak) IBOutlet NSButton *createBtn;
 @property (weak) IBOutlet NSTextField *channeCount;
-@property (weak) IBOutlet NSButton *closeBtn;
+@property (weak) IBOutlet NSButton *connectButton;
+@property (weak) IBOutlet NSButton *disconnectButton;
+@property (weak) IBOutlet NSButton *closeButton;
 @property NSArray* allUsers;
 @property  AMLiveUser* curPeer;
 @end
@@ -57,12 +58,16 @@
 
 -(void)setUpUI
 {
-    [AMButtonHandler changeTabTextColor:self.createBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
-    [self.createBtn.layer setBorderWidth:1.0];
-    [self.createBtn.layer setBorderColor: UI_Color_blue.CGColor];
-    [self.closeBtn.layer  setBorderWidth:1.0];
-    [self.closeBtn.layer  setBorderColor: UI_Color_blue.CGColor];
+    [AMButtonHandler changeTabTextColor:self.connectButton      toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.disconnectButton   toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.closeButton        toColor:UI_Color_blue];
+    
+    [self.connectButton.layer setBorderWidth:1.0];
+    [self.connectButton.layer setBorderColor: UI_Color_blue.CGColor];
+    [self.disconnectButton.layer setBorderWidth:1.0];
+    [self.disconnectButton.layer setBorderColor: UI_Color_blue.CGColor];
+    [self.closeButton.layer  setBorderWidth:1.0];
+    [self.closeButton.layer  setBorderColor: UI_Color_blue.CGColor];
 
     [self.backendSelecter addItemWithTitle:@"JACK"];
     [self.backendSelecter addItemWithTitle:@"RtAudio"];
@@ -346,7 +351,7 @@
     return YES;
 }
 
-- (IBAction)startJacktrip:(NSButton *)sender
+- (IBAction)connectJack:(NSButton *)sender
 {
     if (![self checkouJacktripParams]) {
         return;
@@ -380,7 +385,14 @@
 }
 
 
-- (IBAction)closeClicked:(NSButton *)sender
+- (IBAction) disconnectJack:(NSButton *)sender
+{
+    system("killall jacktrip >/dev/null");
+    [self.window close];
+}
+
+
+- (IBAction)closeWindow:(NSButton *)sender
 {
     [self.window close];
 }

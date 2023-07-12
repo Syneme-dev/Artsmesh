@@ -33,7 +33,7 @@
                     </connections>
                 </button>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Ot-3Y-8Hb" customClass="AMFoundryFontFieldLabelView">
-                    <rect key="frame" x="153" y="282" width="75" height="17"/>
+                    <rect key="frame" x="153" y="246" width="75" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="71" id="8g8-3N-5R1"/>
                         <constraint firstAttribute="height" constant="17" id="Idj-nl-bb6"/>
@@ -46,7 +46,7 @@
                 </textField>
             </subviews>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="1Ot-3Y-8Hb" secondAttribute="bottom" constant="282" id="0Zn-pj-cTD"/>
+                <constraint firstItem="fJy-36-tM4" firstAttribute="bottom" secondItem="1Ot-3Y-8Hb" secondAttribute="bottom" constant="-22" id="0Zn-pj-cTD"/>
                 <constraint firstItem="fJy-36-tM4" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" constant="-3" id="Xm5-68-Zif"/>
                 <constraint firstAttribute="trailing" secondItem="1Ot-3Y-8Hb" secondAttribute="trailing" constant="393" id="gMW-Na-5qi"/>
                 <constraint firstItem="1Ot-3Y-8Hb" firstAttribute="centerX" secondItem="fJy-36-tM4" secondAttribute="centerX" constant="4" id="zaG-g2-hGB"/>

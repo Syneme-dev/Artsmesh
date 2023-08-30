@@ -20,7 +20,8 @@
 @interface AMJacktripSettingsVC ()<AMCheckBoxDelegeate, NSTextFieldDelegate, AMPopUpViewDelegeate>
 
 @property (weak) IBOutlet AMPopUpView *roleCombo;
-@property (weak) IBOutlet AMFoundryFontView *channelCountField;
+@property (weak) IBOutlet AMFoundryFontView *sendChannelCount;
+@property (weak) IBOutlet AMFoundryFontView *fromChannelCount;
 @property (weak) IBOutlet AMFoundryFontView *qblField;
 @property (weak) IBOutlet AMFoundryFontView *prField;
 @property (weak) IBOutlet AMFoundryFontView *brsField;
@@ -60,7 +61,8 @@
     self.loopBackCheck.delegate = self;
     self.zeroUnderRunCheck.delegate = self;
     
-    self.channelCountField.delegate = self;
+    self.sendChannelCount.delegate = self;
+    self.fromChannelCount.delegate = self;
     self.qblField.delegate = self;
     self.prField.delegate = self;
     self.brsField.delegate = self;
@@ -101,9 +103,13 @@
         [self.roleCombo selectItemWithTitle:roleStr];
     }
     
-    NSString *channelCountStr = [[AMPreferenceManager standardUserDefaults]
-                              stringForKey:Preference_Jacktrip_ChannelCount];
-    self.channelCountField.stringValue = channelCountStr;
+    NSString *sendChannelCountStr = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Jacktrip_SendChannelCount];
+    self.sendChannelCount.stringValue = sendChannelCountStr;
+    
+    NSString *fromChannelCountStr = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Jacktrip_FromChannelCount];
+    self.fromChannelCount.stringValue = sendChannelCountStr;
     
     NSString *queueBufLenStr = [[AMPreferenceManager standardUserDefaults]
                                  stringForKey:Preference_Jacktrip_QBL];
@@ -156,7 +162,11 @@
 
 -(BOOL)checkUserInput
 {
-    if ([self.channelCountField.stringValue isEqualToString:@""]) {
+    if ([self.sendChannelCount.stringValue isEqualToString:@""]) {
+        return NO;
+    }
+    
+    if ([self.fromChannelCount.stringValue isEqualToString:@""]) {
         return NO;
     }
     
@@ -179,7 +189,9 @@
 -(void)saveUserPref
 {
     [[AMPreferenceManager standardUserDefaults] setObject:self.roleCombo.stringValue forKey:Preference_Jacktrip_Role];
-    [[AMPreferenceManager standardUserDefaults] setObject:self.channelCountField.stringValue forKey:Preference_Jacktrip_ChannelCount];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.sendChannelCount.stringValue forKey:Preference_Jacktrip_SendChannelCount];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.fromChannelCount.stringValue forKey:Preference_Jacktrip_FromChannelCount];
+    
     [[AMPreferenceManager standardUserDefaults] setObject:self.brsField.stringValue forKey:Preference_Jacktrip_BRR];
     [[AMPreferenceManager standardUserDefaults] setObject:self.prField.stringValue forKey:Preference_Jacktrip_PR];
     [[AMPreferenceManager standardUserDefaults] setObject:self.qblField.stringValue forKey:Preference_Jacktrip_QBL];

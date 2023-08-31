@@ -10,12 +10,15 @@
             <connections>
                 <outlet property="brsField" destination="RuW-53-gdS" id="7g1-sj-0W0"/>
                 <outlet property="cancelBtn" destination="ZYy-PC-fBl" id="hVM-jw-x96"/>
+                <outlet property="hubModeCombo" destination="aIF-nI-IVv" id="928-Gm-xWt"/>
                 <outlet property="jumLink" destination="vch-iU-wWM" id="lmY-co-pWX"/>
                 <outlet property="loopBackCheck" destination="qYF-YM-VDL" id="dSV-NW-FtX"/>
                 <outlet property="prField" destination="OTQ-85-mH8" id="Hk8-Dq-zD7"/>
                 <outlet property="qblField" destination="tJk-UH-WqX" id="0s3-MZ-gey"/>
+                <outlet property="receiveChannelCount" destination="u2n-Z7-02i" id="hvX-YS-EQV"/>
                 <outlet property="roleCombo" destination="x9V-Uh-mGm" id="XeF-N9-mbf"/>
                 <outlet property="saveBtn" destination="Eom-gc-NhV" id="Syi-p0-w4w"/>
+                <outlet property="sendChannelCount" destination="aJy-Bn-boT" id="gmY-3z-huW"/>
                 <outlet property="useIPv6Check" destination="h9L-6z-MYA" id="ePk-Gx-790"/>
                 <outlet property="view" destination="SgO-GO-2jg" id="Iyd-wx-cTn"/>
                 <outlet property="zeroUnderRunCheck" destination="BvV-lO-EhB" id="CIX-gU-ou3"/>

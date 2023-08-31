@@ -63,8 +63,11 @@
     [commandline appendFormat:@" -o %@", cfgs.portOffset];
 
     //channel numbers
-    [commandline appendFormat:@" -n %@", cfgs.channelCount];
-
+//    [commandline appendFormat:@" -n %@", cfgs.channelCount];
+    [commandline appendFormat:@" --receivechannels %@", cfgs.receiveChannelCount];
+    [commandline appendFormat:@" --sendchannels %@", cfgs.sendChannelCount];
+    
+    
     //-q
     [commandline appendFormat:@" -q %@", cfgs.qBufferLen];
 
@@ -111,10 +114,11 @@
 
     
     AMJacktripInstance* newInstance = [[AMJacktripInstance alloc] init];
-    newInstance.jacktripTask = task;
-    newInstance.portOffset = [cfgs.portOffset intValue];
-    newInstance.instanceName = cfgs.clientName;
-    newInstance.channelCount = [cfgs.channelCount intValue];
+    newInstance.jacktripTask        = task;
+    newInstance.portOffset          = [cfgs.portOffset intValue];
+    newInstance.instanceName        = cfgs.clientName;
+    newInstance.sendChannelCount    = [cfgs.sendChannelCount intValue];
+    newInstance.receiveChannelCount = [cfgs.receiveChannelCount intValue];
     
     if (self.jackTripInstances == nil){
         self.jackTripInstances = [[NSMutableArray alloc] init];

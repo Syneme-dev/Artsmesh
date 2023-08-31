@@ -24,7 +24,8 @@
 @property NSString* portOffset;
 
 //-n, --numchannels #                      Number of Input and Output Channels (default 2)
-@property NSString* channelCount;
+@property NSString* sendChannelCount;
+@property NSString* receiveChannelCount;
 
 //-q, --queue       # (1 or more)          Queue Buffer Length, in Packet Size (default 4)
 @property NSString* qBufferLen;

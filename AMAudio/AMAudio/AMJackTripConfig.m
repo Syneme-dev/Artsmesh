@@ -35,7 +35,8 @@
 @property (weak) IBOutlet AMCheckBoxView *zerounderrunCheck;
 @property (weak) IBOutlet AMCheckBoxView *loopbackCheck;
 @property (weak) IBOutlet AMCheckBoxView *ipv6Check;
-@property (weak) IBOutlet NSTextField *channeCount;
+@property (weak) IBOutlet NSTextField *sendChanneCount;
+@property (weak) IBOutlet NSTextField *receiveChanneCount;
 @property (weak) IBOutlet NSButton *connectButton;
 @property (weak) IBOutlet NSButton *disconnectButton;
 @property (weak) IBOutlet NSButton *closeButton;
@@ -197,8 +198,11 @@
     NSString *roleStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_Role];
     [self.roleSelecter selectItemWithTitle:roleStr];
     
-    NSString *chanCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_ChannelCount];
-    self.channeCount.stringValue = chanCountStr;
+    NSString *sendChanCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_SendChannelCount];
+    self.sendChanneCount.stringValue = sendChanCountStr;
+    
+    NSString *receiveChanCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_ReceiveChannelCount];
+    self.receiveChanneCount.stringValue = receiveChanCountStr;
     
     NSString *qblStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_QBL];
     self.queueBufferLen.stringValue = qblStr;
@@ -303,8 +307,14 @@
     //check illegal ip address
     //TODO:
     
-    if ([self.channeCount.stringValue intValue] <= 0) {
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"channel count parameter can not be less than zero"];
+    if ([self.sendChanneCount.stringValue intValue] <= 0) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Send channel count parameter can not be less than zero"];
+        [alert runModal];
+        return NO;
+    }
+    
+    if ([self.receiveChanneCount.stringValue intValue] <= 0) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Receive channel count parameter can not be less than zero"];
         [alert runModal];
         return NO;
     }
@@ -339,11 +349,11 @@
     //check channel count;
     int totalChannels = 0;
     for (AMJacktripInstance* instance in [[AMAudio sharedInstance] audioJacktripManager].jackTripInstances){
-        totalChannels += instance.channelCount;
+        totalChannels += instance.sendChannelCount;
     }
     
-    if (self.maxChannels < totalChannels + [self.channeCount.stringValue intValue]) {
-        NSAlert *alert = [NSAlert alertWithMessageText:@"Too many channels" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There are already too many channels, you must close some deviecs!"];
+    if (self.maxChannels < totalChannels + [self.sendChanneCount.stringValue intValue]) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Too many channels" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There are already too many send channels, you must close some deviecs!"];
         [alert runModal];
         return NO;
     }
@@ -365,7 +375,8 @@
     cfgs.role           = self.roleSelecter.stringValue;
     cfgs.serverAddr     = self.peerAddress.stringValue;
     cfgs.portOffset     = self.portOffsetSelector.stringValue;
-    cfgs.channelCount   = self.channeCount.stringValue;
+    cfgs.sendChannelCount      = self.sendChanneCount.stringValue;
+    cfgs.receiveChannelCount   = self.receiveChanneCount.stringValue;
     cfgs.qBufferLen     = self.queueBufferLen.stringValue;
     cfgs.rCount         = self.rCount.stringValue;
     cfgs.bitrateRes     = self.bitRateRes.stringValue;

@@ -21,8 +21,10 @@
 
 @property (weak) IBOutlet AMPopUpView *roleCombo;
 @property (weak) IBOutlet AMPopUpView *hubModeCombo;
-@property (weak) IBOutlet AMFoundryFontView *sendChannelCount;
-@property (weak) IBOutlet AMFoundryFontView *receiveChannelCount;
+@property (weak) IBOutlet AMPopUpView *bufStrategyCombo;
+@property (weak) IBOutlet AMCheckBoxView *jitterBufCheck;
+@property (weak) IBOutlet AMFoundryFontView *sendChannelsField;
+@property (weak) IBOutlet AMFoundryFontView *receiveChannelsField;
 @property (weak) IBOutlet AMFoundryFontView *qblField;
 @property (weak) IBOutlet AMFoundryFontView *prField;
 @property (weak) IBOutlet AMFoundryFontView *brsField;
@@ -49,8 +51,10 @@
 
 -(void)setUpUI
 {
-    [self.roleCombo addItemWithTitle:@"Client"];
-    [self.roleCombo addItemWithTitle:@"Server"];
+    [self.roleCombo addItemWithTitle:@"P2P SERVER"];
+    [self.roleCombo addItemWithTitle:@"P2P CLIENT"];
+    [self.roleCombo addItemWithTitle:@"HUB SERVER"];
+    [self.roleCombo addItemWithTitle:@"HUB CLIENT"];
     
     [self.hubModeCombo addItemWithTitle:@"0"];
     [self.hubModeCombo addItemWithTitle:@"1"];
@@ -59,23 +63,31 @@
     [self.hubModeCombo addItemWithTitle:@"4"];
     [self.hubModeCombo addItemWithTitle:@"5"];
     
+    [self.bufStrategyCombo addItemWithTitle:@"-1"];
+    [self.bufStrategyCombo addItemWithTitle:@"1"];
+    [self.bufStrategyCombo addItemWithTitle:@"2"];
+    [self.bufStrategyCombo addItemWithTitle:@"3"];
+    
     self.zeroUnderRunCheck.title = @"ZeroUnderRun[-z]";
     self.jumLink.title = @"jamlink[-j]";
     self.loopBackCheck.title = @"Loopback[-l]";
     self.useIPv6Check.title = @"Use Ipv6[-V]";
+    self.jitterBufCheck.title = @"ENABLE JITTER BUFFER";
     
     self.zeroUnderRunCheck.delegate = self;
     self.jumLink.delegate = self;
     self.loopBackCheck.delegate = self;
     self.zeroUnderRunCheck.delegate = self;
     
-    self.sendChannelCount.delegate      = self;
-    self.receiveChannelCount.delegate   = self;
+    self.sendChannelsField.delegate      = self;
+    self.receiveChannelsField.delegate   = self;
     self.qblField.delegate = self;
     self.prField.delegate = self;
     self.brsField.delegate = self;
     
-    self.roleCombo.delegate = self;
+    self.roleCombo.delegate         = self;
+    self.hubModeCombo.delegate      = self;
+    self.bufStrategyCombo.delegate  = self;
     
     [AMButtonHandler changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
@@ -117,14 +129,19 @@
         [self.hubModeCombo selectItemWithTitle:hubModeStr];
     }
     
+    NSString* bufStrategyStr = [[AMPreferenceManager standardUserDefaults]
+                                stringForKey:Preference_Jacktrip_BufStrategy];
+    if (bufStrategyStr != nil) {
+        [self.bufStrategyCombo selectItemWithTitle:bufStrategyStr];
+    }
     
-    NSString *sendChannelCountStr = [[AMPreferenceManager standardUserDefaults]
-                              stringForKey:Preference_Jacktrip_SendChannelCount];
-    self.sendChannelCount.stringValue = sendChannelCountStr;
+    NSString *sendChannelsStr = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Jacktrip_SendChannels];
+    self.sendChannelsField.stringValue = sendChannelsStr;
     
-    NSString *receiveChannelCountStr = [[AMPreferenceManager standardUserDefaults]
-                              stringForKey:Preference_Jacktrip_ReceiveChannelCount];
-    self.receiveChannelCount.stringValue = receiveChannelCountStr;
+    NSString *receiveChannelsStr = [[AMPreferenceManager standardUserDefaults]
+                              stringForKey:Preference_Jacktrip_ReceiveChannels];
+    self.receiveChannelsField.stringValue = receiveChannelsStr;
     
     NSString *queueBufLenStr = [[AMPreferenceManager standardUserDefaults]
                                  stringForKey:Preference_Jacktrip_QBL];
@@ -177,11 +194,11 @@
 
 -(BOOL)checkUserInput
 {
-    if ([self.sendChannelCount.stringValue isEqualToString:@""]) {
+    if ([self.sendChannelsField.stringValue isEqualToString:@""]) {
         return NO;
     }
     
-    if ([self.receiveChannelCount.stringValue isEqualToString:@""]) {
+    if ([self.receiveChannelsField.stringValue isEqualToString:@""]) {
         return NO;
     }
     
@@ -205,8 +222,9 @@
 {
     [[AMPreferenceManager standardUserDefaults] setObject:self.roleCombo.stringValue forKey:Preference_Jacktrip_Role];
     [[AMPreferenceManager standardUserDefaults] setObject:self.hubModeCombo.stringValue forKey:Preference_Jacktrip_HubMode];
-    [[AMPreferenceManager standardUserDefaults] setObject:self.sendChannelCount.stringValue forKey:Preference_Jacktrip_SendChannelCount];
-    [[AMPreferenceManager standardUserDefaults] setObject:self.receiveChannelCount.stringValue forKey:Preference_Jacktrip_ReceiveChannelCount];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.bufStrategyCombo.stringValue forKey:Preference_Jacktrip_BufStrategy];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.sendChannelsField.stringValue forKey:Preference_Jacktrip_SendChannels];
+    [[AMPreferenceManager standardUserDefaults] setObject:self.receiveChannelsField.stringValue forKey:Preference_Jacktrip_ReceiveChannels];
     
     [[AMPreferenceManager standardUserDefaults] setObject:self.brsField.stringValue forKey:Preference_Jacktrip_BRR];
     [[AMPreferenceManager standardUserDefaults] setObject:self.prField.stringValue forKey:Preference_Jacktrip_PR];

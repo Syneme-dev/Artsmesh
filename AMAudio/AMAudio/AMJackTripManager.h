@@ -15,8 +15,9 @@
 @property NSString* instanceName;
 @property NSTask* jacktripTask;
 @property int portOffset;
-@property int sendChannelCount;
-@property int receiveChannelCount;
+@property int sendChannels;
+@property int receiveChannels;
+@property int bufStrategy;
 
 
 @end

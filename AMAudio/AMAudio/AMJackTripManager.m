@@ -58,15 +58,21 @@
         [commandline appendFormat:@" -C %@", cfgs.serverAddr];
     }
     
-
     //port offset
     [commandline appendFormat:@" -o %@", cfgs.portOffset];
 
     //channel numbers
-//    [commandline appendFormat:@" -n %@", cfgs.channelCount];
-    [commandline appendFormat:@" --receivechannels %@", cfgs.receiveChannelCount];
-    [commandline appendFormat:@" --sendchannels %@", cfgs.sendChannelCount];
+    if([cfgs.sendChannels intValue] != 2 || [cfgs.receiveChannels intValue] != 2)
+    {
+        [commandline appendFormat:@" --sendchannels %@",    cfgs.sendChannels];
+        [commandline appendFormat:@" --receivechannels %@", cfgs.receiveChannels];
+    }
     
+    int bufStrategyVal = [cfgs.bufStrategy intValue];
+    if(bufStrategyVal==-1 || bufStrategyVal==2 || bufStrategyVal==3 || bufStrategyVal==4)
+    {
+        [commandline appendFormat:@" --bufstrategy %@",  cfgs.bufStrategy];
+    }
     
     //-q
     [commandline appendFormat:@" -q %@", cfgs.qBufferLen];
@@ -117,8 +123,8 @@
     newInstance.jacktripTask        = task;
     newInstance.portOffset          = [cfgs.portOffset intValue];
     newInstance.instanceName        = cfgs.clientName;
-    newInstance.sendChannelCount    = [cfgs.sendChannelCount intValue];
-    newInstance.receiveChannelCount = [cfgs.receiveChannelCount intValue];
+    newInstance.sendChannels        = [cfgs.sendChannels intValue];
+    newInstance.receiveChannels     = [cfgs.receiveChannels intValue];
     
     if (self.jackTripInstances == nil){
         self.jackTripInstances = [[NSMutableArray alloc] init];

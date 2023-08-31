@@ -35,8 +35,8 @@
 @property (weak) IBOutlet AMCheckBoxView *zerounderrunCheck;
 @property (weak) IBOutlet AMCheckBoxView *loopbackCheck;
 @property (weak) IBOutlet AMCheckBoxView *ipv6Check;
-@property (weak) IBOutlet NSTextField *sendChanneCount;
-@property (weak) IBOutlet NSTextField *receiveChanneCount;
+@property (weak) IBOutlet NSTextField *sendChannelsField;
+@property (weak) IBOutlet NSTextField *receiveChannelsField;
 @property (weak) IBOutlet NSButton *connectButton;
 @property (weak) IBOutlet NSButton *disconnectButton;
 @property (weak) IBOutlet NSButton *closeButton;
@@ -72,6 +72,7 @@
 
     [self.backendSelecter addItemWithTitle:@"JACK"];
     [self.backendSelecter addItemWithTitle:@"RtAudio"];
+    [self.backendSelecter selectItemWithTitle:@"RtAudio"];
     
     [self.roleSelecter addItemWithTitle:@"P2P SERVER"];
     [self.roleSelecter addItemWithTitle:@"P2P CLIENT"];
@@ -198,11 +199,11 @@
     NSString *roleStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_Role];
     [self.roleSelecter selectItemWithTitle:roleStr];
     
-    NSString *sendChanCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_SendChannelCount];
-    self.sendChanneCount.stringValue = sendChanCountStr;
+    NSString *sendChannelsStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_SendChannels];
+    self.sendChannelsField.stringValue = sendChannelsStr;
     
-    NSString *receiveChanCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_ReceiveChannelCount];
-    self.receiveChanneCount.stringValue = receiveChanCountStr;
+    NSString *receiveChannelsStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_ReceiveChannels];
+    self.receiveChannelsField.stringValue = receiveChannelsStr;
     
     NSString *qblStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_QBL];
     self.queueBufferLen.stringValue = qblStr;
@@ -307,13 +308,13 @@
     //check illegal ip address
     //TODO:
     
-    if ([self.sendChanneCount.stringValue intValue] <= 0) {
+    if ([self.sendChannelsField.stringValue intValue] <= 0) {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Send channel count parameter can not be less than zero"];
         [alert runModal];
         return NO;
     }
     
-    if ([self.receiveChanneCount.stringValue intValue] <= 0) {
+    if ([self.receiveChannelsField.stringValue intValue] <= 0) {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"Receive channel count parameter can not be less than zero"];
         [alert runModal];
         return NO;
@@ -349,10 +350,10 @@
     //check channel count;
     int totalChannels = 0;
     for (AMJacktripInstance* instance in [[AMAudio sharedInstance] audioJacktripManager].jackTripInstances){
-        totalChannels += instance.sendChannelCount;
+        totalChannels += instance.sendChannels;
     }
     
-    if (self.maxChannels < totalChannels + [self.sendChanneCount.stringValue intValue]) {
+    if (self.maxChannels < totalChannels + [self.sendChannelsField.stringValue intValue]) {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Too many channels" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"There are already too many send channels, you must close some deviecs!"];
         [alert runModal];
         return NO;
@@ -369,14 +370,19 @@
 
     NSString *jamLink = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_Jamlink];
     
+    
     AMJacktripConfigs* cfgs = [[AMJacktripConfigs alloc] init];
     
     cfgs.backend        = self.backendSelecter.stringValue;
     cfgs.role           = self.roleSelecter.stringValue;
     cfgs.serverAddr     = self.peerAddress.stringValue;
     cfgs.portOffset     = self.portOffsetSelector.stringValue;
-    cfgs.sendChannelCount      = self.sendChanneCount.stringValue;
-    cfgs.receiveChannelCount   = self.receiveChanneCount.stringValue;
+    cfgs.sendChannels       = self.sendChannelsField.stringValue;
+    cfgs.receiveChannels    = self.receiveChannelsField.stringValue;
+    
+    cfgs.hubMode            = [[AMPreferenceManager standardUserDefaults]                                                       stringForKey:Preference_Jacktrip_HubMode];
+    cfgs.bufStrategy        = [[AMPreferenceManager standardUserDefaults]                                                       stringForKey:Preference_Jacktrip_BufStrategy];
+    
     cfgs.qBufferLen     = self.queueBufferLen.stringValue;
     cfgs.rCount         = self.rCount.stringValue;
     cfgs.bitrateRes     = self.bitRateRes.stringValue;

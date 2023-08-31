@@ -9,16 +9,18 @@
         <customObject id="-2" userLabel="File's Owner" customClass="AMJacktripSettingsVC">
             <connections>
                 <outlet property="brsField" destination="RuW-53-gdS" id="7g1-sj-0W0"/>
+                <outlet property="bufStrategyCombo" destination="g28-5N-nIB" id="smR-Lm-Qyh"/>
                 <outlet property="cancelBtn" destination="ZYy-PC-fBl" id="hVM-jw-x96"/>
                 <outlet property="hubModeCombo" destination="aIF-nI-IVv" id="928-Gm-xWt"/>
+                <outlet property="jitterBufCheck" destination="mLR-mb-uju" id="2dX-66-Rhn"/>
                 <outlet property="jumLink" destination="vch-iU-wWM" id="lmY-co-pWX"/>
                 <outlet property="loopBackCheck" destination="qYF-YM-VDL" id="dSV-NW-FtX"/>
                 <outlet property="prField" destination="OTQ-85-mH8" id="Hk8-Dq-zD7"/>
                 <outlet property="qblField" destination="tJk-UH-WqX" id="0s3-MZ-gey"/>
-                <outlet property="receiveChannelCount" destination="u2n-Z7-02i" id="hvX-YS-EQV"/>
+                <outlet property="receiveChannelsField" destination="u2n-Z7-02i" id="y5M-Hx-hGQ"/>
                 <outlet property="roleCombo" destination="x9V-Uh-mGm" id="XeF-N9-mbf"/>
                 <outlet property="saveBtn" destination="Eom-gc-NhV" id="Syi-p0-w4w"/>
-                <outlet property="sendChannelCount" destination="aJy-Bn-boT" id="gmY-3z-huW"/>
+                <outlet property="sendChannelsField" destination="aJy-Bn-boT" id="998-8G-ODu"/>
                 <outlet property="useIPv6Check" destination="h9L-6z-MYA" id="ePk-Gx-790"/>
                 <outlet property="view" destination="SgO-GO-2jg" id="Iyd-wx-cTn"/>
                 <outlet property="zeroUnderRunCheck" destination="BvV-lO-EhB" id="CIX-gU-ou3"/>
@@ -204,6 +206,13 @@
                         <constraint firstAttribute="width" constant="166" id="xlt-XU-Bh0"/>
                     </constraints>
                 </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="g28-5N-nIB" customClass="AMPopUpView">
+                    <rect key="frame" x="213" y="72" width="166" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="166" id="Yo3-dA-T7q"/>
+                        <constraint firstAttribute="height" constant="20" id="yph-U6-k9w"/>
+                    </constraints>
+                </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="BvV-lO-EhB" customClass="AMCheckBoxView">
                     <rect key="frame" x="44" y="177" width="166" height="20"/>
                     <constraints>
@@ -292,6 +301,29 @@
                         <constraint firstAttribute="height" constant="20" id="wvC-Te-lqy"/>
                     </constraints>
                 </customView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dE3-op-Hd8">
+                    <rect key="frame" x="20" y="107" width="3" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="3" id="Y68-NS-Oyp"/>
+                        <constraint firstAttribute="height" constant="17" id="ZCz-nc-IHC"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="P3E-Ry-qGR"/>
+                </imageView>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u3L-HX-cN7">
+                    <rect key="frame" x="20" y="73" width="3" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="KAy-OB-1X4"/>
+                        <constraint firstAttribute="width" constant="3" id="mOL-tK-uwv"/>
+                    </constraints>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="seF-DC-B4z"/>
+                </imageView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="mLR-mb-uju" customClass="AMCheckBoxView">
+                    <rect key="frame" x="44" y="106" width="166" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="HAL-2f-M0i"/>
+                        <constraint firstAttribute="width" constant="166" id="O4e-eg-pdT"/>
+                    </constraints>
+                </customView>
                 <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="xEW-J7-OxY">
                     <rect key="frame" x="20" y="301" width="553" height="5"/>
                     <constraints>
@@ -354,6 +386,18 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="jW7-3n-rX6" customClass="AMFoundryFontFieldLabelView">
+                    <rect key="frame" x="43" y="73" width="169" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="IjR-EV-1AC"/>
+                        <constraint firstAttribute="width" constant="165" id="NtR-Pe-YOm"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="USE BUFFER STATEGY:" id="UMu-iA-lg0">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="controlShadowColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="dwq-e2-vdr" customClass="AMFoundryFontFieldLabelView">
                     <rect key="frame" x="61" y="337" width="146" height="17"/>
                     <constraints>
@@ -370,6 +414,8 @@
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="ZYy-PC-fBl" secondAttribute="bottom" constant="20" id="0KH-F6-ssj"/>
                 <constraint firstItem="OTQ-85-mH8" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="232" id="0t6-GI-COP"/>
+                <constraint firstItem="u3L-HX-cN7" firstAttribute="leading" secondItem="dE3-op-Hd8" secondAttribute="leading" id="1cu-YH-Y0L"/>
+                <constraint firstItem="g28-5N-nIB" firstAttribute="leading" secondItem="mLR-mb-uju" secondAttribute="leading" constant="169" id="1kX-Vi-ncf"/>
                 <constraint firstItem="aJy-Bn-boT" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="133" id="23h-f9-Uc8"/>
                 <constraint firstItem="ZYy-PC-fBl" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" id="2Q6-su-cQA"/>
                 <constraint firstAttribute="trailing" secondItem="xEW-J7-OxY" secondAttribute="trailing" constant="20" id="3hD-lj-Dcg"/>
@@ -381,6 +427,7 @@
                 <constraint firstItem="ZYy-PC-fBl" firstAttribute="width" secondItem="Eom-gc-NhV" secondAttribute="width" id="74u-Rp-KoB"/>
                 <constraint firstItem="Wtv-k5-pmE" firstAttribute="firstBaseline" secondItem="u2n-Z7-02i" secondAttribute="baseline" constant="-3" id="7hE-Wi-yDQ"/>
                 <constraint firstItem="aIF-nI-IVv" firstAttribute="top" secondItem="x9V-Uh-mGm" secondAttribute="bottom" constant="10" id="AJ6-Ea-IwS"/>
+                <constraint firstItem="vch-iU-wWM" firstAttribute="centerY" secondItem="mLR-mb-uju" secondAttribute="centerY" constant="-43" id="AfG-a5-5i6"/>
                 <constraint firstItem="x9V-Uh-mGm" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="223" id="CJx-IM-zDl"/>
                 <constraint firstItem="aIF-nI-IVv" firstAttribute="centerY" secondItem="DKe-eb-gjK" secondAttribute="centerY" id="Cch-bA-NGJ"/>
                 <constraint firstItem="h9L-6z-MYA" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="316" id="DAV-5B-xPK"/>
@@ -388,6 +435,7 @@
                 <constraint firstItem="Wtv-k5-pmE" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="63" id="EAE-zr-MQ2"/>
                 <constraint firstItem="xEW-J7-OxY" firstAttribute="top" secondItem="aJy-Bn-boT" secondAttribute="bottom" constant="33" id="FcF-6l-6pA"/>
                 <constraint firstItem="tJk-UH-WqX" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="203" id="GFj-aJ-KwP"/>
+                <constraint firstItem="jW7-3n-rX6" firstAttribute="top" secondItem="u3L-HX-cN7" secondAttribute="top" id="GQc-fa-P7o"/>
                 <constraint firstItem="dwq-e2-vdr" firstAttribute="centerX" secondItem="BvV-lO-EhB" secondAttribute="centerX" constant="7" id="Gf7-U9-e1g"/>
                 <constraint firstItem="Rzr-Pb-jXz" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="GfM-Ai-cJV"/>
                 <constraint firstItem="4Y8-WF-PEp" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="261" id="HKV-Qo-TeP"/>
@@ -414,6 +462,7 @@
                 <constraint firstItem="Wtv-k5-pmE" firstAttribute="top" secondItem="dwq-e2-vdr" secondAttribute="bottom" constant="8" id="UOc-9v-nNB"/>
                 <constraint firstItem="h9L-6z-MYA" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="414" id="V8w-Vn-HN1"/>
                 <constraint firstItem="aIF-nI-IVv" firstAttribute="leading" secondItem="x9V-Uh-mGm" secondAttribute="leading" id="WeF-zt-FXp"/>
+                <constraint firstItem="h9L-6z-MYA" firstAttribute="bottom" secondItem="dE3-op-Hd8" secondAttribute="bottom" constant="-46" id="WpF-TV-T9Y"/>
                 <constraint firstItem="znq-4b-0JE" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="Xbl-38-LlU"/>
                 <constraint firstItem="aIF-nI-IVv" firstAttribute="centerY" secondItem="fFr-Pi-brk" secondAttribute="centerY" constant="0.5" id="Z7a-Ob-c9n"/>
                 <constraint firstItem="Hcy-2O-cf2" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="ZQH-vl-jSV"/>
@@ -428,12 +477,16 @@
                 <constraint firstItem="C9l-0g-mUk" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="321" id="hoF-MQ-vam"/>
                 <constraint firstItem="TeI-KU-ZPa" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="203" id="iBv-3i-tbr"/>
                 <constraint firstItem="qYF-YM-VDL" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="288" id="iYN-cK-Hcc"/>
+                <constraint firstItem="dE3-op-Hd8" firstAttribute="bottom" secondItem="u3L-HX-cN7" secondAttribute="bottom" constant="-34" id="idc-qL-oC5"/>
                 <constraint firstItem="yq9-Fb-d7T" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="20" id="jPG-Gv-HLq"/>
+                <constraint firstItem="mLR-mb-uju" firstAttribute="leading" secondItem="dE3-op-Hd8" secondAttribute="trailing" constant="21" id="kgT-7I-gro"/>
                 <constraint firstItem="vch-iU-wWM" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="mf1-uK-qgO"/>
                 <constraint firstItem="yW6-ob-bvi" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="mfu-TW-y2g"/>
                 <constraint firstItem="xEW-J7-OxY" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="q2W-Ad-Hpm"/>
+                <constraint firstItem="jW7-3n-rX6" firstAttribute="trailing" secondItem="mLR-mb-uju" secondAttribute="trailing" id="rbn-Qc-s67"/>
                 <constraint firstItem="RuW-53-gdS" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="261" id="rdF-bb-3yk"/>
                 <constraint firstItem="bzB-DR-fs8" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="uBw-Mp-DL4"/>
+                <constraint firstItem="g28-5N-nIB" firstAttribute="centerY" secondItem="u3L-HX-cN7" secondAttribute="centerY" id="vZ2-OC-shu"/>
                 <constraint firstItem="tJk-UH-WqX" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="278" id="vla-Xf-L1b"/>
                 <constraint firstItem="BvV-lO-EhB" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="wxd-YJ-aHe"/>
                 <constraint firstItem="OTQ-85-mH8" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="278" id="xLh-Ar-5cN"/>
@@ -442,6 +495,7 @@
                 <constraint firstItem="ZYy-PC-fBl" firstAttribute="centerY" secondItem="Eom-gc-NhV" secondAttribute="centerY" id="xmI-sz-PnJ"/>
                 <constraint firstItem="DKe-eb-gjK" firstAttribute="leading" secondItem="VGO-6c-hB7" secondAttribute="leading" id="yhA-MU-d6C"/>
                 <constraint firstItem="kht-NW-CPy" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="20" id="ylC-Pp-stb"/>
+                <constraint firstItem="dE3-op-Hd8" firstAttribute="leading" secondItem="Rzr-Pb-jXz" secondAttribute="leading" id="zds-gP-RTb"/>
             </constraints>
             <point key="canvasLocation" x="887.5" y="352.5"/>
         </view>

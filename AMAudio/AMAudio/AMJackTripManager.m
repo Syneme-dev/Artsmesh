@@ -62,11 +62,11 @@
     [commandline appendFormat:@" -o %@", cfgs.portOffset];
 
     //channel numbers
-    if([cfgs.sendChannels intValue] != 2 || [cfgs.receiveChannels intValue] != 2)
-    {
-        [commandline appendFormat:@" --sendchannels %@",    cfgs.sendChannels];
-        [commandline appendFormat:@" --receivechannels %@", cfgs.receiveChannels];
-    }
+//    if([cfgs.sendChannels intValue] != 2 || [cfgs.receiveChannels intValue] != 2)
+//    {
+    [commandline appendFormat:@" --sendchannels %@",    cfgs.sendChannels];
+    [commandline appendFormat:@" --receivechannels %@", cfgs.receiveChannels];
+//    }
     
     int bufStrategyVal = [cfgs.bufStrategy intValue];
     if(bufStrategyVal==-1 || bufStrategyVal==2 || bufStrategyVal==3 || bufStrategyVal==4)

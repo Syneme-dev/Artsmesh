@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="11542" systemVersion="15G1108" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11542"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -312,7 +312,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="wlM-59-yWd"/>
                 </imageView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="55x-ZB-goc" userLabel="PrivateIP" customClass="AMPopUpView">
-                    <rect key="frame" x="199" y="602" width="238" height="20"/>
+                    <rect key="frame" x="199" y="601" width="238" height="20"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="20" id="qVK-hX-eXk"/>
                     </constraints>
@@ -535,6 +535,6 @@
         <userDefaultsController representsSharedInstance="YES" id="sxY-kL-goD"/>
     </objects>
     <resources>
-        <image name="label_bar" width="3" height="15"/>
+        <image name="label_bar" width="6" height="30"/>
     </resources>
 </document>

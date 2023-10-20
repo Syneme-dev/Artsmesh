@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6751"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMRouteViewController">
@@ -17,8 +18,12 @@
             <rect key="frame" x="0.0" y="0.0" width="619" height="569"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fJy-36-tM4">
-                    <rect key="frame" x="20" y="483" width="50" height="50"/>
+                <button verticalHuggingPriority="750" verifyAmbiguity="ignoreSizes" translatesAutoresizingMaskIntoConstraints="NO" id="fJy-36-tM4">
+                    <rect key="frame" x="167" y="268" width="39" height="39"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="39" id="400-qH-OEZ"/>
+                        <constraint firstAttribute="width" constant="39" id="RmQ-7t-kZ6"/>
+                    </constraints>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="JackTripBtn" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Ob1-Mf-6Yv">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -27,7 +32,26 @@
                         <action selector="startJackTrip:" target="-2" id="l4y-31-TtP"/>
                     </connections>
                 </button>
+                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1Ot-3Y-8Hb" customClass="AMFoundryFontFieldLabelView">
+                    <rect key="frame" x="153" y="246" width="75" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="71" id="8g8-3N-5R1"/>
+                        <constraint firstAttribute="height" constant="17" id="Idj-nl-bb6"/>
+                    </constraints>
+                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="JACKTRIP" id="eUJ-G0-Gst">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
             </subviews>
+            <constraints>
+                <constraint firstItem="fJy-36-tM4" firstAttribute="bottom" secondItem="1Ot-3Y-8Hb" secondAttribute="bottom" constant="-22" id="0Zn-pj-cTD"/>
+                <constraint firstItem="fJy-36-tM4" firstAttribute="centerY" secondItem="c22-O7-iKe" secondAttribute="centerY" constant="-3" id="Xm5-68-Zif"/>
+                <constraint firstAttribute="trailing" secondItem="1Ot-3Y-8Hb" secondAttribute="trailing" constant="393" id="gMW-Na-5qi"/>
+                <constraint firstItem="1Ot-3Y-8Hb" firstAttribute="centerX" secondItem="fJy-36-tM4" secondAttribute="centerX" constant="4" id="zaG-g2-hGB"/>
+            </constraints>
+            <point key="canvasLocation" x="65.5" y="-36.5"/>
         </customView>
     </objects>
     <resources>

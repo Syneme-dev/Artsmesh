@@ -23,6 +23,7 @@
 
 @interface AMJackTripConfig ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
 
+@property (weak) IBOutlet AMPopUpView *backendSelecter;
 @property (weak) IBOutlet AMPopUpView *roleSelecter;
 @property (weak) IBOutlet AMPopUpView *peerSelecter;
 @property (weak) IBOutlet AMFoundryFontView *peerAddress;
@@ -34,9 +35,10 @@
 @property (weak) IBOutlet AMCheckBoxView *zerounderrunCheck;
 @property (weak) IBOutlet AMCheckBoxView *loopbackCheck;
 @property (weak) IBOutlet AMCheckBoxView *ipv6Check;
-@property (weak) IBOutlet NSButton *createBtn;
 @property (weak) IBOutlet NSTextField *channeCount;
-@property (weak) IBOutlet NSButton *closeBtn;
+@property (weak) IBOutlet NSButton *connectButton;
+@property (weak) IBOutlet NSButton *disconnectButton;
+@property (weak) IBOutlet NSButton *closeButton;
 @property NSArray* allUsers;
 @property  AMLiveUser* curPeer;
 @end
@@ -56,16 +58,24 @@
 
 -(void)setUpUI
 {
-    [AMButtonHandler changeTabTextColor:self.createBtn toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.closeBtn toColor:UI_Color_blue];
-    [self.createBtn.layer setBorderWidth:1.0];
-    [self.createBtn.layer setBorderColor: UI_Color_blue.CGColor];
-    [self.closeBtn.layer  setBorderWidth:1.0];
-    [self.closeBtn.layer  setBorderColor: UI_Color_blue.CGColor];
-
+    [AMButtonHandler changeTabTextColor:self.connectButton      toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.disconnectButton   toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.closeButton        toColor:UI_Color_blue];
     
-    [self.roleSelecter addItemWithTitle:@"SERVER"];
-    [self.roleSelecter addItemWithTitle:@"CLIENT"];
+    [self.connectButton.layer setBorderWidth:1.0];
+    [self.connectButton.layer setBorderColor: UI_Color_blue.CGColor];
+    [self.disconnectButton.layer setBorderWidth:1.0];
+    [self.disconnectButton.layer setBorderColor: UI_Color_blue.CGColor];
+    [self.closeButton.layer  setBorderWidth:1.0];
+    [self.closeButton.layer  setBorderColor: UI_Color_blue.CGColor];
+
+    [self.backendSelecter addItemWithTitle:@"JACK"];
+    [self.backendSelecter addItemWithTitle:@"RtAudio"];
+    
+    [self.roleSelecter addItemWithTitle:@"P2P SERVER"];
+    [self.roleSelecter addItemWithTitle:@"P2P CLIENT"];
+    [self.roleSelecter addItemWithTitle:@"HUB SERVER"];
+    [self.roleSelecter addItemWithTitle:@"HUB CLIENT"];
     
     [self.peerAddress setEnabled:NO];
     [self.peerName setEnabled:NO];
@@ -265,25 +275,29 @@
 
 -(BOOL)checkouJacktripParams
 {
-    if ([self.roleSelecter.stringValue isNotEqualTo:@"SERVER"] &&
-        [self.roleSelecter.stringValue isNotEqualTo:@"CLIENT"]) {
-        return NO;
+    if ([self.roleSelecter.stringValue isNotEqualTo:@"P2P SERVER"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"P2P CLIENT"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"HUB SERVER"] &&
+        [self.roleSelecter.stringValue isNotEqualTo:@"HUB CLIENT"]) {
+            return NO;
     }
     
-    if ([self.roleSelecter.stringValue isEqualTo:@"SERVER"]){
+    if ([self.roleSelecter.stringValue isEqualTo:@"P2P SERVER"] ||
+        [self.roleSelecter.stringValue isEqualTo:@"HUB SERVER"]){
         if ([self.peerName.stringValue isEqualTo:@""]) {
             NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip server role you must enter clientname."];
             [alert runModal];
             return NO;
         }
         
-    }else if([self.roleSelecter.stringValue isEqualTo:@"CLIENT"]||
-             [self.peerAddress.stringValue isEqualTo:@""]){
-        if([self.peerName.stringValue isEqualTo:@""]){
+    }else if([self.peerAddress.stringValue isEqualTo:@""] &&
+             [self.peerName.stringValue isEqualTo:@""])
+    {
+       
             NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"For a jacktrip client role you must enter both ip address and clientname "];
             [alert runModal];
             return NO;
-        }
+        
     }
     
     //check illegal ip address
@@ -337,7 +351,7 @@
     return YES;
 }
 
-- (IBAction)startJacktrip:(NSButton *)sender
+- (IBAction)connectJack:(NSButton *)sender
 {
     if (![self checkouJacktripParams]) {
         return;
@@ -347,18 +361,19 @@
     
     AMJacktripConfigs* cfgs = [[AMJacktripConfigs alloc] init];
     
-    cfgs.role = self.roleSelecter.stringValue;
-    cfgs.serverAddr = self.peerAddress.stringValue;
-    cfgs.portOffset = self.portOffsetSelector.stringValue;
-    cfgs.channelCount = self.channeCount.stringValue;
-    cfgs.qBufferLen = self.queueBufferLen.stringValue;
-    cfgs.rCount = self.rCount.stringValue;
-    cfgs.bitrateRes = self.bitRateRes.stringValue;
-    cfgs.zerounderrun = self.zerounderrunCheck.checked;
-    cfgs.loopback = self.loopbackCheck.checked;
-    cfgs.jamlink = [jamLink boolValue];
-    cfgs.clientName = self.peerName.stringValue;
-    cfgs.useIpv6 = self.ipv6Check.checked;
+    cfgs.backend        = self.backendSelecter.stringValue;
+    cfgs.role           = self.roleSelecter.stringValue;
+    cfgs.serverAddr     = self.peerAddress.stringValue;
+    cfgs.portOffset     = self.portOffsetSelector.stringValue;
+    cfgs.channelCount   = self.channeCount.stringValue;
+    cfgs.qBufferLen     = self.queueBufferLen.stringValue;
+    cfgs.rCount         = self.rCount.stringValue;
+    cfgs.bitrateRes     = self.bitRateRes.stringValue;
+    cfgs.zerounderrun   = self.zerounderrunCheck.checked;
+    cfgs.loopback       = self.loopbackCheck.checked;
+    cfgs.jamlink        = [jamLink boolValue];
+    cfgs.clientName     = self.peerName.stringValue;
+    cfgs.useIpv6        = self.ipv6Check.checked;
     
     if(![[[AMAudio sharedInstance] audioJacktripManager] startJacktrip:cfgs]){
         
@@ -370,7 +385,14 @@
 }
 
 
-- (IBAction)closeClicked:(NSButton *)sender
+- (IBAction) disconnectJack:(NSButton *)sender
+{
+    system("killall jacktrip >/dev/null");
+    [self.window close];
+}
+
+
+- (IBAction)closeWindow:(NSButton *)sender
 {
     [self.window close];
 }

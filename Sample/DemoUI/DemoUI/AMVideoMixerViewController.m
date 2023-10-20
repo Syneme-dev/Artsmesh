@@ -11,8 +11,7 @@
 
 #import "UIFrameWork/AMPanelView.h"
 #import "AMAppDelegate.h"
-#import "AMSyphonView.h"
-#import "AMSyphonCamera.h"
+
 
 #import "AMP2PVideoView.h"
 #import "AMP2PVideoCommon.h"
@@ -37,7 +36,7 @@
 @property (strong, nonatomic, readonly) NSArray *smallViews;
 @property (weak, nonatomic) AMVideoMixerBackgroundView *selected;
 
-@property  (nonatomic) AMSyphonCamera* syCamera;
+//@property  (nonatomic) AMSyphonCamera* syCamera;
 @end
 
 
@@ -50,16 +49,16 @@
 {
     NSInteger                       _port;
     AMP2PVideoReceiver*             _receiver;
-    AMP2PViewController*            _lastController;
+//    AMP2PViewController*            _lastController;
 }
 
 @synthesize smallViews = _smallViews;
 
 -(void) closeAction
 {
-    [_receiver unregisterP2PVideoLayer:self.videoView.videoLayer withPort:_port];
+ /*   [_receiver unregisterP2PVideoLayer:self.videoView.videoLayer withPort:_port];
     sleep(1);
-    [_lastController resumeP2PVideo];
+    [_lastController resumeP2PVideo];*/
 }
 
 - (void)viewDidLoad
@@ -67,10 +66,10 @@
     [super viewDidLoad];
     [self setup];
     
-    _syCamera = [[AMSyphonCamera alloc] init];
-    [_syCamera initializeDevice];
+//    _syCamera = [[AMSyphonCamera alloc] init];
+//    [_syCamera initializeDevice];
     
-    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
+    /*    NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self
            selector:@selector(getP2PInfo:)
                name:AMP2PVideoInfoNotification
@@ -85,6 +84,7 @@
              selector:@selector(AMSelectNewSyphonServer:)
                  name:AMSyphonRouterChangeServer
                object:nil];
+ */
 }
 
 -(void) startP2PVideo;
@@ -97,6 +97,7 @@
 
 - (void)setup
 {
+    /*
     self.bigView.hasBorder = YES;
     self.bigView.contentView = [self.syphonManager outputView];
     
@@ -110,23 +111,28 @@
         AMVideoMixerBackgroundView *view = self.smallViews[j];
         view.contentView = [self.p2pViewManager clientViewByIndex:(j-self.smallViews.count / 2)];
     }
+     */
 }
-
+/*
 - (AMSyphonClientsManager *)syphonManager
 {
+    
     if (!_syphonClientsManager) {
         _syphonClientsManager = [AMSyphonClientsManager sharedInstance:(int)self.smallViews.count/2];
     }
     return _syphonClientsManager;
+   
 }
 
 - (AMP2PViewManager *)p2pViewManager
 {
+ 
     if (!_p2pViewManager) {
         _p2pViewManager = [[AMP2PViewManager alloc] initWithClientCount:(int)self.smallViews.count/2];
     }
     return _p2pViewManager;
-}
+     
+}*/
 
 
 
@@ -151,6 +157,7 @@
 
 - (IBAction)handleSelectEvent:(AMVideoMixerBackgroundView *)sender
 {
+    /*
     if (sender == self.bigView) {
         if (sender.clickCount == 2) {
             [self popupVideoMixingWindow];
@@ -184,6 +191,7 @@
             [self.syphonManager selectClient:index];
         }
     }
+     */
 }
 -(void) popupP2PVideoMixingWindow
 {
@@ -237,7 +245,7 @@
     
     AMAppDelegate *appDelegate = (AMAppDelegate *)[NSApp delegate];
     NSMutableDictionary *panelControllers = appDelegate.mainWindowController.panelControllers;
-    
+    /*
     if (!panelControllers[panelId]) {
         AMPanelViewController *popupController =
             [[AMPanelViewController alloc] initWithNibName:@"AMPanelView" bundle:nil];
@@ -271,10 +279,11 @@
         popupController.tabPanelButton.hidden = YES;
         popupController.maxSizeButton.hidden = YES;
     }
+     */
 }
 -(void) AMUnselectSyphonServer : (NSNotification*)notification
 {
-    NSDictionary* userInfo = [notification userInfo];
+   /* NSDictionary* userInfo = [notification userInfo];
     NSNumber* indexNumber = [userInfo objectForKey:@"INDEX"];
     if(indexNumber == nil)
         return;
@@ -283,11 +292,12 @@
     if(syphonCtrl == nil)
         return;
     
-    [syphonCtrl unselected];
+    [syphonCtrl unselected];*/
 }
 
 -(void) AMSelectNewSyphonServer : (NSNotification*)notification
 {
+    /*
     NSDictionary* userInfo = [notification userInfo];
     NSNumber* indexNumber = [userInfo objectForKey:@"INDEX"];
     if(indexNumber == nil)
@@ -302,6 +312,7 @@
         return;
     
     [syphonCtrl selectNewSyphonServer:serverName];
+     */
 }
 
 @end

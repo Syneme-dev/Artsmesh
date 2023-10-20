@@ -10,6 +10,9 @@
 
 @interface AMJacktripConfigs : NSObject
 
+// --rtaudio 
+@property NSString* backend;
+
 //-s, --server                             Run in Server Mode
 //-c, --client      <peer_host_IP_number>  Run in Client Mode
 @property NSString* role;

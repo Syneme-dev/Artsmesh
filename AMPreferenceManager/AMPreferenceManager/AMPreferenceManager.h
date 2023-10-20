@@ -130,6 +130,7 @@
 //////////////////////////Jacktrip Default///////////////////////////////////
 #define Preference_Jacktrip_Role            @"Preference_Jacktrip_Role"
 #define Preference_Jacktrip_ChannelCount    @"Preference_Jacktrip_ChannelCount"
+#define Preference_Jacktrip_RecvCount       @"Preference_Jacktrip_RecvCount"
 #define Preference_Jacktrip_QBL             @"Preference_Jacktrip_QBL"
 #define Preference_Jacktrip_PR              @"Preference_Jacktrip_PR"
 #define Preference_Jacktrip_BRR             @"Preference_Jacktrip_BRR"

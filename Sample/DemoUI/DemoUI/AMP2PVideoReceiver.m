@@ -15,7 +15,6 @@
 #include "AMLogger/AMLogger.h"
 #import <OpenGL/OpenGL.h>
 #import <OpenGL/gl.h>
-#import <Syphon/Syphon.h>
 #import <GLKit/GLKit.h>
 #import <VideoToolbox/VideoToolbox.h>
 
@@ -27,7 +26,7 @@
 @property (nonatomic, assign) VTDecompressionSessionRef     decompressionSession;
 @property (nonatomic) CMFormatDescriptionRef   videoFormatDescr;
 @property (nonatomic, retain) AVSampleBufferDisplayLayer*       avsbDisplayLayer;
-@property (nonatomic, strong) SyphonServer*     server;
+//@property (nonatomic, strong) SyphonServer*     server;
 @end
 
 
@@ -86,10 +85,10 @@
     _cglContext = [_glContext CGLContextObj];
     
     NSString* serverName = [[NSString alloc] initWithFormat:@"P2P %ld", (long)port];
-    _server = [[SyphonServer alloc] initWithName:serverName context:_cglContext options:nil];
+/*    _server = [[SyphonServer alloc] initWithName:serverName context:_cglContext options:nil];
 
     [_server addObserver:self forKeyPath:@"hasClients" options:NSKeyValueObservingOptionNew context:nil];
-    
+    */
     return YES;
 }
 
@@ -103,8 +102,8 @@
                        withPort:(NSInteger) port
 {
     [_udpSocket close];
-    [_server stop];
-    _server = nil;
+//    [_server stop];
+//    _server = nil;
     return true;
 }
 
@@ -357,7 +356,7 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
                                              CMTime presentationTimeStamp,
                                              CMTime presentationDuration)
 {
-    NSError* error;
+/*    NSError* error;
     if (status != noErr)
     {
         NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil];
@@ -382,10 +381,10 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
         //glTexSubImage2D(GL_TEXTURE_2D, 0, 0, 0, imageWidth, imageHeight, GL_BGRA,
         //                GL_UNSIGNED_INT_8_8_8_8_REV, CVPixelBufferGetBaseAddress(imageBuffer));
         
-        /*//This for RGBA context, but can't create.
+        //This for RGBA context, but can't create.
         CGColorSpaceRef colorSpace  = CGColorSpaceCreateDeviceRGB( );
         CGContextRef    cgContext   = CGBitmapContextCreate(baseAddress,  width,  height,   8,
-                                            bytesPerRow, colorSpace, CGImageAlphaPremultipliedLast);*/
+                                            bytesPerRow, colorSpace, CGImageAlphaPremultipliedLast);
         
         CGImageRef cgImage = CGBitmapContextCreateImage(cgContext);
         if(cgImage == nil){
@@ -438,7 +437,7 @@ void decompressionSessionDecodeFrameCallback(void *decompressionOutputRefCon,
         NSError *error = [NSError errorWithDomain:NSOSStatusErrorDomain code:status userInfo:nil];
         NSLog(@"VTDecompressionSessionDecodeFrame error: %@", error);
     }
-
+*/
     return;
 }
 

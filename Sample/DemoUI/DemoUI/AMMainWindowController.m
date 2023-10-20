@@ -33,7 +33,7 @@
 #import "AMTimerViewController.h"
 #import "AMScoreViewController.h"
 #import "AMOSCMessageViewController.h"
-#import "AMBroadcastViewController.h"
+//#import "AMBroadcastViewController.h"
 #import "AMManualViewController.h"
 #import "AMAudio/AMAudio.h"
 #import "AMOSCGroups/AMOSCGroups.h"
@@ -763,8 +763,8 @@
                                                              width:panelWidth height:panelHeight relatedView:view];
     AMPanelView *panelView = (AMPanelView *) panelViewController.view;
     panelView.minSizeConstraint = NSMakeSize(panelWidth, panelHeight);
-    AMBroadcastViewController *gPlusViewController = [[AMBroadcastViewController alloc] initWithNibName:@"AMBroadcastViewController" bundle:nil];
-    [self fillPanel:panelViewController content:gPlusViewController];
+ //   AMBroadcastViewController *gPlusViewController = [[AMBroadcastViewController alloc] initWithNibName:@"AMBroadcastViewController" bundle:nil];
+   // [self fillPanel:panelViewController content:gPlusViewController];
     return panelViewController;
 }
 

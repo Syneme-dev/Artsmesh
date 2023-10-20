@@ -41,12 +41,23 @@
     NSBundle* mainBundle = [NSBundle mainBundle];
     NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"jacktrip"]];
     
-    //-s or -c
-    if([cfgs.role isEqualToString:@"SERVER"]){
-        [commandline appendFormat:@" -s"];
-    }else{
-        [commandline appendFormat:@" -c %@", cfgs.serverAddr];
+    // RT Audio
+    if([cfgs.backend isEqualToString:@"RtAudio"]){
+        [commandline appendFormat:@" --rtaudio"];
     }
+    
+    
+    //-s or -c
+    if([cfgs.role isEqualToString:@"P2P SERVER"]){
+        [commandline appendFormat:@" -s"];
+    }else if([cfgs.role isEqualToString:@"P2P CLIENT"]){
+        [commandline appendFormat:@" -c %@", cfgs.serverAddr];
+    }else if([cfgs.role isEqualToString:@"HUB SERVER"]){
+        [commandline appendFormat:@" -S"];
+    }else{
+        [commandline appendFormat:@" -C %@", cfgs.serverAddr];
+    }
+    
 
     //port offset
     [commandline appendFormat:@" -o %@", cfgs.portOffset];

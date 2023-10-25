@@ -26,6 +26,10 @@
 //-n, --numchannels #                      Number of Input and Output Channels (default 2)
 @property NSString* channelCount;
 
+//-, --numchannels #                       Counter of recv Channels (default 2)
+@property NSString* recvCount;
+
+
 //-q, --queue       # (1 or more)          Queue Buffer Length, in Packet Size (default 4)
 @property NSString* qBufferLen;
 

@@ -36,6 +36,7 @@
 @property (weak) IBOutlet AMCheckBoxView *loopbackCheck;
 @property (weak) IBOutlet AMCheckBoxView *ipv6Check;
 @property (weak) IBOutlet NSTextField *channeCount;
+@property (weak) IBOutlet NSTextField *recvCount;
 @property (weak) IBOutlet NSButton *connectButton;
 @property (weak) IBOutlet NSButton *disconnectButton;
 @property (weak) IBOutlet NSButton *closeButton;
@@ -194,11 +195,16 @@
 
 -(void)loadDefaultPref
 {
+    [self.backendSelecter selectItemWithTitle:@"JACK"];
+    
     NSString *roleStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_Role];
     [self.roleSelecter selectItemWithTitle:roleStr];
     
     NSString *chanCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_ChannelCount];
     self.channeCount.stringValue = chanCountStr;
+    
+    NSString *recvCountStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_RecvCount];
+    self.recvCount.stringValue = recvCountStr;
     
     NSString *qblStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_QBL];
     self.queueBufferLen.stringValue = qblStr;
@@ -308,6 +314,12 @@
         [alert runModal];
         return NO;
     }
+
+    if ([self.recvCount.stringValue intValue] <= 0) {
+        NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"recv channel count parameter can not be less than zero"];
+        [alert runModal];
+        return NO;
+    }
     
     if ([self.queueBufferLen.stringValue intValue] <= 0) {
         NSAlert *alert = [NSAlert alertWithMessageText:@"Parameter Error" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"queue buffer parameter can not be less than zero"];
@@ -366,6 +378,7 @@
     cfgs.serverAddr     = self.peerAddress.stringValue;
     cfgs.portOffset     = self.portOffsetSelector.stringValue;
     cfgs.channelCount   = self.channeCount.stringValue;
+    cfgs.recvCount      = self.recvCount.stringValue;
     cfgs.qBufferLen     = self.queueBufferLen.stringValue;
     cfgs.rCount         = self.rCount.stringValue;
     cfgs.bitrateRes     = self.bitRateRes.stringValue;

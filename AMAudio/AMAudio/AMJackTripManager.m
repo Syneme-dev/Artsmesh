@@ -61,7 +61,10 @@
     [commandline appendFormat:@" -o %@", cfgs.portOffset];
 
     //channel numbers
-    [commandline appendFormat:@" -n %@", cfgs.channelCount];
+    //[commandline appendFormat:@" -n %@", cfgs.channelCount];
+    [commandline appendFormat:@" --sendchannels %@",   cfgs.channelCount];
+    [commandline appendFormat:@" --receivechannels %@", cfgs.recvCount];
+    
 
     //-q
     [commandline appendFormat:@" -q %@", cfgs.qBufferLen];

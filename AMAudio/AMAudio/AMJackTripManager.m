@@ -95,6 +95,8 @@
         [commandline appendFormat:@" -V"];
     }
     
+    [commandline appendFormat:@" --udprt"];
+    
     NSString *systemLogPath = AMLogDirectory();
 
     NSString* jacktripLogPath = [NSString stringWithFormat:@" > \"%@/Jacktrip_%@.log\"", systemLogPath, cfgs.clientName];

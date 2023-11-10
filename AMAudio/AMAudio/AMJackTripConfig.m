@@ -400,6 +400,7 @@
 
 - (IBAction) disconnectJack:(NSButton *)sender
 {
+    [[[AMAudio sharedInstance] audioJacktripManager] stopAllJacktrips];
     system("killall jacktrip >/dev/null");
     [self.window close];
 }

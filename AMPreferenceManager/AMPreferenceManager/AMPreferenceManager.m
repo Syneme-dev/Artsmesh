@@ -108,6 +108,7 @@
              @"NO", Preference_Jacktrip_Loopback,
              @"NO", Preference_Jacktrip_Jamlink,
              @"NO", Preference_Jacktrip_UseIpv6,
+             @"0", Preference_Jacktrip_HubPatch,
              @"SERVER", Preference_iPerf_Role,
              @"YES",    Preference_iPerf_UseUDP,
              @"5001",   Preference_iPerf_Port,

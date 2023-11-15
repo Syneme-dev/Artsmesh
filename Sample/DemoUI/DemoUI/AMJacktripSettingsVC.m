@@ -20,6 +20,7 @@
 @interface AMJacktripSettingsVC ()<AMCheckBoxDelegeate, NSTextFieldDelegate, AMPopUpViewDelegeate>
 
 @property (weak) IBOutlet AMPopUpView *roleCombo;
+@property (weak) IBOutlet AMPopUpView *hubPatchCombo;
 @property (weak) IBOutlet AMFoundryFontView *channelCountField;
 @property (weak) IBOutlet AMFoundryFontView *recvCountField;
 @property (weak) IBOutlet AMFoundryFontView *qblField;
@@ -58,6 +59,13 @@
     self.loopBackCheck.title = @"Loopback[-l]";
     self.useIPv6Check.title = @"Use Ipv6[-V]";
     
+    [self.hubPatchCombo addItemWithTitle:@"0"];
+    [self.hubPatchCombo addItemWithTitle:@"1"];
+    [self.hubPatchCombo addItemWithTitle:@"2"];
+    [self.hubPatchCombo addItemWithTitle:@"3"];
+    [self.hubPatchCombo addItemWithTitle:@"4"];
+    [self.hubPatchCombo addItemWithTitle:@"5"];
+    
     self.zeroUnderRunCheck.delegate = self;
     self.jumLink.delegate = self;
     self.loopBackCheck.delegate = self;
@@ -71,6 +79,7 @@
     self.brsField.delegate = self;
     
     self.roleCombo.delegate = self;
+    self.hubPatchCombo.delegate  = self;
     
     [AMButtonHandler changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
@@ -158,6 +167,13 @@
         self.useIPv6Check.checked = NO;
     }
     
+    NSString* hubPatchStr = [[AMPreferenceManager standardUserDefaults]
+                             stringForKey:Preference_Jacktrip_HubPatch];
+    if (hubPatchStr != nil) {
+        [self.hubPatchCombo selectItemWithTitle:hubPatchStr];
+    }
+    
+    
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];
 }
@@ -217,6 +233,8 @@
     }else{
         [[AMPreferenceManager standardUserDefaults] setObject:@"NO" forKey:Preference_Jacktrip_ZeroUnderRun];
     }
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:self.hubPatchCombo.stringValue forKey:Preference_Jacktrip_HubPatch];
     
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];

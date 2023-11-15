@@ -54,4 +54,7 @@
 //--ipv6                                   User Ipv6 Protocol
 @property BOOL useIpv6;
 
+//--Hub Patch Mode
+@property NSString* hubPatch;
+
 @end

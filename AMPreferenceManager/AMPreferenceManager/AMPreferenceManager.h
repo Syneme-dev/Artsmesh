@@ -138,6 +138,7 @@
 #define Preference_Jacktrip_Loopback        @"Preference_Jacktrip_Loopback"
 #define Preference_Jacktrip_Jamlink         @"Preference_Jacktrip_Jamlink"
 #define Preference_Jacktrip_UseIpv6         @"Preference_Jacktrip_UseIpv6"
+#define Preference_Jacktrip_HubPatch        @"Preference_Jacktrip_HubPatch"
 
 /////////////////////////iPerf Default/////////////////////////
 #define Preference_iPerf_Role               @"Preference_iPerf_Role"

@@ -67,8 +67,9 @@
     
 
     //-q
-    [commandline appendFormat:@" -q %@", cfgs.qBufferLen];
-
+    //[commandline appendFormat:@" -q %@", cfgs.qBufferLen];
+    [commandline appendFormat:@" -q auto"];
+    
     //-r
     [commandline appendFormat:@" -r %@", cfgs.rCount];
 
@@ -93,6 +94,10 @@
     //-V
     if (cfgs.useIpv6) {
         [commandline appendFormat:@" -V"];
+    }
+    
+    if([cfgs.role isEqualToString:@"HUB SERVER"]){
+        [commandline appendFormat:@" --hubpatch %@", cfgs.hubPatch];
     }
     
     [commandline appendFormat:@" --udprt"];

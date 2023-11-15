@@ -388,6 +388,9 @@
     cfgs.clientName     = self.peerName.stringValue;
     cfgs.useIpv6        = self.ipv6Check.checked;
     
+    NSString *hubPatch = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_HubPatch];
+    cfgs.hubPatch       = hubPatch;
+    
     if(![[[AMAudio sharedInstance] audioJacktripManager] startJacktrip:cfgs]){
         
         NSAlert *alert = [NSAlert alertWithMessageText:@"start jacktrip failed!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"maybe port conflict!"];

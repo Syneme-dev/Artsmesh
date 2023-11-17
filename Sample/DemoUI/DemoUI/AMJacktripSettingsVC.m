@@ -20,7 +20,6 @@
 @interface AMJacktripSettingsVC ()<AMCheckBoxDelegeate, NSTextFieldDelegate, AMPopUpViewDelegeate>
 
 @property (weak) IBOutlet AMPopUpView *roleCombo;
-@property (weak) IBOutlet AMPopUpView *hubPatchCombo;
 @property (weak) IBOutlet AMFoundryFontView *channelCountField;
 @property (weak) IBOutlet AMFoundryFontView *recvCountField;
 @property (weak) IBOutlet AMFoundryFontView *qblField;
@@ -32,7 +31,8 @@
 @property (weak) IBOutlet AMCheckBoxView *useIPv6Check;
 @property (weak) IBOutlet AMBlueBorderButton *saveBtn;
 @property (weak) IBOutlet AMBlueBorderButton *cancelBtn;
-
+@property (weak) IBOutlet AMPopUpView *hubPatchCombo;
+@property (weak) IBOutlet AMPopUpView *bufStrategyCombo;
 
 @end
 
@@ -66,6 +66,12 @@
     [self.hubPatchCombo addItemWithTitle:@"4"];
     [self.hubPatchCombo addItemWithTitle:@"5"];
     
+    [self.bufStrategyCombo  addItemWithTitle:@"0"];
+    [self.bufStrategyCombo  addItemWithTitle:@"1"];
+    [self.bufStrategyCombo  addItemWithTitle:@"2"];
+    [self.bufStrategyCombo  addItemWithTitle:@"3"];
+    [self.bufStrategyCombo  addItemWithTitle:@"4"];
+    
     self.zeroUnderRunCheck.delegate = self;
     self.jumLink.delegate = self;
     self.loopBackCheck.delegate = self;
@@ -78,8 +84,9 @@
     self.prField.delegate = self;
     self.brsField.delegate = self;
     
-    self.roleCombo.delegate = self;
-    self.hubPatchCombo.delegate  = self;
+    self.roleCombo.delegate         = self;
+    self.hubPatchCombo.delegate     = self;
+    self.bufStrategyCombo.delegate  = self;
     
     [AMButtonHandler changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
@@ -173,6 +180,12 @@
         [self.hubPatchCombo selectItemWithTitle:hubPatchStr];
     }
     
+    NSString* bufStrategyStr = [[AMPreferenceManager standardUserDefaults]
+                             stringForKey:Preference_Jacktrip_BufStrategy];
+    if (bufStrategyStr != nil) {
+        [self.bufStrategyCombo selectItemWithTitle:bufStrategyStr];
+    }
+    
     
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];
@@ -235,6 +248,8 @@
     }
     
     [[AMPreferenceManager standardUserDefaults] setObject:self.hubPatchCombo.stringValue forKey:Preference_Jacktrip_HubPatch];
+    
+    [[AMPreferenceManager standardUserDefaults] setObject:self.bufStrategyCombo.stringValue forKey:Preference_Jacktrip_BufStrategy];
     
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];

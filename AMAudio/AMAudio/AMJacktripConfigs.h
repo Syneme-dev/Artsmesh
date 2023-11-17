@@ -57,4 +57,7 @@
 //--Hub Patch Mode
 @property NSString* hubPatch;
 
+//-- Buffer Strategy
+@property NSString* bufStrategy;
+
 @end

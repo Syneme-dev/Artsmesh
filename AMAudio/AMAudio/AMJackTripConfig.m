@@ -388,8 +388,11 @@
     cfgs.clientName     = self.peerName.stringValue;
     cfgs.useIpv6        = self.ipv6Check.checked;
     
-    NSString *hubPatch = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_HubPatch];
+    NSString *hubPatch      = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_HubPatch];
     cfgs.hubPatch       = hubPatch;
+    
+    NSString *bufStrategy   = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_BufStrategy];
+    cfgs.bufStrategy     = bufStrategy;
     
     if(![[[AMAudio sharedInstance] audioJacktripManager] startJacktrip:cfgs]){
         

@@ -97,7 +97,7 @@
     }
     
     if([cfgs.role isEqualToString:@"HUB SERVER"]){
-        [commandline appendFormat:@" --hubpatch %@", cfgs.hubPatch];
+        [commandline appendFormat:@" -p %@", cfgs.hubPatch];
     }
     
     [commandline appendFormat:@" --udprt"];

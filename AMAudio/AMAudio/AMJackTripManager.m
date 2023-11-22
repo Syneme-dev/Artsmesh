@@ -100,6 +100,12 @@
         [commandline appendFormat:@" -p %@", cfgs.hubPatch];
     }
     
+    if(![cfgs.bufStrategy isEqualToString:@"0"] &&
+       ![cfgs.bufStrategy isEqualToString:@"1"])
+    {
+        [commandline appendFormat:@" --bufstrategy %@", cfgs.bufStrategy];
+    }
+    
     [commandline appendFormat:@" --udprt"];
     
     NSString *systemLogPath = AMLogDirectory();

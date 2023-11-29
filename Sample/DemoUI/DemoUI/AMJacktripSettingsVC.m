@@ -33,6 +33,8 @@
 @property (weak) IBOutlet AMBlueBorderButton *cancelBtn;
 @property (weak) IBOutlet AMPopUpView *hubPatchCombo;
 @property (weak) IBOutlet AMPopUpView *bufStrategyCombo;
+@property (weak) IBOutlet AMCheckBoxView *includeServerCheck;
+@property (weak) IBOutlet AMCheckBoxView *monoToStereoCheck;
 
 @end
 
@@ -72,6 +74,9 @@
     [self.bufStrategyCombo  addItemWithTitle:@"3"];
     [self.bufStrategyCombo  addItemWithTitle:@"4"];
     
+    self.includeServerCheck.title   = @"IncludeServerInPatching";
+    self.monoToStereoCheck.title    = @"UpmixClientMonoToStereo";
+    
     self.zeroUnderRunCheck.delegate = self;
     self.jumLink.delegate = self;
     self.loopBackCheck.delegate = self;
@@ -87,6 +92,8 @@
     self.roleCombo.delegate         = self;
     self.hubPatchCombo.delegate     = self;
     self.bufStrategyCombo.delegate  = self;
+    self.includeServerCheck.delegate    = self;
+    self.monoToStereoCheck.delegate     = self;
     
     [AMButtonHandler changeTabTextColor:self.saveBtn toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.cancelBtn toColor:UI_Color_blue];
@@ -186,6 +193,21 @@
         [self.bufStrategyCombo selectItemWithTitle:bufStrategyStr];
     }
     
+    NSString *incServerStr  = [[AMPreferenceManager standardUserDefaults]
+                             stringForKey:Preference_Jacktrip_IncludeServer];
+    if ([incServerStr isEqualToString:@"YES"]) {
+        self.includeServerCheck.checked = YES;
+    }else{
+        self.includeServerCheck.checked = NO;
+    }
+    
+    NSString *monoStereoStr  = [[AMPreferenceManager standardUserDefaults]
+                             stringForKey:Preference_Jacktrip_MonoToStereo];
+    if ([monoStereoStr isEqualToString:@"YES"]) {
+        self.monoToStereoCheck.checked = YES;
+    }else{
+        self.monoToStereoCheck.checked = NO;
+    }
     
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];
@@ -250,6 +272,18 @@
     [[AMPreferenceManager standardUserDefaults] setObject:self.hubPatchCombo.stringValue forKey:Preference_Jacktrip_HubPatch];
     
     [[AMPreferenceManager standardUserDefaults] setObject:self.bufStrategyCombo.stringValue forKey:Preference_Jacktrip_BufStrategy];
+    
+    if (self.includeServerCheck.checked) {
+        [[AMPreferenceManager standardUserDefaults] setObject:@"YES" forKey:Preference_Jacktrip_IncludeServer];
+    }else{
+        [[AMPreferenceManager standardUserDefaults] setObject:@"NO" forKey:Preference_Jacktrip_IncludeServer];
+    }
+    
+    if (self.monoToStereoCheck.checked) {
+        [[AMPreferenceManager standardUserDefaults] setObject:@"YES" forKey:Preference_Jacktrip_MonoToStereo];
+    }else{
+        [[AMPreferenceManager standardUserDefaults] setObject:@"NO" forKey:Preference_Jacktrip_MonoToStereo];
+    }
     
     [self.saveBtn setEnabled:NO];
     [self.cancelBtn setEnabled:NO];

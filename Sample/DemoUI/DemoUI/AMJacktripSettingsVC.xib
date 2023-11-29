@@ -13,8 +13,10 @@
                 <outlet property="cancelBtn" destination="ZYy-PC-fBl" id="hVM-jw-x96"/>
                 <outlet property="channelCountField" destination="aJy-Bn-boT" id="63E-X7-hLg"/>
                 <outlet property="hubPatchCombo" destination="tVy-0z-MTH" id="ws8-2m-pkE"/>
+                <outlet property="includeServerCheck" destination="S3K-se-DVc" id="3MF-IY-4ek"/>
                 <outlet property="jumLink" destination="vch-iU-wWM" id="lmY-co-pWX"/>
                 <outlet property="loopBackCheck" destination="qYF-YM-VDL" id="dSV-NW-FtX"/>
+                <outlet property="monoToStereoCheck" destination="DUD-oB-buF" id="7qv-Qa-LSd"/>
                 <outlet property="prField" destination="OTQ-85-mH8" id="Hk8-Dq-zD7"/>
                 <outlet property="qblField" destination="tJk-UH-WqX" id="0s3-MZ-gey"/>
                 <outlet property="recvCountField" destination="DxC-Qy-0kI" id="KJI-Db-IPZ"/>
@@ -230,7 +232,7 @@
                     </constraints>
                 </customView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="epE-5i-Epw">
-                    <rect key="frame" x="20" y="106" width="3" height="17"/>
+                    <rect key="frame" x="20" y="59" width="3" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="3" id="DSY-9K-aC2"/>
                         <constraint firstAttribute="height" constant="17" id="TST-g6-SJR"/>
@@ -238,7 +240,7 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="label_bar" id="Hfr-mo-uxw"/>
                 </imageView>
                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="5K0-8N-G2q" customClass="AMFoundryFontFieldLabelView">
-                    <rect key="frame" x="42" y="106" width="133" height="17"/>
+                    <rect key="frame" x="42" y="59" width="133" height="17"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="129" id="EiF-cf-fVX"/>
                         <constraint firstAttribute="height" constant="17" id="qQq-bF-WOV"/>
@@ -250,7 +252,7 @@
                     </textFieldCell>
                 </textField>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="VAt-eF-apx" customClass="AMPopUpView">
-                    <rect key="frame" x="181" y="105" width="166" height="20"/>
+                    <rect key="frame" x="181" y="58" width="166" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="166" id="Ukl-Bt-pcP"/>
                         <constraint firstAttribute="height" constant="20" id="fjU-62-MpT"/>
@@ -261,6 +263,20 @@
                     <constraints>
                         <constraint firstAttribute="width" constant="166" id="Tok-Lp-gfh"/>
                         <constraint firstAttribute="height" constant="20" id="am0-vO-QQY"/>
+                    </constraints>
+                </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="S3K-se-DVc" customClass="AMCheckBoxView">
+                    <rect key="frame" x="54" y="106" width="293" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="293" id="IB8-Vk-0Nl"/>
+                        <constraint firstAttribute="height" constant="20" id="uSP-Km-b2V"/>
+                    </constraints>
+                </customView>
+                <customView translatesAutoresizingMaskIntoConstraints="NO" id="DUD-oB-buF" customClass="AMCheckBoxView">
+                    <rect key="frame" x="54" y="82" width="293" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="293" id="UvO-DW-Bqo"/>
+                        <constraint firstAttribute="height" constant="20" id="n6d-FP-1T7"/>
                     </constraints>
                 </customView>
                 <customView translatesAutoresizingMaskIntoConstraints="NO" id="qYF-YM-VDL" customClass="AMCheckBoxView">
@@ -418,6 +434,8 @@
                 <constraint firstItem="epE-5i-Epw" firstAttribute="leading" secondItem="Vem-Fe-SFa" secondAttribute="leading" id="Grp-vN-jA1"/>
                 <constraint firstItem="4Y8-WF-PEp" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="231" id="HKV-Qo-TeP"/>
                 <constraint firstItem="vch-iU-wWM" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="290" id="HmA-gs-gcX"/>
+                <constraint firstItem="DUD-oB-buF" firstAttribute="leading" secondItem="S3K-se-DVc" secondAttribute="leading" id="IeZ-u6-UNN"/>
+                <constraint firstItem="DUD-oB-buF" firstAttribute="top" secondItem="S3K-se-DVc" secondAttribute="bottom" constant="4" id="J4y-uU-jVh"/>
                 <constraint firstItem="VAt-eF-apx" firstAttribute="leading" secondItem="5K0-8N-G2q" secondAttribute="trailing" constant="8" id="JER-Bh-m5g"/>
                 <constraint firstItem="Eom-gc-NhV" firstAttribute="leading" secondItem="ZYy-PC-fBl" secondAttribute="trailing" constant="-1" id="JWi-DV-KLT"/>
                 <constraint firstItem="yq9-Fb-d7T" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="Jv9-Ce-YNV"/>
@@ -440,8 +458,9 @@
                 <constraint firstItem="aJy-Bn-boT" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="305" id="TxP-ae-3tk"/>
                 <constraint firstItem="GNU-QT-lFp" firstAttribute="top" secondItem="znq-4b-0JE" secondAttribute="bottom" constant="7" id="U0Y-HV-ntZ"/>
                 <constraint firstItem="h9L-6z-MYA" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="414" id="V8w-Vn-HN1"/>
+                <constraint firstItem="S3K-se-DVc" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="54" id="XYk-7b-AJi"/>
                 <constraint firstItem="znq-4b-0JE" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="71" id="Xbl-38-LlU"/>
-                <constraint firstItem="VAt-eF-apx" firstAttribute="centerY" secondItem="XsE-7v-mgh" secondAttribute="centerY" constant="285.5" id="YCr-bH-3yy"/>
+                <constraint firstItem="VAt-eF-apx" firstAttribute="centerY" secondItem="XsE-7v-mgh" secondAttribute="centerY" constant="332.5" id="YCr-bH-3yy"/>
                 <constraint firstItem="Hcy-2O-cf2" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="ZQH-vl-jSV"/>
                 <constraint firstItem="znq-4b-0JE" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="105" id="aYt-7H-YDE"/>
                 <constraint firstItem="Usf-64-TXk" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="aZa-eU-4vk"/>
@@ -456,12 +475,13 @@
                 <constraint firstItem="TeI-KU-ZPa" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="173" id="iBv-3i-tbr"/>
                 <constraint firstItem="qYF-YM-VDL" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="258" id="iYN-cK-Hcc"/>
                 <constraint firstItem="yq9-Fb-d7T" firstAttribute="top" secondItem="SgO-GO-2jg" secondAttribute="top" constant="20" id="jPG-Gv-HLq"/>
-                <constraint firstItem="5K0-8N-G2q" firstAttribute="top" secondItem="Rzr-Pb-jXz" secondAttribute="top" constant="36" id="lwZ-ul-pHD"/>
+                <constraint firstItem="S3K-se-DVc" firstAttribute="top" secondItem="tVy-0z-MTH" secondAttribute="bottom" constant="4" id="lkr-ta-4R1"/>
+                <constraint firstItem="5K0-8N-G2q" firstAttribute="top" secondItem="Rzr-Pb-jXz" secondAttribute="top" constant="83" id="lwZ-ul-pHD"/>
                 <constraint firstItem="tVy-0z-MTH" firstAttribute="centerY" secondItem="Vem-Fe-SFa" secondAttribute="centerY" id="m11-uD-AFM"/>
                 <constraint firstItem="XsE-7v-mgh" firstAttribute="leading" secondItem="GNU-QT-lFp" secondAttribute="trailing" constant="-198" id="mG6-rW-GGf"/>
                 <constraint firstItem="vch-iU-wWM" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="44" id="mf1-uK-qgO"/>
                 <constraint firstItem="yW6-ob-bvi" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="mfu-TW-y2g"/>
-                <constraint firstAttribute="bottom" secondItem="epE-5i-Epw" secondAttribute="bottom" constant="106" id="o7Y-A4-Zdb"/>
+                <constraint firstAttribute="bottom" secondItem="epE-5i-Epw" secondAttribute="bottom" constant="59" id="o7Y-A4-Zdb"/>
                 <constraint firstItem="xEW-J7-OxY" firstAttribute="leading" secondItem="SgO-GO-2jg" secondAttribute="leading" constant="20" id="q2W-Ad-Hpm"/>
                 <constraint firstItem="tVy-0z-MTH" firstAttribute="leading" secondItem="LyR-iR-oks" secondAttribute="trailing" constant="8" id="q7H-OP-beF"/>
                 <constraint firstItem="XsE-7v-mgh" firstAttribute="top" secondItem="VGO-6c-hB7" secondAttribute="top" id="qcU-rn-qsd"/>

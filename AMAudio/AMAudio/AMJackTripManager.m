@@ -98,6 +98,20 @@
     
     if([cfgs.role isEqualToString:@"HUB SERVER"]){
         [commandline appendFormat:@" -p %@", cfgs.hubPatch];
+        
+        if([cfgs.hubPatch isEqualToString:@"3"] ||
+           [cfgs.hubPatch isEqualToString:@"4"])
+        {
+            if(cfgs.includeServer)
+            {
+                [commandline appendFormat:@" -i"];
+            }
+        }
+        
+        //
+        if(cfgs.monoToStereo){
+            [commandline appendFormat:@" -u"];
+        }
     }
     
     if(![cfgs.bufStrategy isEqualToString:@"0"] &&

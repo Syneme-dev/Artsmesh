@@ -60,4 +60,10 @@
 //-- Buffer Strategy
 @property NSString* bufStrategy;
 
+//-i,                                       Include server in patching
+@property BOOL includeServer;
+
+//-u                                        Upmix mono clients to stereo
+@property BOOL monoToStereo;
+
 @end

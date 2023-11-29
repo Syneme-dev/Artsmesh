@@ -110,6 +110,8 @@
              @"NO", Preference_Jacktrip_UseIpv6,
              @"0",  Preference_Jacktrip_HubPatch,
              @"0",  Preference_Jacktrip_BufStrategy,
+             @"NO", Preference_Jacktrip_IncludeServer,
+             @"NO", Preference_Jacktrip_MonoToStereo,
              @"SERVER", Preference_iPerf_Role,
              @"YES",    Preference_iPerf_UseUDP,
              @"5001",   Preference_iPerf_Port,

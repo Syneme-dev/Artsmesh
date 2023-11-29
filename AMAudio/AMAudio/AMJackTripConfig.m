@@ -394,6 +394,12 @@
     NSString *bufStrategy   = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_BufStrategy];
     cfgs.bufStrategy     = bufStrategy;
     
+    NSString *incServerStr  = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_IncludeServer];
+    cfgs.includeServer     = [incServerStr boolValue];
+
+    NSString *moToStereoStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_MonoToStereo];
+    cfgs.monoToStereo     = [moToStereoStr boolValue];
+    
     if(![[[AMAudio sharedInstance] audioJacktripManager] startJacktrip:cfgs]){
         
         NSAlert *alert = [NSAlert alertWithMessageText:@"start jacktrip failed!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"maybe port conflict!"];

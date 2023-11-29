@@ -140,6 +140,8 @@
 #define Preference_Jacktrip_UseIpv6         @"Preference_Jacktrip_UseIpv6"
 #define Preference_Jacktrip_HubPatch        @"Preference_Jacktrip_HubPatch"
 #define Preference_Jacktrip_BufStrategy     @"Preference_Jacktrip_BufStrategy"
+#define Preference_Jacktrip_IncludeServer   @"Preference_Jacktrip_IncludeServer"
+#define Preference_Jacktrip_MonoToStereo    @"Preference_Jacktrip_MonoToStereo"
 
 /////////////////////////iPerf Default/////////////////////////
 #define Preference_iPerf_Role               @"Preference_iPerf_Role"

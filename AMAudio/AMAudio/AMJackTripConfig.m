@@ -368,7 +368,7 @@
     if (![self checkouJacktripParams]) {
         return;
     }
-
+    
     NSString *jamLink = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_Jamlink];
     
     AMJacktripConfigs* cfgs = [[AMJacktripConfigs alloc] init];
@@ -396,7 +396,7 @@
     
     NSString *incServerStr  = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_IncludeServer];
     cfgs.includeServer     = [incServerStr boolValue];
-
+    
     NSString *moToStereoStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_MonoToStereo];
     cfgs.monoToStereo     = [moToStereoStr boolValue];
     
@@ -406,7 +406,15 @@
         [alert runModal];
     }
     
-    [self.window close];
+    if([cfgs.backend isEqualToString:@"JACK"] &&
+       [cfgs.role    isEqualToString:@"HUB SERVER"]){
+        [self.connectButton setEnabled:NO];
+    }
+    else{
+        [self.window close];
+    }
+  
+    //[self.window close];
 }
 
 

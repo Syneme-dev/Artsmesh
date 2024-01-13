@@ -38,8 +38,9 @@
 
 -(BOOL)startJacktrip:(AMJacktripConfigs *)cfgs
 {
-    NSBundle* mainBundle = [NSBundle mainBundle];
-    NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"jacktrip"]];
+    //NSBundle* mainBundle = [NSBundle mainBundle];
+   // NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", ..[mainBundle pathForAuxiliaryExecutable:@"jacktrip"]];
+    NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"/usr/local/bin/jacktrip"];
     
     //-s or -c
     if([cfgs.role isEqualToString:@"P2P SERVER"]){

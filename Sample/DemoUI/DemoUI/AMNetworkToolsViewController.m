@@ -127,9 +127,66 @@
     [AMButtonHandler changeTabTextColor:self.iperfButton        toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.logButton          toColor:UI_Color_blue];
   
-    NSArray *logs = [[NSFileManager defaultManager] contentsOfDirectoryAtPath:AMLogDirectory()
-                                                                        error:nil];
+    NSMutableArray* jackTripFiles = [[NSMutableArray alloc] initWithCapacity:10];
+    NSMutableArray* logs = [[NSMutableArray alloc] initWithCapacity:10];
+    NSError* err = nil;
+    NSArray *filesArray = [[NSFileManager defaultManager]
+                                    contentsOfDirectoryAtPath:AMLogDirectory()
+                                                        error:&err];
+    if(err == nil){
+        // sort by creation date
+        NSMutableArray* filesAndProperties = [NSMutableArray arrayWithCapacity:[filesArray count]];
+        for(NSString* file in filesArray){
+            NSString* filePath = [AMLogDirectory() stringByAppendingPathComponent:file];
+            NSDictionary* properties = [[NSFileManager defaultManager]
+                                            attributesOfItemAtPath:filePath
+                                            error:&err];
+            NSDate* modDate = [properties objectForKey:NSFileModificationDate];
+            if(err == nil)
+            {
+                [filesAndProperties addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                   file, @"path",
+                                                   modDate, @"lastModDate",
+                                                   nil]];
+            }
+        }
+            
+        // sort using a block. order inverted as we want latest date first
+        NSArray* sortedFiles = [filesAndProperties sortedArrayUsingComparator:
+                                ^(id path1, id path2){
+            // compare
+            NSComparisonResult comp = [[path1 objectForKey:@"lastModDate"] compare:
+                                                 [path2 objectForKey:@"lastModDate"]];
+            // invert ordering
+            if (comp == NSOrderedDescending) {
+                comp = NSOrderedAscending;
+            }
+            else if(comp == NSOrderedAscending){
+                      comp = NSOrderedDescending;
+            }
+                  return comp;
+        }];
+            
+        for (NSDictionary* dic in sortedFiles){
+            [logs addObject:[dic objectForKey:@"path"]];
+        }
+        
+        for (NSString* logFile in logs) {
+            NSRange searchResult = [logFile rangeOfString:kAMJackTripFile];
+            if(searchResult.location != NSNotFound){
+                [jackTripFiles addObject:logFile];
+            }
+        }
+        
+        //logs = [logs pathsMatchingExtensions:@[ @"log" ]];
+        [self.logFileCombo addItemsWithObjectValues:logs];
+        self.logFileCombo.delegate = self;
+    }
+    else
+        NSLog(@"Error in reading files: %@", [err localizedDescription]);
+        
     
+    /*
     logs = [logs pathsMatchingExtensions:@[ @"log" ]];
     [self.logFileCombo addItemsWithObjectValues:logs];
     self.logFileCombo.delegate = self;
@@ -140,9 +197,11 @@
         if(searchResult.location != NSNotFound){
             [jackTripFiles addObject:logFile];
         }
-    }
+    }*/
     
- /*    NSArray* jackTripFiles = [NSArray arrayWithArray:logs];*/
+
+    
+    
     [self.logFilePopUp addItemsWithTitles:jackTripFiles];
     [self.logButton performClick:jackTripFiles];
     

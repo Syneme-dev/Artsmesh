@@ -174,15 +174,15 @@
     strcat(stringa, " -p");
     NSString* bufferSizeStr = [NSString stringWithFormat:@"%@", bufferSize];
     strcat(stringa, [bufferSizeStr cStringUsingEncoding:NSUTF8StringEncoding]);
-   
-    strcat(stringa, " -o ");
-    NSString* outchans = [NSString stringWithFormat:@"%@", outChannCount];
-    strcat(stringa, [outchans cStringUsingEncoding:NSUTF8StringEncoding]);
     
     strcat(stringa, " -i ");
     NSString* inchans = [NSString stringWithFormat:@"%@", inChannCount];
     strcat(stringa, [inchans cStringUsingEncoding:NSUTF8StringEncoding]);
-    
+   
+    strcat(stringa, " -o ");
+    NSString* outchans = [NSString stringWithFormat:@"%@", outChannCount];
+    strcat(stringa, [outchans cStringUsingEncoding:NSUTF8StringEncoding]);
+
     /*
     if ([inputDevUID isEqualToString:outputDevUID]) {
         strcat(stringa, " -d ");

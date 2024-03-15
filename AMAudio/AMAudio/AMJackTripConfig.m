@@ -408,6 +408,7 @@
     
     if([cfgs.backend isEqualToString:@"JACK"] &&
        [cfgs.role    isEqualToString:@"HUB SERVER"]){
+        [self.connectButton setTitle:@"CONNECTED"];
         [self.connectButton setEnabled:NO];
     }
     else{

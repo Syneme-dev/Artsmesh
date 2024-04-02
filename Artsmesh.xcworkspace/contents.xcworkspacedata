@@ -3,9 +3,9 @@
    version = "1.0">
    <Group
       location = "container:"
-      name = "Artsmesh">
+      name = "Mesh">
       <FileRef
-         location = "group:Sample/DemoUI/Artsmesh.xcodeproj">
+         location = "group:/Users/whiskyzed/src/Artsmesh/Sample/DemoUI/Mesh.xcodeproj">
       </FileRef>
       <FileRef
          location = "group:AMNotificationManager/AMNotificationManager.xcodeproj">

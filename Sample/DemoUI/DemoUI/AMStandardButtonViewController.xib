@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="7706"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMStandardButtonViewController">
@@ -27,7 +29,7 @@
                                 <constraint firstAttribute="height" constant="14" id="IdF-AP-mGx"/>
                             </constraints>
                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" sendsActionOnEndEditing="YES" state="on" alignment="center" title="SAVE" id="h01-aj-emu">
-                                <font key="font" size="12" name="FoundryMonoline-Bold"/>
+                                <font key="font" metaFont="cellTitle"/>
                                 <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                             </textFieldCell>
@@ -47,6 +49,7 @@
                 <constraint firstAttribute="trailing" secondItem="3N7-96-zqe" secondAttribute="trailing" constant="1" id="WbW-cQ-iM0"/>
                 <constraint firstItem="3N7-96-zqe" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" constant="1" id="rlf-Dc-2Cn"/>
             </constraints>
+            <point key="canvasLocation" x="22" y="135"/>
         </customView>
     </objects>
 </document>

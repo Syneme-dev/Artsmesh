@@ -25,7 +25,7 @@
     
     NSAssert(AMLogInitialize(), @"Initialize Log Error!");
     
-    AMLog(kAMInfoLog, @"Main", @"Artsmesh is Starting...");
+    AMLog(kAMInfoLog, @"Main", @"Mesh is Starting...");
     
     [self loadPreference];
     [self loadPanels];

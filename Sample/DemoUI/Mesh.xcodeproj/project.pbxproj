@@ -204,7 +204,7 @@
 		AFAEBD861961075F00B7FB51 /* visualShot.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD841961075F00B7FB51 /* visualShot.png */; };
 		AFAEBD8A196107BE00B7FB51 /* info.css in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD88196107BE00B7FB51 /* info.css */; };
 		AFAEBD8B196107BE00B7FB51 /* web.css in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD89196107BE00B7FB51 /* web.css */; };
-		AFAEBD9619610B8700B7FB51 /* Artsmesh2Logo.icns in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD8F19610B8700B7FB51 /* Artsmesh2Logo.icns */; };
+		AFAEBD9619610B8700B7FB51 /* Mesh2Logo.icns in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD8F19610B8700B7FB51 /* Mesh2Logo.icns */; };
 		AFAEBD9719610B8700B7FB51 /* CreateGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD9019610B8700B7FB51 /* CreateGroup.png */; };
 		AFAEBD9819610B8700B7FB51 /* GroupMessage.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD9119610B8700B7FB51 /* GroupMessage.png */; };
 		AFAEBD9919610B8700B7FB51 /* JoinGroup.png in Resources */ = {isa = PBXBuildFile; fileRef = AFAEBD9219610B8700B7FB51 /* JoinGroup.png */; };
@@ -410,15 +410,15 @@
 		2DF728441C58277F00A4969E /* AMFFmpegConfigs.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFFmpegConfigs.m; sourceTree = "<group>"; };
 		2DF728471C58365F00A4969E /* AMFFmpeg.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AMFFmpeg.h; sourceTree = "<group>"; };
 		2DF728481C58365F00A4969E /* AMFFmpeg.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AMFFmpeg.m; sourceTree = "<group>"; };
-		37C2316C187A8FFD00554AFD /* Artsmesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Artsmesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		37C2316C187A8FFD00554AFD /* Mesh.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Mesh.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		37C2316F187A8FFD00554AFD /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		37C23172187A8FFD00554AFD /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		37C23173187A8FFD00554AFD /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		37C23174187A8FFD00554AFD /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		37C23177187A8FFD00554AFD /* Artsmesh-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Artsmesh-Info.plist"; sourceTree = "<group>"; };
+		37C23177187A8FFD00554AFD /* Mesh-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Mesh-Info.plist"; sourceTree = "<group>"; };
 		37C23179187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		37C2317B187A8FFD00554AFD /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		37C2317D187A8FFD00554AFD /* Artsmesh-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Artsmesh-Prefix.pch"; sourceTree = "<group>"; };
+		37C2317D187A8FFD00554AFD /* Mesh-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Mesh-Prefix.pch"; sourceTree = "<group>"; };
 		37C2317F187A8FFD00554AFD /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
 		37C23181187A8FFD00554AFD /* AMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AMAppDelegate.h; sourceTree = "<group>"; };
 		37C23182187A8FFD00554AFD /* AMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AMAppDelegate.m; sourceTree = "<group>"; };
@@ -613,7 +613,7 @@
 		AFAEBD841961075F00B7FB51 /* visualShot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visualShot.png; sourceTree = "<group>"; };
 		AFAEBD88196107BE00B7FB51 /* info.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = info.css; sourceTree = "<group>"; };
 		AFAEBD89196107BE00B7FB51 /* web.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = web.css; sourceTree = "<group>"; };
-		AFAEBD8F19610B8700B7FB51 /* Artsmesh2Logo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Artsmesh2Logo.icns; sourceTree = "<group>"; };
+		AFAEBD8F19610B8700B7FB51 /* Mesh2Logo.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Mesh2Logo.icns; sourceTree = "<group>"; };
 		AFAEBD9019610B8700B7FB51 /* CreateGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = CreateGroup.png; sourceTree = "<group>"; };
 		AFAEBD9119610B8700B7FB51 /* GroupMessage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = GroupMessage.png; sourceTree = "<group>"; };
 		AFAEBD9219610B8700B7FB51 /* JoinGroup.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = JoinGroup.png; sourceTree = "<group>"; };
@@ -1000,7 +1000,7 @@
 		37C2316D187A8FFD00554AFD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				37C2316C187A8FFD00554AFD /* Artsmesh.app */,
+				37C2316C187A8FFD00554AFD /* Mesh.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1083,10 +1083,10 @@
 				D447827818CD6BFE00D72C9F /* UserGroupModuleConst.h */,
 				D447827718CD6BEA00D72C9F /* HelloWorldConst.h */,
 				AFAEBD801961038F00B7FB51 /* Resource */,
-				37C23177187A8FFD00554AFD /* Artsmesh-Info.plist */,
+				37C23177187A8FFD00554AFD /* Mesh-Info.plist */,
 				37C23178187A8FFD00554AFD /* InfoPlist.strings */,
 				37C2317B187A8FFD00554AFD /* main.m */,
-				37C2317D187A8FFD00554AFD /* Artsmesh-Prefix.pch */,
+				37C2317D187A8FFD00554AFD /* Mesh-Prefix.pch */,
 				37C2317E187A8FFD00554AFD /* Credits.rtf */,
 			);
 			name = "Supporting Files";
@@ -1391,7 +1391,7 @@
 			isa = PBXGroup;
 			children = (
 				CE7216CC19A19C9F00504E28 /* logo-02.png */,
-				AFAEBD8F19610B8700B7FB51 /* Artsmesh2Logo.icns */,
+				AFAEBD8F19610B8700B7FB51 /* Mesh2Logo.icns */,
 				AFAEBD9019610B8700B7FB51 /* CreateGroup.png */,
 				AFAEBD9119610B8700B7FB51 /* GroupMessage.png */,
 				AFAEBD9219610B8700B7FB51 /* JoinGroup.png */,
@@ -1551,9 +1551,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		37C2316B187A8FFD00554AFD /* Artsmesh */ = {
+		37C2316B187A8FFD00554AFD /* Mesh */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 37C2319D187A8FFD00554AFD /* Build configuration list for PBXNativeTarget "Artsmesh" */;
+			buildConfigurationList = 37C2319D187A8FFD00554AFD /* Build configuration list for PBXNativeTarget "Mesh" */;
 			buildPhases = (
 				09714A52F7964CC4AFC5CC4D /* Check Pods Manifest.lock */,
 				37C23168187A8FFD00554AFD /* Sources */,
@@ -1570,9 +1570,9 @@
 			);
 			dependencies = (
 			);
-			name = Artsmesh;
+			name = Mesh;
 			productName = DemoUI;
-			productReference = 37C2316C187A8FFD00554AFD /* Artsmesh.app */;
+			productReference = 37C2316C187A8FFD00554AFD /* Mesh.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -1585,7 +1585,7 @@
 				LastUpgradeCheck = 0600;
 				ORGANIZATIONNAME = Artsmesh;
 			};
-			buildConfigurationList = 37C23167187A8FFD00554AFD /* Build configuration list for PBXProject "Artsmesh" */;
+			buildConfigurationList = 37C23167187A8FFD00554AFD /* Build configuration list for PBXProject "Mesh" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -1599,7 +1599,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				37C2316B187A8FFD00554AFD /* Artsmesh */,
+				37C2316B187A8FFD00554AFD /* Mesh */,
 			);
 		};
 /* End PBXProject section */
@@ -1710,7 +1710,7 @@
 				AFAEBD861961075F00B7FB51 /* visualShot.png in Resources */,
 				AFDA79A61945864A0002873B /* AMMixingViewController.xib in Resources */,
 				AFD34799195BEF620055043E /* AMTimerViewController.xib in Resources */,
-				AFAEBD9619610B8700B7FB51 /* Artsmesh2Logo.icns in Resources */,
+				AFAEBD9619610B8700B7FB51 /* Mesh2Logo.icns in Resources */,
 				4A8C69E91A7093A000540694 /* AMStaticUserDetailsViewController.xib in Resources */,
 				4A4511761A8B5F62001E7328 /* AMJackSettingsVC.xib in Resources */,
 				AFAEBDB619610BEA00B7FB51 /* ShareLocation.png in Resources */,
@@ -1991,7 +1991,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DemoUI/Artsmesh-Prefix.pch";
+				GCC_PREFIX_HEADER = "DemoUI/Mesh-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -2003,7 +2003,7 @@
 					"GTL_BUILT_AS_FRAMEWORK=1",
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				INFOPLIST_FILE = "DemoUI/Artsmesh-Info.plist";
+				INFOPLIST_FILE = "DemoUI/Mesh-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2029,7 +2029,7 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "DemoUI/Artsmesh-Prefix.pch";
+				GCC_PREFIX_HEADER = "DemoUI/Mesh-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -2041,7 +2041,7 @@
 					GTL_BUILT_AS_FRAMEWORK,
 				);
 				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = YES;
-				INFOPLIST_FILE = "DemoUI/Artsmesh-Info.plist";
+				INFOPLIST_FILE = "DemoUI/Mesh-Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2057,7 +2057,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		37C23167187A8FFD00554AFD /* Build configuration list for PBXProject "Artsmesh" */ = {
+		37C23167187A8FFD00554AFD /* Build configuration list for PBXProject "Mesh" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37C2319B187A8FFD00554AFD /* Debug */,
@@ -2066,7 +2066,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		37C2319D187A8FFD00554AFD /* Build configuration list for PBXNativeTarget "Artsmesh" */ = {
+		37C2319D187A8FFD00554AFD /* Build configuration list for PBXNativeTarget "Mesh" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				37C2319E187A8FFD00554AFD /* Debug */,

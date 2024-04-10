@@ -662,7 +662,7 @@
 
 
 - (AMPanelViewController *)loadTimerPanel:(NSString *)panelId relatedView:(NSView*)view{
-    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"CLOCK" width:760 height:UI_defaultPanelHeight relatedView:view];
+    AMPanelViewController *panelViewController = [self createPanel:panelId withTitle:@"NETRONOME" width:760 height:UI_defaultPanelHeight relatedView:view];
 //    AMPanelView *panelView = (AMPanelView *) panelViewController.view;
 //    panelView.minSizeConstraint = panelView.frame.size;
     NSViewController *viewController = [[AMTimerViewController alloc] initWithNibName:@"AMTimerViewController" bundle:nil];

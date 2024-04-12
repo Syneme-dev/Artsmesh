@@ -66,4 +66,15 @@
 //-u                                        Upmix mono clients to stereo
 @property BOOL monoToStereo;
 
+
+//--srate                                   Sampling Rate, like 48000
+@property NSString* samplingRate;
+
+//--bufsize                                 Buffer Size, like 256
+@property NSString* bufferSize;
+
+//                                          Input Device and output device
+@property NSString* inputDevice;
+@property NSString* outputDevice;
+
 @end

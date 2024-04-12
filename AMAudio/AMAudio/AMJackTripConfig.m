@@ -400,6 +400,21 @@
     NSString *moToStereoStr = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jacktrip_MonoToStereo];
     cfgs.monoToStereo     = [moToStereoStr boolValue];
     
+    // JackAudio Configs
+
+    NSString *sampleRate   = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_SampleRate];
+    cfgs.samplingRate     = sampleRate;
+    
+    NSString *bufferSize   = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_BufferSize];
+    cfgs.bufferSize     = bufferSize;
+    
+    NSString *inputDevice   = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_InputDevice];
+    cfgs.inputDevice     = inputDevice;
+    
+    NSString *outputDevice  = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_OutputDevice];
+    cfgs.outputDevice     = outputDevice;
+    
+    
     if(![[[AMAudio sharedInstance] audioJacktripManager] startJacktrip:cfgs]){
         
         NSAlert *alert = [NSAlert alertWithMessageText:@"start jacktrip failed!" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"maybe port conflict!"];

@@ -18,6 +18,7 @@
 @interface AMNetworkToolsViewController : AMTabPanelViewController
 
 @property (weak)                IBOutlet AMPopUpView*   logFilePopUp;
+@property (weak)                IBOutlet NSButton*      jacktripButton;
 @property (weak)                IBOutlet NSButton*      pingButton;
 @property (weak)                IBOutlet NSButton*      tracerouteButton;
 @property (weak)                IBOutlet NSButton*      iperfButton;
@@ -34,6 +35,7 @@
 
 
 
+- (IBAction)jacktrip:(id)sender;
 - (IBAction)ping:(id)sender;
 - (IBAction)traceroute:(id)sender;
 - (IBAction)iperf:(id)sender;

@@ -55,7 +55,12 @@
     
     // RT Audio
     if([cfgs.backend isEqualToString:@"RtAudio"]){
+        
         [commandline appendFormat:@" --rtaudio"];
+        
+        [commandline appendFormat:@" --srate %@",           cfgs.samplingRate];
+        [commandline appendFormat:@" --bufsize %@",         cfgs.bufferSize];
+        [commandline appendFormat:@" --audiodevice %@, %@", cfgs.inputDevice, cfgs.outputDevice];
     }
 
     //port offset

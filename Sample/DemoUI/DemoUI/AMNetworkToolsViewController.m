@@ -126,6 +126,7 @@
     [AMButtonHandler changeTabTextColor:self.tracerouteButton   toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.iperfButton        toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.logButton          toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.jacktripButton     toColor:UI_Color_blue];
   
     NSMutableArray* jackTripFiles = [[NSMutableArray alloc] initWithCapacity:10];
     NSMutableArray* logs = [[NSMutableArray alloc] initWithCapacity:10];
@@ -184,23 +185,7 @@
     }
     else
         NSLog(@"Error in reading files: %@", [err localizedDescription]);
-        
-    
-    /*
-    logs = [logs pathsMatchingExtensions:@[ @"log" ]];
-    [self.logFileCombo addItemsWithObjectValues:logs];
-    self.logFileCombo.delegate = self;
-    
-    NSMutableArray* jackTripFiles = [[NSMutableArray alloc] initWithCapacity:10];
-   for (NSString* logFile in logs) {
-        NSRange searchResult = [logFile rangeOfString:kAMJackTripFile];
-        if(searchResult.location != NSNotFound){
-            [jackTripFiles addObject:logFile];
-        }
-    }*/
-    
-
-    
+  
     
     [self.logFilePopUp addItemsWithTitles:jackTripFiles];
     [self.logButton performClick:jackTripFiles];
@@ -285,7 +270,8 @@
     [self.tabButtons addObject:self.tracerouteButton];
     [self.tabButtons addObject:self.iperfButton];
     [self.tabButtons addObject:self.logButton];
-    self.showingTabsCount=4;
+    [self.tabButtons addObject:self.jacktripButton];
+    self.showingTabsCount=5;
 }
 
 - (void)ipv6CheckedT:(NSNotification *)notification
@@ -304,6 +290,13 @@
     [self onChecked:self.ratioVideo];
     self.logTextView.needsDisplay = YES;
 }
+
+- (IBAction)jacktrip:(id)sender
+{
+    [self pushDownButton:self.jacktripButton];
+    [self.tabView selectTabViewItemWithIdentifier:@"logTab"];
+}
+
 
 - (IBAction)ping:(id)sender
 {

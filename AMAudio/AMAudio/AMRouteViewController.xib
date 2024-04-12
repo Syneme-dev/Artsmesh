@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,16 +18,16 @@
             <rect key="frame" x="0.0" y="0.0" width="619" height="569"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button verticalHuggingPriority="750" verifyAmbiguity="ignoreSizes" translatesAutoresizingMaskIntoConstraints="NO" id="fJy-36-tM4">
+                <button verifyAmbiguity="ignoreSizes" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="fJy-36-tM4">
                     <rect key="frame" x="167" y="268" width="39" height="39"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="39" id="400-qH-OEZ"/>
-                        <constraint firstAttribute="width" constant="39" id="RmQ-7t-kZ6"/>
-                    </constraints>
                     <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="JackTripBtn" imagePosition="overlaps" alignment="center" state="on" imageScaling="proportionallyDown" inset="2" id="Ob1-Mf-6Yv">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="39" id="400-qH-OEZ"/>
+                        <constraint firstAttribute="width" constant="39" id="RmQ-7t-kZ6"/>
+                    </constraints>
                     <connections>
                         <action selector="startJackTrip:" target="-2" id="l4y-31-TtP"/>
                     </connections>

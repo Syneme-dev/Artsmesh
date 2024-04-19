@@ -20,9 +20,12 @@
 #import "AMAudio/AMAudio.h"
 #import "UIFramework/AMWindow.h"
 
-
+NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
 @interface AMJackTripConfig ()<AMPopUpViewDelegeate, AMCheckBoxDelegeate>
-
+{
+    NSTimer*        _readTimer;
+    NSString*       _logName;
+}
 @property (weak) IBOutlet AMPopUpView *backendSelecter;
 @property (weak) IBOutlet AMPopUpView *roleSelecter;
 @property (weak) IBOutlet AMPopUpView *peerSelecter;
@@ -421,16 +424,33 @@
         [alert runModal];
     }
     
+    _logName = [[NSMutableString alloc]
+                initWithFormat:@"jacktrip_%@.log", [self.peerName stringValue]];
+    
     if([cfgs.backend isEqualToString:@"JACK"] &&
        [cfgs.role    isEqualToString:@"HUB SERVER"]){
         [self.connectButton setTitle:@"CONNECTED"];
         [self.connectButton setEnabled:NO];
+        
+        _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
+                                                     target:self
+                                                   selector:@selector(sendLogName:)
+                                                   userInfo:nil
+                                                    repeats:YES];
     }
     else{
+        [[NSNotificationCenter defaultCenter]
+                        postNotificationName:AMJacktripLogNotification
+                                    object:_logName];
         [self.window close];
     }
-  
-    //[self.window close];
+}
+
+- (void) sendLogName:(NSTimer*) timer
+{
+    [[NSNotificationCenter defaultCenter]
+                    postNotificationName:AMJacktripLogNotification
+                                object:_logName];
 }
 
 
@@ -444,6 +464,7 @@
 
 - (IBAction)closeWindow:(NSButton *)sender
 {
+    [_readTimer invalidate];
     [self.window close];
 }
 

@@ -22,6 +22,9 @@
 #import "AMNetworkingToolVC.h"
 #import "AMFFmpeg.h"
 
+
+NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
+
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
                                             AMRatioButtonDelegeate>
 {
@@ -37,6 +40,8 @@
     NSString*                   _searchWord;
     Boolean                     _needSearch;
     Boolean                     _ipv6Checked;
+    
+    Boolean                     _logState;
 }
 
 @property (weak) IBOutlet AMCheckBoxView    *fullLogCheck;
@@ -83,6 +88,21 @@
     [self.ratioVideo        setChecked:NO];
 }
 
+- (void) enableAllControls:(BOOL)enable
+{
+    [self.ratioOSCServer    setEnabled:enable];
+    [self.ratioOSCClient    setEnabled:enable];
+    [self.ratioJackAudio    setEnabled:enable];
+    [self.ratioAMServer     setEnabled:enable];
+    [self.ratioArtsmesh     setEnabled:enable];
+    [self.ratioVideo        setEnabled:enable];
+    [self.fullLogCheck      setEnabled:enable];
+    [self.searchField       setEnabled:enable];
+    [self.logFilePopUp      setEnabled:enable];
+    
+    if(!enable)
+        [self UncheckAllRatioButton];
+}
 
 -(void) itemSelected:(AMPopUpView*)sender{
     NSString* fileName = [self.logFilePopUp stringValue];
@@ -117,6 +137,13 @@
     }
     return self;
 }
+
+-(void) refreshLogFilePopUp
+{
+        
+    
+}
+
 
 - (void)awakeFromNib
 {
@@ -179,7 +206,6 @@
             }
         }
         
-        //logs = [logs pathsMatchingExtensions:@[ @"log" ]];
         [self.logFileCombo addItemsWithObjectValues:logs];
         self.logFileCombo.delegate = self;
     }
@@ -220,8 +246,6 @@
                                     kVideoFile,
                                         kVideoTitle,
                                     nil];
-    
-   /* [self.logTextView setFont: [NSFont fontWithName: @"FoundryMonoline-Bold" size: self.logTextView.font.pointSize]];*/
 
     [self onChecked:self.ratioArtsmesh];
     
@@ -254,7 +278,10 @@
            selector:@selector(refreshVideoLog:)
                name:AMVIDEOYouTubeStreamNotification
              object:nil];
-
+    [nc addObserver:self
+           selector:@selector(showJacktripLog:)
+               name:AMJacktripLogNotification
+             object:nil];
 
     [self registerTabButtons];
     
@@ -291,18 +318,88 @@
     self.logTextView.needsDisplay = YES;
 }
 
+- (void) showJacktripLog:(NSNotification *)notification
+{
+    [self.logFilePopUp removeAllItems];
+    NSMutableArray* jackTripFiles = [[NSMutableArray alloc] initWithCapacity:10];
+    NSMutableArray* logs = [[NSMutableArray alloc] initWithCapacity:10];
+    NSError* err = nil;
+    NSArray *filesArray = [[NSFileManager defaultManager]
+                                    contentsOfDirectoryAtPath:AMLogDirectory()
+                                                        error:&err];
+    if(err == nil){
+        // sort by creation date
+        NSMutableArray* filesAndProperties = [NSMutableArray arrayWithCapacity:[filesArray count]];
+        for(NSString* file in filesArray){
+            NSString* filePath = [AMLogDirectory() stringByAppendingPathComponent:file];
+            NSDictionary* properties = [[NSFileManager defaultManager]
+                                            attributesOfItemAtPath:filePath
+                                            error:&err];
+            NSDate* modDate = [properties objectForKey:NSFileModificationDate];
+            if(err == nil)
+            {
+                [filesAndProperties addObject:[NSDictionary dictionaryWithObjectsAndKeys:
+                                                   file, @"path",
+                                                   modDate, @"lastModDate",
+                                                   nil]];
+            }
+        }
+            
+        // sort using a block. order inverted as we want latest date first
+        NSArray* sortedFiles = [filesAndProperties sortedArrayUsingComparator:
+                                ^(id path1, id path2){
+            // compare
+            NSComparisonResult comp = [[path1 objectForKey:@"lastModDate"] compare:
+                                                 [path2 objectForKey:@"lastModDate"]];
+            // invert ordering
+            if (comp == NSOrderedDescending) {
+                comp = NSOrderedAscending;
+            }
+            else if(comp == NSOrderedAscending){
+                      comp = NSOrderedDescending;
+            }
+                  return comp;
+        }];
+            
+        for (NSDictionary* dic in sortedFiles){
+            [logs addObject:[dic objectForKey:@"path"]];
+        }
+        
+        for (NSString* logFile in logs) {
+            NSRange searchResult = [logFile rangeOfString:kAMJackTripFile];
+            if(searchResult.location != NSNotFound){
+                [jackTripFiles addObject:logFile];
+            }
+        }
+
+        [self.logFileCombo addItemsWithObjectValues:logs];
+    }
+    
+    [self.logFilePopUp addItemsWithTitles:jackTripFiles];
+
+    if(!_logState)
+    {
+        NSString* fileName = [notification object];
+        _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
+        [self showLog];
+    }
+}
+
 - (IBAction)jacktrip:(id)sender
 {
     [self pushDownButton:self.jacktripButton];
     [self.tabView selectTabViewItemWithIdentifier:@"logTab"];
+    
+    [self enableAllControls:FALSE];
+    
+    [_readTimer invalidate];
+    [self.logTextView setString:@""];
+    
+    _logState = FALSE;
 }
-
 
 - (IBAction)ping:(id)sender
 {
-    /*
-    [self pushDownButton:self.pingButton];
-    [self.tabView selectTabViewItemWithIdentifier:@"pingTab"];*/
     [self pushDownButton:self.pingButton];
     [self.tabView selectTabViewItemAtIndex:0];
     
@@ -312,8 +409,6 @@
 
 - (IBAction)traceroute:(id)sender
 {
-  //  [self pushDownButton:self.tracerouteButton];
-  //  [self.tabView selectTabViewItemWithIdentifier:@"tracerouteTab"];
     [self pushDownButton:self.tracerouteButton];
     [self.tabView selectTabViewItemAtIndex:1];
     
@@ -323,8 +418,6 @@
 
 - (IBAction)iperf:(id)sender
 {
- //   [self pushDownButton:self.iperfButton];
- //   [self.tabView selectTabViewItemWithIdentifier:@"iperfTab"];
     [self pushDownButton:self.iperfButton];
     [self.tabView selectTabViewItemAtIndex:2];
     
@@ -333,11 +426,12 @@
 }
 
 - (IBAction)log:(id)sender {
+    [self enableAllControls:TRUE];
     [self pushDownButton:self.logButton];
     [self.tabView selectTabViewItemWithIdentifier:@"logTab"];
+    
+    _logState = TRUE;
 }
-
-
 
 //-------------Log---------------//
 - (void) writeToLogView:(NSString*) logItem
@@ -352,16 +446,12 @@
     NSDictionary* attr = @{NSForegroundColorAttributeName:  UI_Color_b7b7b7 ,
                            NSFontAttributeName:textViewFont};
     
-    
- //  NSDictionary *attr = @{ NSForegroundColorAttributeName : UI_Color_b7b7b7 };
     NSAttributedString *attrString = [[NSAttributedString alloc] initWithString:logItem
                                                                      attributes:attr];
    
     [self.logTextView.textStorage appendAttributedString:attrString];
     self.logTextView.needsDisplay = YES;
     
-  /*   [[[self.logTextView textStorage] mutableString] appendString: logItem];
-    self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];*/
 }
 
 
@@ -375,10 +465,6 @@
             for (NSString* logItem in logArray) {
                  NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
                 [self writeToLogView:logItemEnter];
-                /*
-                [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
-                self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
-                 */
             }
         }
         _appendStringCount = 0;
@@ -387,8 +473,6 @@
     while( (logItem = [_logReader nextLogItem]) != nil) {
             NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
             [self writeToLogView:logItemEnter];
-           /* [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
-            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];*/
             _appendStringCount++;
     }
 }
@@ -402,8 +486,6 @@
         for (NSString* logItem in logArray) {
             NSString* logItemEnter = [NSString stringWithFormat:@"%@\n", logItem];
             [self writeToLogView:logItemEnter];
-//            [[[self.logTextView textStorage] mutableString] appendString: logItemEnter];
-//            self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];
         }
         
         _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
@@ -422,9 +504,6 @@
     while((logItem = [_logReader nextLogItem]) != nil){
         NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
         [self writeToLogView:logItemEnter];
-        /*
-        [[[self.logTextView textStorage] mutableString] appendString:logItemEnter];
-        self.logTextView.textStorage.foregroundColor = [NSColor lightGrayColor];*/
     }
     
 }

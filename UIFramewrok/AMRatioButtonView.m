@@ -106,6 +106,11 @@
     }
 }
 
+-(void) setEnabled:(BOOL)enabled
+{
+    [super setEnabled:enabled];
+    self.readOnly = !enabled;
+}
 
 -(void)setChecked:(BOOL)checked
 {

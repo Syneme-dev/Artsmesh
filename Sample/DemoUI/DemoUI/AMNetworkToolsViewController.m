@@ -41,6 +41,7 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
     Boolean                     _needSearch;
     Boolean                     _ipv6Checked;
     
+    NSMutableArray*             _jackTripFiles;
     Boolean                     _logState;
 }
 
@@ -140,22 +141,9 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
 
 -(void) refreshLogFilePopUp
 {
-        
+    [self.logFilePopUp removeAllItems];
     
-}
-
-
-- (void)awakeFromNib
-{
-    [super awakeFromNib];
- //   _ipv6Checked = FALSE;
-    [AMButtonHandler changeTabTextColor:self.pingButton         toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.tracerouteButton   toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.iperfButton        toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.logButton          toColor:UI_Color_blue];
-    [AMButtonHandler changeTabTextColor:self.jacktripButton     toColor:UI_Color_blue];
-  
-    NSMutableArray* jackTripFiles = [[NSMutableArray alloc] initWithCapacity:10];
+    _jackTripFiles = [[NSMutableArray alloc] initWithCapacity:10];
     NSMutableArray* logs = [[NSMutableArray alloc] initWithCapacity:10];
     NSError* err = nil;
     NSArray *filesArray = [[NSFileManager defaultManager]
@@ -202,32 +190,44 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
         for (NSString* logFile in logs) {
             NSRange searchResult = [logFile rangeOfString:kAMJackTripFile];
             if(searchResult.location != NSNotFound){
-                [jackTripFiles addObject:logFile];
+                [_jackTripFiles addObject:logFile];
             }
         }
-        
         [self.logFileCombo addItemsWithObjectValues:logs];
-        self.logFileCombo.delegate = self;
     }
     else
         NSLog(@"Error in reading files: %@", [err localizedDescription]);
   
+    [self.logFilePopUp addItemsWithTitles:_jackTripFiles];
+}
+
+
+- (void)awakeFromNib
+{
+    [super awakeFromNib];
+ //   _ipv6Checked = FALSE;
+    [AMButtonHandler changeTabTextColor:self.pingButton         toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.tracerouteButton   toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.iperfButton        toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.logButton          toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.jacktripButton     toColor:UI_Color_blue];
+  
+    [self refreshLogFilePopUp];
     
-    [self.logFilePopUp addItemsWithTitles:jackTripFiles];
-    [self.logButton performClick:jackTripFiles];
-    
-    
-    self.fullLogCheck.title = @"FULL LOG";
-    
-    self.logFilePopUp.delegate  = self;
-    self.searchField.delegate   = self;
-    
+    self.logFileCombo.delegate      = self;
+    self.logFilePopUp.delegate      = self;
+    self.searchField.delegate       = self;
     self.ratioOSCClient.delegate    = self;
     self.ratioOSCServer.delegate    = self;
     self.ratioJackAudio.delegate    = self;
     self.ratioAMServer.delegate     = self;
     self.ratioArtsmesh.delegate     = self;
     self.ratioVideo.delegate        = self;
+    
+    [self.logButton performClick:_jackTripFiles];
+    
+    self.fullLogCheck.title = @"FULL LOG";
+   
     
     self.ratioOSCServer.title    = kAMOSCServerTitle;
     self.ratioOSCClient.title    = kAMOSCClientTitle;
@@ -320,63 +320,8 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
 
 - (void) showJacktripLog:(NSNotification *)notification
 {
-    [self.logFilePopUp removeAllItems];
-    NSMutableArray* jackTripFiles = [[NSMutableArray alloc] initWithCapacity:10];
-    NSMutableArray* logs = [[NSMutableArray alloc] initWithCapacity:10];
-    NSError* err = nil;
-    NSArray *filesArray = [[NSFileManager defaultManager]
-                                    contentsOfDirectoryAtPath:AMLogDirectory()
-                                                        error:&err];
-    if(err == nil){
-        // sort by creation date
-        NSMutableArray* filesAndProperties = [NSMutableArray arrayWithCapacity:[filesArray count]];
-        for(NSString* file in filesArray){
-            NSString* filePath = [AMLogDirectory() stringByAppendingPathComponent:file];
-            NSDictionary* properties = [[NSFileManager defaultManager]
-                                            attributesOfItemAtPath:filePath
-                                            error:&err];
-            NSDate* modDate = [properties objectForKey:NSFileModificationDate];
-            if(err == nil)
-            {
-                [filesAndProperties addObject:[NSDictionary dictionaryWithObjectsAndKeys:
-                                                   file, @"path",
-                                                   modDate, @"lastModDate",
-                                                   nil]];
-            }
-        }
-            
-        // sort using a block. order inverted as we want latest date first
-        NSArray* sortedFiles = [filesAndProperties sortedArrayUsingComparator:
-                                ^(id path1, id path2){
-            // compare
-            NSComparisonResult comp = [[path1 objectForKey:@"lastModDate"] compare:
-                                                 [path2 objectForKey:@"lastModDate"]];
-            // invert ordering
-            if (comp == NSOrderedDescending) {
-                comp = NSOrderedAscending;
-            }
-            else if(comp == NSOrderedAscending){
-                      comp = NSOrderedDescending;
-            }
-                  return comp;
-        }];
-            
-        for (NSDictionary* dic in sortedFiles){
-            [logs addObject:[dic objectForKey:@"path"]];
-        }
-        
-        for (NSString* logFile in logs) {
-            NSRange searchResult = [logFile rangeOfString:kAMJackTripFile];
-            if(searchResult.location != NSNotFound){
-                [jackTripFiles addObject:logFile];
-            }
-        }
-
-        [self.logFileCombo addItemsWithObjectValues:logs];
-    }
+    [self refreshLogFilePopUp];
     
-    [self.logFilePopUp addItemsWithTitles:jackTripFiles];
-
     if(!_logState)
     {
         NSString* fileName = [notification object];

@@ -60,7 +60,8 @@
         
         [commandline appendFormat:@" --srate %@",           cfgs.samplingRate];
         [commandline appendFormat:@" --bufsize %@",         cfgs.bufferSize];
-        [commandline appendFormat:@" --audiodevice %@, %@", cfgs.inputDevice, cfgs.outputDevice];
+        [commandline appendFormat:@" --audiodevice \"%@\",\"%@\"",
+                                        cfgs.inputDevice, cfgs.outputDevice];
     }
 
     //port offset
@@ -128,10 +129,14 @@
     
     [commandline appendFormat:@" --udprt"];
     
+    [commandline appendFormat:@" -K \"%@\"",cfgs.clientName];
+    
     NSString *systemLogPath = AMLogDirectory();
 
     NSString* jacktripLogPath = [NSString stringWithFormat:@" > \"%@/Jacktrip_%@.log\"", systemLogPath, cfgs.clientName];
-    [commandline appendFormat:@" --clientname %@ %@",cfgs.clientName, jacktripLogPath];
+    //[commandline appendFormat:@" --clientname %@ %@",cfgs.clientName, jacktripLogPath];
+    [commandline appendFormat:@"%@", jacktripLogPath];
+    
     AMLog(kAMInfoLog, @"AMAudio", @"jack trip command line is %@", commandline);
     
     NSTask* task = [[NSTask alloc] init];

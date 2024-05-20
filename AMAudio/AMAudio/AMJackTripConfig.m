@@ -411,10 +411,10 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
     NSString *bufferSize   = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_BufferSize];
     cfgs.bufferSize     = bufferSize;
     
-    NSString *inputDevice   = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_InputDevice];
+    NSString *inputDevice   = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_InputMakrDevice];
     cfgs.inputDevice     = inputDevice;
     
-    NSString *outputDevice  = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_OutputDevice];
+    NSString *outputDevice  = [[AMPreferenceManager standardUserDefaults] stringForKey:Preference_Jack_OutputMakrDevice];
     cfgs.outputDevice     = outputDevice;
     
     

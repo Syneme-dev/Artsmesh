@@ -14,6 +14,7 @@
 @property AudioDeviceID devId;
 @property NSString* devUID;
 @property NSString* devName;
+@property NSString* makrName;
 @property int inChannels;
 @property int outChanels;
 @property NSMutableArray* sampleRates;

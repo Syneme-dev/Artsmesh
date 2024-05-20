@@ -314,6 +314,30 @@
     
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.outputDevBox.stringValue forKey:Preference_Jack_OutputDevice];
+ 
+    //Get full name of manufactor and device name and save them to preference.
+    NSString* inputDevName = self.inputDevBox.stringValue;
+    NSString* outputDevName = self.outputDevBox.stringValue;
+    
+    AMAudioDevice* inputDev = [[[AMAudio sharedInstance] audioDeviceManager] findDevByName:inputDevName];
+    AMAudioDevice* outputDev = [[[AMAudio sharedInstance] audioDeviceManager] findDevByName:outputDevName];
+    
+    if(inputDev){
+        inputDevName = [NSString stringWithFormat:@"%@: %@",
+                        inputDev.makrName, inputDev.devName];
+        
+        [[AMPreferenceManager standardUserDefaults]
+         setObject:inputDevName forKey:Preference_Jack_InputMakrDevice];
+    }
+    
+    if(outputDev){
+        outputDevName = [NSString stringWithFormat:@"%@: %@",
+                         outputDev.makrName, outputDev.devName];
+        
+        [[AMPreferenceManager standardUserDefaults]
+         setObject:outputDevName forKey:Preference_Jack_OutputMakrDevice];
+    }
+    //
     
     [[AMPreferenceManager standardUserDefaults]
      setObject:self.sampleRateBox.stringValue forKey:Preference_Jack_SampleRate];

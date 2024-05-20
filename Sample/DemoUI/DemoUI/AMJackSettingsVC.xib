@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -194,9 +194,6 @@
                 </customView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hJg-c1-QdD" customClass="AMBlueBorderButton">
                     <rect key="frame" x="0.0" y="20" width="301" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="Mp8-Ih-pJr"/>
-                    </constraints>
                     <buttonCell key="cell" type="square" title="CANCEL" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="642-7q-QIt" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
@@ -204,6 +201,9 @@
 Gw
 </string>
                     </buttonCell>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Mp8-Ih-pJr"/>
+                    </constraints>
                     <connections>
                         <action selector="restoreConfig:" target="-2" id="Rhp-1o-1lx"/>
                     </connections>
@@ -386,13 +386,13 @@ Gw
                 </customView>
                 <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VXR-lw-yED" customClass="AMBlueBorderButton">
                     <rect key="frame" x="300" y="20" width="300" height="40"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="40" id="dfb-K4-Q1c"/>
-                    </constraints>
                     <buttonCell key="cell" type="square" title="SAVE" bezelStyle="shadowlessSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="JPa-Wc-0kP" customClass="AMBlueBorderButtonCell">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="dfb-K4-Q1c"/>
+                    </constraints>
                     <connections>
                         <action selector="saveConfig:" target="-2" id="N71-xL-3gj"/>
                     </connections>

@@ -191,6 +191,21 @@ static Float64	sCommonSampleRates[] = {	  8000.0,  11025.0,  12000.0,
             newDevice.inChannels = 0;
             newDevice.outChanels = 0;
             
+            //Get Device manufactory
+            char makr_name[256];
+            CFStringRef makrNameRef;
+            size = sizeof(CFStringRef);
+            err = AudioDeviceGetProperty(allDevices[i], 0, false, kAudioObjectPropertyManufacturer, &size, &makrNameRef);
+            if (err != noErr){
+                CFRelease(makrNameRef);
+                continue;
+            }
+            CFStringGetCString(makrNameRef, makr_name, 256, kCFStringEncodingMacRoman);
+            AMLog(kAMInfoLog, @"AMAudio", @"Checking device manufactory= %s\n", makr_name);
+            
+            NSString* makrName = [NSString stringWithCString:makr_name encoding:NSMacOSRomanStringEncoding];
+            newDevice.makrName = makrName;
+            
             //GetDeviceUID
             char deviceUID[128];
             getDeviceUIDFromID(allDevices[i], deviceUID);

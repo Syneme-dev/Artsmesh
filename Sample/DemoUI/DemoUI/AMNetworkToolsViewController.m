@@ -22,8 +22,10 @@
 #import "AMNetworkingToolVC.h"
 #import "AMFFmpeg.h"
 
-
-NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
+NSString* const AMJacktripConnectNotification      = @"AMJacktripConnectNotification";
+NSString* const AMJacktripDisconnectNotification   = @"AMJacktripDisconnectNotification";
+NSString* const AMJacktripWaitingNotification      = @"AMJacktripWaitingNotification";
+NSString* const AMJacktripLogNotification          = @"AMJacktripLogNotification";
 
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
                                             AMRatioButtonDelegeate>
@@ -327,6 +329,8 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
         NSString* fileName = [notification object];
         _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
         [self showLog];
+        
+        
     }
 }
 

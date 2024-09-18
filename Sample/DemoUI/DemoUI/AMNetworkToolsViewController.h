@@ -13,6 +13,10 @@
 #import "UIFramework/AMTheme.h"
 
 
+extern NSString * const AMJacktripConnectNotification;
+extern NSString * const AMJacktripDisconnectNotification;
+extern NSString * const AMJacktripWaitingNotification;
+
 @class AMLogReader;
 
 @interface AMNetworkToolsViewController : AMTabPanelViewController

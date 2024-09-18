@@ -1006,12 +1006,12 @@
     AMVideo* videoMod= [AMVideo sharedInstance];
     if (![videoMod isSyphonServerStarted]) {
         
-        [self.syphonServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+        [self.jacktripBtn setImage:[NSImage imageNamed:@"Server_on"]];
         [videoMod startSyphon];
         
     }else{
         [videoMod stopSyphon];
-        [self.syphonServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
+        [self.jacktripBtn setImage:[NSImage imageNamed:@"Server_off"]];
     }
 }
 
@@ -1170,9 +1170,37 @@
     self.timer.fireDate = [[NSDate date] dateByAddingTimeInterval:1.0];*/
 }
 
+
+#pragma mark -
+#pragma mark Jacktrip Monitor Blink
+- (void) jacktripBlink : (NSNotification*) notfication
+{
+    if([notfication.name
+        isEqualToString:AMJacktripConnectNotification]) {
+        [self.jacktripBtn setImage:
+                [NSImage imageNamed:@"groupuser_meshed_icon"]];
+    }else if([notfication.name
+              isEqualToString:AMJacktripDisconnectNotification]){
+        [self.jacktripBtn setImage:
+                [NSImage imageNamed:@"groupuser_busy"]];
+    }else if([notfication.name
+              isEqualToString:AMJacktripWaitingNotification]){
+        [self.jacktripBtn setImage:
+                [NSImage imageNamed:@"project_broadcast"]];
+    }else {
+        return;
+    }
+   
+    [self.jacktripBtn setNeedsDisplay:  YES];
+    
+    [NSThread sleepForTimeInterval:0.2];
+    [self.jacktripBtn setImage:[NSImage imageNamed:@"black_dot"]];
+    [self.jacktripBtn setNeedsDisplay:YES];
+}
+
+
 #pragma mark -
 #pragma mark Heartbeat Monitor Blink
-
 - (void) heartbeatBlinkYellow : (NSNotification*) notfication
 {
 //    //Now just

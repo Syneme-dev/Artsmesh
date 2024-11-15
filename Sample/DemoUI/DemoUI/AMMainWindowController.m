@@ -37,7 +37,6 @@
 #import "AMManualViewController.h"
 #import "AMAudio/AMAudio.h"
 #import "AMOSCGroups/AMOSCGroups.h"
-#import "AMVideo.h"
 #import "UIFramework/AMFoundryFontView.h"
 #import "AMCoreData/AMCoreData.h"
 #import "AMTimerTabVC.h"
@@ -1003,7 +1002,7 @@
 
 - (IBAction)syphonServerToggled:(id)sender
 {
-    AMVideo* videoMod= [AMVideo sharedInstance];
+/*    AMVideo* videoMod= [AMVideo sharedInstance];
     if (![videoMod isSyphonServerStarted]) {
         
         [self.syphonServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
@@ -1012,7 +1011,7 @@
     }else{
         [videoMod stopSyphon];
         [self.syphonServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
-    }
+    }*/
 }
 
 - (IBAction)localMesherToggled:(id)sender {

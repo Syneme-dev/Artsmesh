@@ -34,7 +34,7 @@
             <rect key="frame" x="0.0" y="0.0" width="661" height="519"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
             <subviews>
-                <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nZa-5y-MGa">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="nZa-5y-MGa">
                     <rect key="frame" x="572" y="503" width="33" height="14"/>
                     <buttonCell key="cell" type="inline" title="IPERF" bezelStyle="inline" alignment="center" inset="2" id="jS4-uB-U96">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -47,7 +47,7 @@
                         <action selector="iperf:" target="-2" id="8JS-zM-SPH"/>
                     </connections>
                 </button>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-0B-n84">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-0B-n84">
                     <rect key="frame" x="469" y="503" width="9" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="5" id="EE5-jz-9zL"/>
@@ -58,7 +58,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NLT-7b-QCs">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NLT-7b-QCs">
                     <rect key="frame" x="558" y="503" width="9" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="5" id="Lln-Hj-Xta"/>
@@ -69,7 +69,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
+                <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
                     <rect key="frame" x="612" y="503" width="8" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="YWW-89-p3B">
                         <font key="font" metaFont="system"/>
@@ -77,7 +77,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-                <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="P0v-P2-klr">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="P0v-P2-klr">
                     <rect key="frame" x="436" y="503" width="32" height="14"/>
                     <buttonCell key="cell" type="inline" title="PING" bezelStyle="inline" alignment="center" inset="2" id="nC0-vp-2hI">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -87,7 +87,7 @@
                         <action selector="ping:" target="-2" id="aIn-0m-0bF"/>
                     </connections>
                 </button>
-                <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LzQ-Ob-uiT">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="LzQ-Ob-uiT">
                     <rect key="frame" x="624" y="503" width="33" height="14"/>
                     <buttonCell key="cell" type="inline" title="LOG" bezelStyle="inline" alignment="center" inset="2" id="Z1N-LI-INV">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -100,12 +100,12 @@
                         <action selector="log:" target="-2" id="fmA-zR-2x1"/>
                     </connections>
                 </button>
-                <tabView ambiguous="YES" type="noTabsNoBorder" initialItem="jfh-Uf-Sck" translatesAutoresizingMaskIntoConstraints="NO" id="Iy7-e0-VXr">
+                <tabView type="noTabsNoBorder" initialItem="jfh-Uf-Sck" translatesAutoresizingMaskIntoConstraints="NO" id="Iy7-e0-VXr">
                     <rect key="frame" x="0.0" y="29" width="661" height="469"/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="pingTab" identifier="pingTab" id="Jjd-Ru-VJF">
-                            <view key="view" ambiguous="YES" id="oYb-Pc-Jvr" customClass="AMTabItemView">
+                            <view key="view" id="oYb-Pc-Jvr" customClass="AMTabItemView">
                                 <rect key="frame" x="0.0" y="0.0" width="661" height="469"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </view>
@@ -403,7 +403,7 @@
                         </tabViewItem>
                     </tabViewItems>
                 </tabView>
-                <button ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dEP-VR-XJx">
+                <button translatesAutoresizingMaskIntoConstraints="NO" id="dEP-VR-XJx">
                     <rect key="frame" x="475" y="503" width="86" height="14"/>
                     <buttonCell key="cell" type="inline" title="TRACEROUTE" bezelStyle="inline" alignment="center" inset="2" id="E2B-TS-gCt">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -420,6 +420,7 @@
                 <constraint firstItem="P0v-P2-klr" firstAttribute="baseline" secondItem="dEP-VR-XJx" secondAttribute="baseline" id="5cb-ii-nku"/>
                 <constraint firstItem="LzQ-Ob-uiT" firstAttribute="leading" secondItem="pNR-yl-mHg" secondAttribute="trailing" constant="6" id="65H-fj-GqM"/>
                 <constraint firstItem="ZK2-0B-n84" firstAttribute="leading" secondItem="P0v-P2-klr" secondAttribute="trailing" constant="3" id="7po-4T-xbJ"/>
+                <constraint firstItem="Iy7-e0-VXr" firstAttribute="top" secondItem="AXe-bk-9Ll" secondAttribute="top" constant="21" id="Gwc-tr-89D"/>
                 <constraint firstItem="nZa-5y-MGa" firstAttribute="leading" secondItem="dEP-VR-XJx" secondAttribute="trailing" constant="11" id="KC1-x7-JGn"/>
                 <constraint firstItem="NLT-7b-QCs" firstAttribute="leading" secondItem="ZK2-0B-n84" secondAttribute="trailing" constant="84" id="KnH-u2-dy9"/>
                 <constraint firstItem="dEP-VR-XJx" firstAttribute="leading" secondItem="P0v-P2-klr" secondAttribute="trailing" constant="7" id="Y5I-LF-LUE"/>
@@ -430,6 +431,7 @@
                 <constraint firstItem="pNR-yl-mHg" firstAttribute="leading" secondItem="nZa-5y-MGa" secondAttribute="trailing" constant="9" id="jlN-La-LfL"/>
                 <constraint firstItem="pNR-yl-mHg" firstAttribute="centerY" secondItem="LzQ-Ob-uiT" secondAttribute="centerY" constant="-1" id="lDQ-hf-XnV"/>
                 <constraint firstItem="nZa-5y-MGa" firstAttribute="baseline" secondItem="LzQ-Ob-uiT" secondAttribute="baseline" id="mLy-Qw-q3M"/>
+                <constraint firstItem="Iy7-e0-VXr" firstAttribute="top" secondItem="nZa-5y-MGa" secondAttribute="bottom" constant="5" id="n45-QJ-43t"/>
                 <constraint firstItem="ZK2-0B-n84" firstAttribute="baseline" secondItem="NLT-7b-QCs" secondAttribute="baseline" id="yW6-e8-0fZ"/>
                 <constraint firstItem="NLT-7b-QCs" firstAttribute="baseline" secondItem="pNR-yl-mHg" secondAttribute="baseline" id="yix-L2-Iro"/>
             </constraints>

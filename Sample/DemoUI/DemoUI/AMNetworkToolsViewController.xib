@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="22689"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -10,7 +10,6 @@
             <connections>
                 <outlet property="fullLogCheck" destination="vAt-up-KKp" id="kba-Xk-mjn"/>
                 <outlet property="iperfButton" destination="nZa-5y-MGa" id="7pJ-pv-X38"/>
-                <outlet property="jacktripButton" destination="D3c-iK-oqN" id="wRQ-n8-NfU"/>
                 <outlet property="logButton" destination="LzQ-Ob-uiT" id="sH0-ai-DdT"/>
                 <outlet property="logFilePopUp" destination="h9L-Ma-tsd" id="eYK-3L-DK3"/>
                 <outlet property="logTextView" destination="l4w-D1-cZA" id="Fp8-OV-aJv"/>
@@ -48,11 +47,7 @@
                         <action selector="iperf:" target="-2" id="8JS-zM-SPH"/>
                     </connections>
                 </button>
-<<<<<<< HEAD
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-0B-n84">
-=======
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZK2-0B-n84">
->>>>>>> parent of 1f34570d (remove video tab in Mixer and jacktrip tab in log)
                     <rect key="frame" x="469" y="503" width="9" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="5" id="EE5-jz-9zL"/>
@@ -63,22 +58,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-<<<<<<< HEAD
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NLT-7b-QCs">
-=======
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gIf-UH-6OA">
-                    <rect key="frame" x="420" y="503" width="9" height="16"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="5" id="zGA-KT-tBc"/>
-                    </constraints>
-                    <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="mbf-Aa-oBg">
-                        <font key="font" metaFont="system"/>
-                        <color key="textColor" red="0.231372565" green="0.2941176593" blue="0.35686275360000003" alpha="1" colorSpace="deviceRGB"/>
-                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                    </textFieldCell>
-                </textField>
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="NLT-7b-QCs">
->>>>>>> parent of 1f34570d (remove video tab in Mixer and jacktrip tab in log)
                     <rect key="frame" x="558" y="503" width="9" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="5" id="Lln-Hj-Xta"/>
@@ -89,11 +69,7 @@
                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                     </textFieldCell>
                 </textField>
-<<<<<<< HEAD
                 <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
-=======
-                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pNR-yl-mHg">
->>>>>>> parent of 1f34570d (remove video tab in Mixer and jacktrip tab in log)
                     <rect key="frame" x="612" y="503" width="8" height="16"/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="YWW-89-p3B">
                         <font key="font" metaFont="system"/>
@@ -102,11 +78,7 @@
                     </textFieldCell>
                 </textField>
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="P0v-P2-klr">
-<<<<<<< HEAD
                     <rect key="frame" x="436" y="503" width="32" height="14"/>
-=======
-                    <rect key="frame" x="424" y="503" width="44" height="14"/>
->>>>>>> parent of 1f34570d (remove video tab in Mixer and jacktrip tab in log)
                     <buttonCell key="cell" type="inline" title="PING" bezelStyle="inline" alignment="center" inset="2" id="nC0-vp-2hI">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="smallSystemBold"/>
@@ -115,19 +87,6 @@
                         <action selector="ping:" target="-2" id="aIn-0m-0bF"/>
                     </connections>
                 </button>
-<<<<<<< HEAD
-=======
-                <button translatesAutoresizingMaskIntoConstraints="NO" id="D3c-iK-oqN">
-                    <rect key="frame" x="359" y="496" width="61" height="28"/>
-                    <buttonCell key="cell" type="inline" title="JACKTRIP" bezelStyle="inline" alignment="center" inset="2" id="1IF-tw-yxB">
-                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                        <font key="font" metaFont="smallSystemBold"/>
-                    </buttonCell>
-                    <connections>
-                        <action selector="jacktrip:" target="-2" id="BJd-UQ-6N5"/>
-                    </connections>
-                </button>
->>>>>>> parent of 1f34570d (remove video tab in Mixer and jacktrip tab in log)
                 <button translatesAutoresizingMaskIntoConstraints="NO" id="LzQ-Ob-uiT">
                     <rect key="frame" x="624" y="503" width="33" height="14"/>
                     <buttonCell key="cell" type="inline" title="LOG" bezelStyle="inline" alignment="center" inset="2" id="Z1N-LI-INV">
@@ -186,7 +145,7 @@
                                                                     <rect key="frame" x="11" y="1" width="155" height="17"/>
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
-                                                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="chR-Jm-aSk" customClass="AMFoundryFontView">
+                                                                        <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="chR-Jm-aSk" customClass="AMFoundryFontView">
                                                                             <rect key="frame" x="0.0" y="0.0" width="175" height="17"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="17" id="mHx-CD-1dk"/>
@@ -398,7 +357,7 @@
                                             <constraint firstAttribute="height" constant="28" id="a0P-BH-wBk"/>
                                         </constraints>
                                     </customView>
-                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F8o-y9-ppv" customClass="AMFoundryFontView">
+                                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="F8o-y9-ppv" customClass="AMFoundryFontView">
                                         <rect key="frame" x="20" y="67" width="146" height="22"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="22" id="DYS-9V-zYG"/>
@@ -456,37 +415,23 @@
                 </button>
             </subviews>
             <constraints>
-                <constraint firstItem="ZK2-0B-n84" firstAttribute="leading" secondItem="gIf-UH-6OA" secondAttribute="trailing" constant="44" id="0AM-PF-fhI"/>
-                <constraint firstItem="gIf-UH-6OA" firstAttribute="leading" secondItem="D3c-iK-oqN" secondAttribute="trailing" constant="2" id="1AP-Tz-GyB"/>
                 <constraint firstAttribute="trailing" secondItem="LzQ-Ob-uiT" secondAttribute="trailing" constant="4" id="1vv-wP-4b3"/>
                 <constraint firstItem="nZa-5y-MGa" firstAttribute="leading" secondItem="NLT-7b-QCs" secondAttribute="trailing" constant="7" id="2hA-1p-A8Z"/>
                 <constraint firstItem="P0v-P2-klr" firstAttribute="baseline" secondItem="dEP-VR-XJx" secondAttribute="baseline" id="5cb-ii-nku"/>
                 <constraint firstItem="LzQ-Ob-uiT" firstAttribute="leading" secondItem="pNR-yl-mHg" secondAttribute="trailing" constant="6" id="65H-fj-GqM"/>
                 <constraint firstItem="ZK2-0B-n84" firstAttribute="leading" secondItem="P0v-P2-klr" secondAttribute="trailing" constant="3" id="7po-4T-xbJ"/>
-<<<<<<< HEAD
                 <constraint firstItem="Iy7-e0-VXr" firstAttribute="top" secondItem="AXe-bk-9Ll" secondAttribute="top" constant="21" id="Gwc-tr-89D"/>
-=======
-                <constraint firstItem="Iy7-e0-VXr" firstAttribute="top" secondItem="gIf-UH-6OA" secondAttribute="bottom" constant="5" id="ELn-PN-nrJ"/>
-                <constraint firstItem="D3c-iK-oqN" firstAttribute="top" secondItem="AXe-bk-9Ll" secondAttribute="top" constant="-5" id="K5I-re-8GJ"/>
->>>>>>> parent of 1f34570d (remove video tab in Mixer and jacktrip tab in log)
                 <constraint firstItem="nZa-5y-MGa" firstAttribute="leading" secondItem="dEP-VR-XJx" secondAttribute="trailing" constant="11" id="KC1-x7-JGn"/>
                 <constraint firstItem="NLT-7b-QCs" firstAttribute="leading" secondItem="ZK2-0B-n84" secondAttribute="trailing" constant="84" id="KnH-u2-dy9"/>
                 <constraint firstItem="dEP-VR-XJx" firstAttribute="leading" secondItem="P0v-P2-klr" secondAttribute="trailing" constant="7" id="Y5I-LF-LUE"/>
                 <constraint firstAttribute="bottom" secondItem="Iy7-e0-VXr" secondAttribute="bottom" constant="29" id="YNB-9g-Vf9"/>
-                <constraint firstItem="gIf-UH-6OA" firstAttribute="baseline" secondItem="ZK2-0B-n84" secondAttribute="baseline" id="YPO-B7-X6R"/>
                 <constraint firstItem="Iy7-e0-VXr" firstAttribute="leading" secondItem="AXe-bk-9Ll" secondAttribute="leading" id="eHn-AV-ueH"/>
                 <constraint firstItem="dEP-VR-XJx" firstAttribute="baseline" secondItem="nZa-5y-MGa" secondAttribute="baseline" id="ehe-mO-VNM"/>
                 <constraint firstAttribute="trailing" secondItem="Iy7-e0-VXr" secondAttribute="trailing" id="f61-oy-6Ko"/>
-                <constraint firstItem="P0v-P2-klr" firstAttribute="leading" secondItem="D3c-iK-oqN" secondAttribute="trailing" constant="4" id="hhG-1k-awU"/>
                 <constraint firstItem="pNR-yl-mHg" firstAttribute="leading" secondItem="nZa-5y-MGa" secondAttribute="trailing" constant="9" id="jlN-La-LfL"/>
                 <constraint firstItem="pNR-yl-mHg" firstAttribute="centerY" secondItem="LzQ-Ob-uiT" secondAttribute="centerY" constant="-1" id="lDQ-hf-XnV"/>
                 <constraint firstItem="nZa-5y-MGa" firstAttribute="baseline" secondItem="LzQ-Ob-uiT" secondAttribute="baseline" id="mLy-Qw-q3M"/>
-<<<<<<< HEAD
                 <constraint firstItem="Iy7-e0-VXr" firstAttribute="top" secondItem="nZa-5y-MGa" secondAttribute="bottom" constant="5" id="n45-QJ-43t"/>
-=======
-                <constraint firstItem="D3c-iK-oqN" firstAttribute="centerY" secondItem="gIf-UH-6OA" secondAttribute="centerY" constant="1" id="rDv-El-DNh"/>
-                <constraint firstItem="gIf-UH-6OA" firstAttribute="top" secondItem="AXe-bk-9Ll" secondAttribute="top" id="url-VP-VH5"/>
->>>>>>> parent of 1f34570d (remove video tab in Mixer and jacktrip tab in log)
                 <constraint firstItem="ZK2-0B-n84" firstAttribute="baseline" secondItem="NLT-7b-QCs" secondAttribute="baseline" id="yW6-e8-0fZ"/>
                 <constraint firstItem="NLT-7b-QCs" firstAttribute="baseline" secondItem="pNR-yl-mHg" secondAttribute="baseline" id="yix-L2-Iro"/>
             </constraints>

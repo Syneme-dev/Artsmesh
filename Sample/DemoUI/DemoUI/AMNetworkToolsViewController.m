@@ -22,8 +22,10 @@
 #import "AMNetworkingToolVC.h"
 #import "AMFFmpeg.h"
 
-
-NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
+NSString* const AMJacktripConnectNotification      = @"AMJacktripConnectNotification";
+NSString* const AMJacktripDisconnectNotification   = @"AMJacktripDisconnectNotification";
+NSString* const AMJacktripWaitingNotification      = @"AMJacktripWaitingNotification";
+NSString* const AMJacktripLogNotification          = @"AMJacktripLogNotification";
 
 @interface AMNetworkToolsViewController ()<NSComboBoxDelegate, AMPopUpViewDelegeate,
                                             AMRatioButtonDelegeate>
@@ -42,6 +44,7 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
     Boolean                     _ipv6Checked;
     
     NSMutableArray*             _jackTripFiles;
+    Boolean                     _logState;
 }
 
 @property (weak) IBOutlet AMCheckBoxView    *fullLogCheck;
@@ -209,7 +212,7 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
     [AMButtonHandler changeTabTextColor:self.tracerouteButton   toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.iperfButton        toColor:UI_Color_blue];
     [AMButtonHandler changeTabTextColor:self.logButton          toColor:UI_Color_blue];
-    //[AMButtonHandler changeTabTextColor:self.jacktripButton     toColor:UI_Color_blue];
+    [AMButtonHandler changeTabTextColor:self.jacktripButton     toColor:UI_Color_blue];
   
     [self refreshLogFilePopUp];
     
@@ -242,7 +245,8 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
                                     kAMJackAudioFile,       kAMJackAudioTitle,
                                     kAMAMServerFile,        kAMAMServerTitle,
                                     kAMArtsmeshFile,        kAMArtsmeshTitle,
-                                    kVideoFile,             kVideoTitle,
+                                    kVideoFile,
+                                        kVideoTitle,
                                     nil];
 
     [self onChecked:self.ratioArtsmesh];
@@ -276,10 +280,10 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
            selector:@selector(refreshVideoLog:)
                name:AMVIDEOYouTubeStreamNotification
              object:nil];
-/*    [nc addObserver:self
+    [nc addObserver:self
            selector:@selector(showJacktripLog:)
                name:AMJacktripLogNotification
-             object:nil];*/
+             object:nil];
 
     [self registerTabButtons];
     
@@ -295,7 +299,7 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
     [self.tabButtons addObject:self.tracerouteButton];
     [self.tabButtons addObject:self.iperfButton];
     [self.tabButtons addObject:self.logButton];
-    //[self.tabButtons addObject:self.jacktripButton];
+    [self.tabButtons addObject:self.jacktripButton];
     self.showingTabsCount=5;
 }
 
@@ -320,12 +324,31 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
 {
     [self refreshLogFilePopUp];
     
-   
-    NSString* fileName = [notification object];
-    _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
-    [self showLog];
+    if(!_logState)
+    {
+        NSString* fileName = [notification object];
+        _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
+        [self showLog];
+<<<<<<< HEAD
+        
+        
+=======
+>>>>>>> parent of 1f34570d (remove video tab in Mixer and jacktrip tab in log)
+    }
 }
 
+- (IBAction)jacktrip:(id)sender
+{
+    [self pushDownButton:self.jacktripButton];
+    [self.tabView selectTabViewItemWithIdentifier:@"logTab"];
+    
+    [self enableAllControls:FALSE];
+    
+    [_readTimer invalidate];
+    [self.logTextView setString:@""];
+    
+    _logState = FALSE;
+}
 
 - (IBAction)ping:(id)sender
 {
@@ -358,6 +381,8 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
     [self enableAllControls:TRUE];
     [self pushDownButton:self.logButton];
     [self.tabView selectTabViewItemWithIdentifier:@"logTab"];
+    
+    _logState = TRUE;
 }
 
 //-------------Log---------------//

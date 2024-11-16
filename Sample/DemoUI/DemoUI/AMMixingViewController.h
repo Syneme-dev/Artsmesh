@@ -12,7 +12,9 @@
 
 @interface AMMixingViewController : AMTabPanelViewController
 @property (strong) IBOutlet NSButton *audioTab;
+@property (strong) IBOutlet NSButton *videoTab;
 - (IBAction)onAudioTabClick:(id)sender;
+- (IBAction)onVideoTabClick:(id)sender;
 @property (strong) IBOutlet NSTabView *tabs;
 
 @end

@@ -24,7 +24,7 @@
 @property(nonatomic, readonly) NSView *containerView;
 @property (weak) IBOutlet NSButton *jackServerBtn;
 @property (weak) IBOutlet NSButton *oscServerBtn;
-@property (weak) IBOutlet NSButton *jacktripBtn;
+@property (weak) IBOutlet NSButton *syphonServerBtn;
 @property (weak) IBOutlet NSButton *localMesherBtn;
 
 

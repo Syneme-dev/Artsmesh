@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -671,7 +671,7 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="JHd-2A-fFw" userLabel="logo">
                         <rect key="frame" x="0.0" y="719" width="152" height="38"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9ep-tr-zcn" customClass="AMFoundryFontView">
+                            <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9ep-tr-zcn" customClass="AMFoundryFontView">
                                 <rect key="frame" x="71" y="11" width="71" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="MESH" id="eNi-as-Uyj">
                                     <font key="font" metaFont="system"/>
@@ -716,18 +716,18 @@
                             <constraint firstItem="eNK-vB-bPT" firstAttribute="leading" secondItem="XK4-TL-O3D" secondAttribute="leading" id="zdX-gU-b7j"/>
                         </constraints>
                     </customView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iv2-ru-op1" customClass="AMFoundryFontView">
-                        <rect key="frame" x="906" y="732" width="56" height="16"/>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iv2-ru-op1" customClass="AMFoundryFontView">
+                        <rect key="frame" x="897" y="732" width="65" height="16"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="52" id="Nm6-gW-Mzv"/>
+                            <constraint firstAttribute="width" constant="61" id="Nm6-gW-Mzv"/>
                         </constraints>
-                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SYPHON" id="j3Z-Wm-3C7">
+                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="JACKTRIP" id="j3Z-Wm-3C7">
                             <font key="font" metaFont="system"/>
                             <color key="textColor" red="0.59607845540000004" green="0.59607845540000004" blue="0.59607845540000004" alpha="1" colorSpace="deviceRGB"/>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m4w-q8-NcC" customClass="AMFoundryFontView">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="m4w-q8-NcC" customClass="AMFoundryFontView">
                         <rect key="frame" x="1013" y="732" width="60" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="56" id="Vpy-14-Wcy"/>
@@ -740,57 +740,57 @@
                     </textField>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="kwj-11-GIT" userLabel="mesh">
                         <rect key="frame" x="183" y="725" width="30" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="30" id="Txh-O7-eQE"/>
-                        </constraints>
                         <buttonCell key="cell" type="smallSquare" bezelStyle="smallSquare" image="topbar_mesh" imagePosition="overlaps" alignment="center" alternateImage="topbar_mesh_offline" state="on" imageScaling="proportionallyDown" inset="2" id="Jvn-3b-iFH">
                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="Txh-O7-eQE"/>
+                        </constraints>
                         <connections>
                             <action selector="mesh:" target="B30-a9-ZW1" id="nU0-Er-fia"/>
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="KD8-g0-Ew6">
-                        <rect key="frame" x="876" y="732" width="15" height="16"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="15" id="KQ5-iv-SQL"/>
-                        </constraints>
+                        <rect key="frame" x="870" y="732" width="15" height="16"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Server_off" imagePosition="only" alignment="center" alternateImage="Server_on" imageScaling="proportionallyDown" inset="2" id="e63-MZ-myK">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="KQ5-iv-SQL"/>
+                        </constraints>
                         <connections>
                             <action selector="syphonServerToggled:" target="B30-a9-ZW1" id="RZl-iE-aua"/>
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="qme-pL-mB7">
                         <rect key="frame" x="983" y="732" width="16" height="16"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="16" id="TZy-ac-98x"/>
-                        </constraints>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Server_off" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="pz7-Yu-088">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="TZy-ac-98x"/>
+                        </constraints>
                         <connections>
                             <action selector="jackServerToggled:" target="B30-a9-ZW1" id="hdO-bj-jF4"/>
                         </connections>
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="PQH-zt-t50">
                         <rect key="frame" x="1079" y="732" width="16" height="16"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="16" id="IhA-Sz-AFL"/>
-                        </constraints>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Server_off" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="BjC-Au-PYB">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="IhA-Sz-AFL"/>
+                        </constraints>
                         <connections>
                             <action selector="oscServerToggled:" target="B30-a9-ZW1" id="IvS-f0-Z8o"/>
                         </connections>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Bw-Cb-ntc" customClass="AMFoundryFontView">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Bw-Cb-ntc" customClass="AMFoundryFontView">
                         <rect key="frame" x="221" y="732" width="38" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="34" id="E8l-xF-r9U"/>
@@ -804,7 +804,7 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="eIW-oc-qXb" customClass="AMJackCPULoderView">
                         <rect key="frame" x="1008" y="722" width="45" height="4"/>
                     </customView>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DZl-dT-72j" customClass="AMFoundryFontView">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DZl-dT-72j" customClass="AMFoundryFontView">
                         <rect key="frame" x="981" y="718" width="26" height="12"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="22" id="kER-mS-ldY"/>
@@ -815,7 +815,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gOu-jT-RnE" customClass="AMFoundryFontView">
+                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="gOu-jT-RnE" customClass="AMFoundryFontView">
                         <rect key="frame" x="306" y="729" width="14" height="20"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="10" id="fLI-AJ-R50"/>
@@ -826,7 +826,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="27d-GZ-NlT" customClass="AMFoundryFontView">
+                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="27d-GZ-NlT" customClass="AMFoundryFontView">
                         <rect key="frame" x="332" y="729" width="14" height="20"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" state="on" alignment="center" title=":" id="fln-eI-SaK">
                             <font key="font" metaFont="system"/>
@@ -834,7 +834,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zga-ap-ATV" customClass="AMFoundryFontView">
+                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Zga-ap-ATV" customClass="AMFoundryFontView">
                         <rect key="frame" x="339" y="726" width="24" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="vFa-fW-v6G"/>
@@ -845,7 +845,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FRr-qb-qcc" customClass="AMFoundryFontView">
+                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FRr-qb-qcc" customClass="AMFoundryFontView">
                         <rect key="frame" x="361" y="726" width="30" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="26" id="mXb-55-4C0"/>
@@ -856,7 +856,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="leE-VP-qR4" customClass="AMFoundryFontView">
+                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="leE-VP-qR4" customClass="AMFoundryFontView">
                         <rect key="frame" x="287" y="726" width="25" height="22"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" allowsUndo="NO" state="on" alignment="center" title="00" id="zOf-52-AeA">
                             <font key="font" metaFont="system"/>
@@ -864,7 +864,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r2k-KX-ngq" customClass="AMFoundryFontView">
+                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r2k-KX-ngq" customClass="AMFoundryFontView">
                         <rect key="frame" x="315" y="726" width="24" height="22"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="20" id="F6y-mJ-uc5"/>
@@ -875,7 +875,7 @@
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0y6-Or-7Ha" customClass="AMFoundryFontView">
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0y6-Or-7Ha" customClass="AMFoundryFontView">
                         <rect key="frame" x="1112" y="732" width="60" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="56" id="9fp-VU-G1X"/>
@@ -888,16 +888,16 @@
                     </textField>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="p6U-XZ-4p3">
                         <rect key="frame" x="158" y="732" width="8" height="12"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="8" id="DZE-hV-86j"/>
-                        </constraints>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="black_dot" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="Mcb-NS-EX8">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="8" id="DZE-hV-86j"/>
+                        </constraints>
                     </button>
-                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JcB-Q1-HgG" customClass="AMFoundryFontView">
-                        <rect key="frame" x="806" y="732" width="49" height="16"/>
+                    <textField focusRingType="none" horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JcB-Q1-HgG" customClass="AMFoundryFontView">
+                        <rect key="frame" x="800" y="732" width="49" height="16"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="45" id="q36-ee-KO5"/>
                         </constraints>
@@ -908,20 +908,20 @@
                         </textFieldCell>
                     </textField>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="wsz-oa-ViC">
-                        <rect key="frame" x="776" y="732" width="16" height="16"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="16" id="0zK-3F-vdM"/>
-                        </constraints>
+                        <rect key="frame" x="770" y="732" width="16" height="16"/>
                         <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="Server_off" imagePosition="only" alignment="center" imageScaling="proportionallyDown" inset="2" id="c3P-uw-pxx">
                             <behavior key="behavior" pushIn="YES" changeContents="YES" lightByContents="YES"/>
                             <font key="font" metaFont="system"/>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="0zK-3F-vdM"/>
+                        </constraints>
                         <connections>
                             <action selector="localMesherToggled:" target="B30-a9-ZW1" id="78f-Do-mtb"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y31-97-Rvb" customClass="AMFoundryFontView">
-                        <rect key="frame" x="769" y="718" width="30" height="12"/>
+                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Y31-97-Rvb" customClass="AMFoundryFontView">
+                        <rect key="frame" x="763" y="718" width="30" height="12"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="26" id="0PD-3s-hF9"/>
                         </constraints>
@@ -1000,7 +1000,7 @@
                     <constraint firstItem="JHd-2A-fFw" firstAttribute="centerY" secondItem="p6U-XZ-4p3" secondAttribute="centerY" id="wJu-em-DTy"/>
                     <constraint firstItem="p6U-XZ-4p3" firstAttribute="centerY" secondItem="gOu-jT-RnE" secondAttribute="centerY" constant="1" id="wmi-L1-odf"/>
                     <constraint firstItem="leE-VP-qR4" firstAttribute="leading" secondItem="6Bw-Cb-ntc" secondAttribute="trailing" constant="32" id="x5w-YU-Sd1"/>
-                    <constraint firstItem="iv2-ru-op1" firstAttribute="leading" secondItem="KD8-g0-Ew6" secondAttribute="trailing" constant="17" id="x70-9d-x4h"/>
+                    <constraint firstItem="iv2-ru-op1" firstAttribute="leading" secondItem="KD8-g0-Ew6" secondAttribute="trailing" constant="14" id="x70-9d-x4h"/>
                     <constraint firstItem="zEs-xu-vmU" firstAttribute="leading" secondItem="372" secondAttribute="leading" constant="50" id="yiz-4x-mcs"/>
                     <constraint firstItem="gOu-jT-RnE" firstAttribute="baseline" secondItem="27d-GZ-NlT" secondAttribute="baseline" id="zJM-Aj-t5H"/>
                 </constraints>

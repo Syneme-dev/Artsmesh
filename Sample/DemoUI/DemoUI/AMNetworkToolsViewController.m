@@ -276,10 +276,10 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
            selector:@selector(refreshVideoLog:)
                name:AMVIDEOYouTubeStreamNotification
              object:nil];
-/*    [nc addObserver:self
-           selector:@selector(showJacktripLog:)
+    [nc addObserver:self
+           selector:@selector(showJacktripState:)
                name:AMJacktripLogNotification
-             object:nil];*/
+             object:nil];
 
     [self registerTabButtons];
     
@@ -316,14 +316,14 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
     self.logTextView.needsDisplay = YES;
 }
 
-- (void) showJacktripLog:(NSNotification *)notification
+- (void) showJacktripState:(NSNotification *)notification
 {
     [self refreshLogFilePopUp];
     
    
     NSString* fileName = [notification object];
     _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
-    [self showLog];
+    [_logReader sendStateNotification];
 }
 
 
@@ -447,6 +447,8 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
         [self showLogFromTail];
     }
     [self.logTextView scrollToEndOfDocument:self];
+    
+    [_logReader sendStateNotification];
 }
 
 - (void)addViewController:(Class)aViewControllerClass

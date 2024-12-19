@@ -178,6 +178,12 @@
                                                      name:@"AMThemeChanged"
                                                    object:nil];
         
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(jacktripConnect:)
+                                                     name:@"AMJacktripConnectNotification"
+                                                   object:nil];
+
+        
         _curTheme = [AMTheme sharedInstance];
     }
     return self;
@@ -1232,7 +1238,12 @@
         default:
             break;
     }
+}
 
+-(void)jacktripConnect:(NSNotification*)notification
+{
+    [self.syphonServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+    [self.syphonServerBtn setNeedsDisplay:YES];
 }
 
 - (void) changeTheme:(NSNotification *) notification {

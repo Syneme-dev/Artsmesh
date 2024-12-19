@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+extern NSString * const AMJacktripDisconnectNotification;
+extern NSString * const AMJacktripConnectNotification;
+
 @interface AMLogReader : NSObject
 
 @property(nonatomic, copy) BOOL (^filter)(NSString *line);
@@ -18,6 +21,8 @@
 - (NSString *)nextLogItem;
 
 - (Boolean) resetLog;
+
+- (void )sendStateNotification;
 
 @end
 

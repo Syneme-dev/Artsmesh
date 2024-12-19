@@ -432,7 +432,6 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
         NSString* logItemEnter = [NSString stringWithFormat:@"%@", logItem];
         [self writeToLogView:logItemEnter];
     }
-    
 }
 
 -(void) showLog

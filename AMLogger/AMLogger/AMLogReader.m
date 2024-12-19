@@ -141,19 +141,16 @@ NSString * const AMJacktripDisconnectNotification   = @"AMJacktripDisconnectNoti
 
 - (void)sendStateNotification
 {
-    
     NSString* connectedMsg = @"Received Connection from Peer";
     
     [self resetLog];
-    
     NSString *fullLog = [[NSString alloc] init];
     NSString *logItem = nil;
     while((logItem = [self nextLogItem]) != nil){
-        [fullLog stringByAppendingString:logItem];
+        fullLog = [fullLog stringByAppendingString:logItem];
     }
     
     NSRange connectRange = [fullLog rangeOfString:connectedMsg options:NSBackwardsSearch];
-    
     
     if(connectRange.length >0)
     {
@@ -161,23 +158,7 @@ NSString * const AMJacktripDisconnectNotification   = @"AMJacktripDisconnectNoti
          postNotificationName:AMJacktripConnectNotification
          object:self];
     }
-    
-    /*
-    NSString *searchText = @"what do you want to match string";
-    NSError *error = NULL;
-    // 创建一个正则
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^[0-9]+$" options:NSRegularExpressionCaseInsensitive error:&error];
 
-    //遍历所有匹配记录
-    NSArray *matches = [regex matchesInString:searchText
-                        options:0
-                        range:NSMakeRange(0, searchText.length)];
-    for (NSTextCheckingResult *match in matches) {
-        NSRange range = [match range];
-        NSString *mStr = [searchText substringWithRange:range];
-        NSLog(@"AllResult:%@", mStr);
-    }
-     */
 }
 @end
 

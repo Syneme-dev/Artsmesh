@@ -16,7 +16,7 @@ NSString* const AMJacktripConnectNotification  = @"AMJacktripConnectNotification
 NSString* const AMJacktripStopNotification     = @"AMJacktripStopNotification";
 
 NSString* const connectMsg  = @"Received Connection from Peer";
-NSString* const waitMsg     = @"Waiting for Peer";
+NSString* const waitMsg     = @"Waiting for";
 NSString* const stopMsg     = @"Shutting Down";
 
 @interface AMLogReader()

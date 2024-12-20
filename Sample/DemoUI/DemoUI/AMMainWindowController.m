@@ -179,10 +179,19 @@
                                                    object:nil];
         
         [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(jacktripWait:)
+                                                     name:@"AMJacktripWaitNotification"
+                                                   object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self
                                                  selector:@selector(jacktripConnect:)
                                                      name:@"AMJacktripConnectNotification"
                                                    object:nil];
 
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(jacktripStop:)
+                                                     name:@"AMJacktripStopNotification"
+                                                   object:nil];
         
         _curTheme = [AMTheme sharedInstance];
     }
@@ -1240,9 +1249,21 @@
     }
 }
 
+-(void)jacktripWait:(NSNotification*)notification
+{
+    [self.syphonServerBtn setImage:[NSImage imageNamed:@"server_starting"]];
+    [self.syphonServerBtn setNeedsDisplay:YES];
+}
+
 -(void)jacktripConnect:(NSNotification*)notification
 {
     [self.syphonServerBtn setImage:[NSImage imageNamed:@"Server_on"]];
+    [self.syphonServerBtn setNeedsDisplay:YES];
+}
+
+-(void)jacktripStop:(NSNotification*)notification
+{
+    [self.syphonServerBtn setImage:[NSImage imageNamed:@"Server_off"]];
     [self.syphonServerBtn setNeedsDisplay:YES];
 }
 

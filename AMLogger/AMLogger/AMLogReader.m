@@ -11,9 +11,13 @@
 
 static const NSInteger kBufferSize = 4096 * 4;   // 16k
 
-NSString * const AMJacktripConnectNotification      = @"AMJacktripConnectNotification";
-NSString * const AMJacktripDisconnectNotification   = @"AMJacktripDisconnectNotification";
+NSString* const AMJacktripWaitNotification     = @"AMJacktripWaitNotification";
+NSString* const AMJacktripConnectNotification  = @"AMJacktripConnectNotification";
+NSString* const AMJacktripStopNotification     = @"AMJacktripStopNotification";
 
+NSString* const connectMsg  = @"Received Connection from Peer";
+NSString* const waitMsg     = @"Waiting for Peer";
+NSString* const stopMsg     = @"Shutting Down";
 
 @interface AMLogReader()
 {
@@ -141,8 +145,6 @@ NSString * const AMJacktripDisconnectNotification   = @"AMJacktripDisconnectNoti
 
 - (void)sendStateNotification
 {
-    NSString* connectedMsg = @"Received Connection from Peer";
-    
     [self resetLog];
     NSString *fullLog = [[NSString alloc] init];
     NSString *logItem = nil;
@@ -150,15 +152,28 @@ NSString * const AMJacktripDisconnectNotification   = @"AMJacktripDisconnectNoti
         fullLog = [fullLog stringByAppendingString:logItem];
     }
     
-    NSRange connectRange = [fullLog rangeOfString:connectedMsg options:NSBackwardsSearch];
+    NSRange waitRange       = [fullLog rangeOfString:waitMsg        options:NSBackwardsSearch];
+    NSRange connectRange    = [fullLog rangeOfString:connectMsg     options:NSBackwardsSearch];
+    NSRange stopRange       = [fullLog rangeOfString:stopMsg        options:NSBackwardsSearch];
     
-    if(connectRange.length >0)
+    if(stopRange.length > 0)
+    {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:AMJacktripStopNotification
+         object:self];
+    }
+    else if(connectRange.length > 0)
     {
         [[NSNotificationCenter defaultCenter]
          postNotificationName:AMJacktripConnectNotification
          object:self];
     }
-
+    else if(waitRange.length > 0)
+    {
+        [[NSNotificationCenter defaultCenter]
+         postNotificationName:AMJacktripWaitNotification
+         object:self];
+    }
 }
 @end
 

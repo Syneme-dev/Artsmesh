@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString * const AMJacktripDisconnectNotification;
+extern NSString * const AMJacktripWaitNotification;
 extern NSString * const AMJacktripConnectNotification;
+extern NSString * const AMJacktripStopNotification;
 
 @interface AMLogReader : NSObject
 

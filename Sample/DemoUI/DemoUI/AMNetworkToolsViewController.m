@@ -285,6 +285,7 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
     
     [self.logTabVerticalScrollView.documentView setBackgroundColor:[AMTheme sharedInstance].colorBackground];
 
+    [self removeLogFile];
 }
 
 -(void)registerTabButtons
@@ -482,6 +483,19 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
         _viewControllers = [NSMutableArray array];
     }
     return _viewControllers;
+}
+
+- (void) removeLogFile
+{
+    NSString* jacktripLogPath = [NSString stringWithFormat:@"%@/Jacktrip.log", AMLogDirectory()];
+    NSString* rmCommand = [NSString stringWithFormat:@"rm %@ > /dev/null", jacktripLogPath];
+    const char *command = [rmCommand cStringUsingEncoding:NSUTF8StringEncoding];
+
+   /*
+    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
+                             arguments:[NSArray arrayWithObjects:@"-c", @"iperf", nil]];
+    int n = system("killall -0 jackd >/dev/null");    */
+    int n = system(command);
 }
 
 @end

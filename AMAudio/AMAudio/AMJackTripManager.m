@@ -60,8 +60,15 @@
         
         [commandline appendFormat:@" --srate %@",           cfgs.samplingRate];
         [commandline appendFormat:@" --bufsize %@",         cfgs.bufferSize];
-        [commandline appendFormat:@" --audiodevice \"%@\",\"%@\"",
-                                        cfgs.inputDevice, cfgs.outputDevice];
+        
+        //![commandline appendFormat:@" --audiodevice \"%@\",\"%@\"",
+        //!                                cfgs.inputDevice, cfgs.outputDevice];
+       
+        NSString* inDev = @"Rogue Amoeba Software, Inc.: Live2Jt";
+        NSString* inputDevice = [inDev stringByReplacingOccurrencesOfString:@"," withString:@"\\,"];
+        NSString* outDev = @"Rogue Amoeba Software, Inc.: Live2Jt";
+        NSString* outputDevice = [outDev stringByReplacingOccurrencesOfString:@"," withString:@"\\,"];
+        [commandline appendFormat:@" --audiodevice \"%@\",\"%@\"", inputDevice,  outputDevice];
     }
 
     //port offset

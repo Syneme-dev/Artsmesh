@@ -61,13 +61,23 @@ AMLogInitialize(void)
     if (isDirectory) {
         NSString *logDirectory = AMLogDirectory();
         
+        NSString* jacktripLogPath = [NSString stringWithFormat:@"%@/Jacktrip.log", AMLogDirectory()];
+        NSString* rmCommand = [NSString stringWithFormat:@"rm %@ > /dev/null", jacktripLogPath];
+        const char *command = [rmCommand cStringUsingEncoding:NSUTF8StringEncoding];
+
+       /*
+        [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
+                                 arguments:[NSArray arrayWithObjects:@"-c", @"iperf", nil]];
+        int n = system("killall -0 jackd >/dev/null");    */
+        int n = system(command);
         
         //先将要创建log文件完整路径全部写到NSArray
-        NSMutableArray*  logFiles = [NSMutableArray arrayWithCapacity:4];
+        NSMutableArray*  logFiles = [NSMutableArray arrayWithCapacity:5];
         [logFiles addObject:[logDirectory stringByAppendingPathComponent:kAMOSCServerFile]];
         [logFiles addObject:[logDirectory stringByAppendingPathComponent:kAMOSCClientFile]];
         [logFiles addObject:[logDirectory stringByAppendingPathComponent:kAMJackAudioFile]];
         [logFiles addObject:[logDirectory stringByAppendingPathComponent:kAMAMServerFile]];
+        [logFiles addObject:[logDirectory stringByAppendingPathComponent:kVideoFile]];
         
         for (NSString* logPath in logFiles) {
             if(![fileManager fileExistsAtPath:logPath])

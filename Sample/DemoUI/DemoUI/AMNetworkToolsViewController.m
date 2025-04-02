@@ -33,6 +33,7 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
     AMNetworkToolsCommand *     _tracerouteCommand;
     
     AMLogReader*                _logReader;
+    AMLogReader*                _logStateReader;
     NSTimer*                    _readTimer;
     NSTimer*                    _testTimer;
     
@@ -282,10 +283,7 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
              object:nil];
 
     [self registerTabButtons];
-    
     [self.logTabVerticalScrollView.documentView setBackgroundColor:[AMTheme sharedInstance].colorBackground];
-
-    [self removeLogFile];
 }
 
 -(void)registerTabButtons
@@ -320,11 +318,11 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
 - (void) showJacktripState:(NSNotification *)notification
 {
     [self refreshLogFilePopUp];
-    
+
    
     NSString* fileName = [notification object];
-    _logReader = [[AMSystemLogReader alloc] initWithFileName:fileName];
-    [_logReader sendStateNotification];
+    _logStateReader = [[AMSystemLogReader alloc] initWithFileName:@"Jacktrip.log"];
+    [_logStateReader sendStateNotification];
 }
 
 
@@ -379,7 +377,6 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
    
     [self.logTextView.textStorage appendAttributedString:attrString];
     self.logTextView.needsDisplay = YES;
-    
 }
 
 
@@ -403,6 +400,10 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
             [self writeToLogView:logItemEnter];
             _appendStringCount++;
     }
+    
+    _logStateReader = [[AMSystemLogReader alloc] initWithFileName:@"Jacktrip.log"];
+    [_logStateReader sendStateNotification];
+    
 }
 
 
@@ -415,14 +416,12 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
             NSString* logItemEnter = [NSString stringWithFormat:@"%@\n", logItem];
             [self writeToLogView:logItemEnter];
         }
-        
-        _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
-                                                     target:self
-                                                   selector:@selector(handleNextLogTimer:)
-                                                   userInfo:nil
-                                                    repeats:YES];
     }
-
+    _readTimer =[NSTimer scheduledTimerWithTimeInterval:2
+                                                 target:self
+                                               selector:@selector(handleNextLogTimer:)
+                                               userInfo:nil
+                                                repeats:YES];
 }
 
 -(void) showFullLog
@@ -447,8 +446,6 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
         [self showLogFromTail];
     }
     [self.logTextView scrollToEndOfDocument:self];
-    
-    [_logReader sendStateNotification];
 }
 
 - (void)addViewController:(Class)aViewControllerClass
@@ -483,19 +480,6 @@ NSString * const AMJacktripLogNotification      = @"AMJacktripLogNotification";
         _viewControllers = [NSMutableArray array];
     }
     return _viewControllers;
-}
-
-- (void) removeLogFile
-{
-    NSString* jacktripLogPath = [NSString stringWithFormat:@"%@/Jacktrip.log", AMLogDirectory()];
-    NSString* rmCommand = [NSString stringWithFormat:@"rm %@ > /dev/null", jacktripLogPath];
-    const char *command = [rmCommand cStringUsingEncoding:NSUTF8StringEncoding];
-
-   /*
-    [NSTask launchedTaskWithLaunchPath:@"/usr/bin/killall"
-                             arguments:[NSArray arrayWithObjects:@"-c", @"iperf", nil]];
-    int n = system("killall -0 jackd >/dev/null");    */
-    int n = system(command);
 }
 
 @end

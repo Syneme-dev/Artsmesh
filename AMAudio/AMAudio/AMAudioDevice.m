@@ -12,6 +12,9 @@
 
 -(BOOL)isAggregateDevice
 {
+    // Disable this function.
+    return NO;
+    
     if(self.inChannels >0 && self.outChanels > 0){
         return YES;
     }

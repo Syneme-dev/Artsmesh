@@ -10,6 +10,9 @@
 
 @interface AMJacktripConfigs : NSObject
 
+// --rtaudio 
+@property NSString* backend;
+
 //-s, --server                             Run in Server Mode
 //-c, --client      <peer_host_IP_number>  Run in Client Mode
 @property NSString* role;
@@ -22,6 +25,10 @@
 
 //-n, --numchannels #                      Number of Input and Output Channels (default 2)
 @property NSString* channelCount;
+
+//-, --numchannels #                       Counter of recv Channels (default 2)
+@property NSString* recvCount;
+
 
 //-q, --queue       # (1 or more)          Queue Buffer Length, in Packet Size (default 4)
 @property NSString* qBufferLen;
@@ -46,5 +53,17 @@
 
 //--ipv6                                   User Ipv6 Protocol
 @property BOOL useIpv6;
+
+//--Hub Patch Mode
+@property NSString* hubPatch;
+
+//-- Buffer Strategy
+@property NSString* bufStrategy;
+
+//-i,                                       Include server in patching
+@property BOOL includeServer;
+
+//-u                                        Upmix mono clients to stereo
+@property BOOL monoToStereo;
 
 @end

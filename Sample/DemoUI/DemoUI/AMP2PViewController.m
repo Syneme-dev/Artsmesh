@@ -10,7 +10,7 @@
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
 #import "AMVideoDeviceManager.h"
-#import "AMSyphonView.h"
+//#import "AMSyphonView.h"
 #import <VideoToolbox/VideoToolbox.h>
 #import "AMNetworkUtils/JSONKit.h"
 #import "AMNetworkUtils/GCDAsyncUdpSocket.h"

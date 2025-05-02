@@ -46,7 +46,7 @@
     Usually you do this with the -D flag to the compiler. e.g.:
 
     $ g++ -DOSC_HOST_LITTLE_ENDIAN ...
-*/
+
 
 #if defined(OSC_HOST_LITTLE_ENDIAN) || defined(OSC_HOST_BIG_ENDIAN)
 
@@ -122,6 +122,10 @@
 #error please edit OSCHostEndianness.h or define one of {OSC_HOST_LITTLE_ENDIAN, OSC_HOST_BIG_ENDIAN} to configure endianness
 
 #endif
+ */
+ 
+#define OSC_HOST_LITTLE_ENDIAN 1
+#undef OSC_HOST_BIG_ENDIAN
 
 #endif /* INCLUDED_OSCPACK_OSCHOSTENDIANNESS_H */
 

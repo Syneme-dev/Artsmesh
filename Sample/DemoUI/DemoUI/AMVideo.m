@@ -37,31 +37,32 @@
 
 - (void)startSyphon
 {
-    if(_mixerViewController){
+ /*   if(_mixerViewController){
         if(_mixerViewController.syphonClientsManager){
             [_mixerViewController.syphonClientsManager startRouter];
         }
-    }
+    }*/
 }
 
 - (void)stopSyphon
 {
-    if(_mixerViewController){
+/*    if(_mixerViewController){
         if(_mixerViewController.syphonClientsManager){
             [_mixerViewController.syphonClientsManager stopRouter];
         }
-    }
+    }*/
 }
 
 -(BOOL)isSyphonServerStarted
 {
-    if(_mixerViewController){
+ /*   if(_mixerViewController){
         if(_mixerViewController.syphonClientsManager){
             return [_mixerViewController.syphonClientsManager isSyphonServerStarted];
         }
     }
     
-    return NO;
+    return NO;*/
+    return YES;
 }
 
 @end

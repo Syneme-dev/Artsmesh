@@ -50,7 +50,7 @@
     
     //Launch OSCGroupClient
     NSBundle* mainBundle = [NSBundle mainBundle];
-    NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"OscGroupClient"]];
+    NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"%@", [mainBundle pathForAuxiliaryExecutable:@"OscGroupClient"]];
     
     [commandline appendFormat:@" %@ %@ %@ %@ %@ %@ %@ %@ %@ %@ %@",
      self.serverAddr, self.serverPort,
@@ -58,10 +58,11 @@
      self.rxPort, self.userName,
      self.userPwd, self.groupName,
      self.groupPwd, self.monitorAddr,
-     self.monitorPort];
+    self.monitorPort];
     
     NSString *systemLogPath = AMLogDirectory();
-    [commandline appendFormat:@" %@/OSC_Client.log", systemLogPath];
+    [commandline appendFormat:@" > %@/OSC_Client.log", systemLogPath];
+
     
     [_task terminate];
     _task = [[NSTask alloc] init];

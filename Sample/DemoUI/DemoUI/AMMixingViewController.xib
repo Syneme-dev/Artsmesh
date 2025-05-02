@@ -1,8 +1,9 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9060"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21701"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="AMMixingViewController">
@@ -21,20 +22,18 @@
             <subviews>
                 <tabView drawsBackground="NO" type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="IvW-AE-wDy">
                     <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
-                    <animations/>
                     <font key="font" metaFont="system"/>
                     <tabViewItems>
                         <tabViewItem label="VIDEO" identifier="1" id="NF0-OA-Rwq">
                             <view key="view" identifier="Video Mixer" id="FvG-wM-AMY">
+                                <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <animations/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="AUDIO" identifier="2" id="bzf-ck-IUs">
                             <view key="view" identifier="Audio Mixer" id="0NF-gq-SD2">
                                 <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <animations/>
                             </view>
                         </tabViewItem>
                         <tabViewItem label="OUTPUT" identifier="" id="2k8-Yt-b7W">
@@ -44,11 +43,10 @@
                                 <subviews>
                                     <imageView horizontalHuggingPriority="100" verticalHuggingPriority="100" horizontalCompressionResistancePriority="100" verticalCompressionResistancePriority="100" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xrH-QL-xhi">
                                         <rect key="frame" x="0.0" y="0.0" width="1107" height="915"/>
-                                        <animations/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                         <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="axesIndependently" image="shot_mainOutput" id="rgf-wz-8O1"/>
                                     </imageView>
                                 </subviews>
-                                <animations/>
                             </view>
                         </tabViewItem>
                     </tabViewItems>
@@ -59,7 +57,6 @@
                         <constraint firstAttribute="height" constant="13" id="3of-2K-djm"/>
                         <constraint firstAttribute="width" constant="38" id="PgW-0c-wfW"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="inline" title="VIDEO" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="9zL-e0-h1e">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
@@ -74,7 +71,6 @@
                         <constraint firstAttribute="height" constant="17" id="jYY-lZ-Gk2"/>
                         <constraint firstAttribute="width" constant="4" id="zvR-Wd-5C2"/>
                     </constraints>
-                    <animations/>
                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="|" id="mEb-I7-mdl">
                         <font key="font" metaFont="system"/>
                         <color key="textColor" red="0.18039215689999999" green="0.2274509804" blue="0.29411764709999999" alpha="0.84999999999999998" colorSpace="calibratedRGB"/>
@@ -87,7 +83,6 @@
                         <constraint firstAttribute="width" constant="40" id="7ro-Jq-Xc9"/>
                         <constraint firstAttribute="height" constant="13" id="RF6-bs-km7"/>
                     </constraints>
-                    <animations/>
                     <buttonCell key="cell" type="inline" title="AUDIO" bezelStyle="inline" alignment="center" imageScaling="proportionallyDown" inset="2" id="QLQ-Cg-T9P">
                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system" size="10"/>
@@ -109,7 +104,7 @@
                 <constraint firstItem="QPj-Wf-kEx" firstAttribute="leading" secondItem="4O6-Ou-FXf" secondAttribute="trailing" constant="8" id="pUJ-SK-DIJ"/>
                 <constraint firstAttribute="bottom" secondItem="IvW-AE-wDy" secondAttribute="bottom" id="yQK-MF-3c9"/>
             </constraints>
-            <animations/>
+            <point key="canvasLocation" x="66" y="-36"/>
         </customView>
     </objects>
     <resources>

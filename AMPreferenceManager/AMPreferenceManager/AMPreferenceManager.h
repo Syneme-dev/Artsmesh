@@ -130,6 +130,7 @@
 //////////////////////////Jacktrip Default///////////////////////////////////
 #define Preference_Jacktrip_Role            @"Preference_Jacktrip_Role"
 #define Preference_Jacktrip_ChannelCount    @"Preference_Jacktrip_ChannelCount"
+#define Preference_Jacktrip_RecvCount       @"Preference_Jacktrip_RecvCount"
 #define Preference_Jacktrip_QBL             @"Preference_Jacktrip_QBL"
 #define Preference_Jacktrip_PR              @"Preference_Jacktrip_PR"
 #define Preference_Jacktrip_BRR             @"Preference_Jacktrip_BRR"
@@ -137,6 +138,10 @@
 #define Preference_Jacktrip_Loopback        @"Preference_Jacktrip_Loopback"
 #define Preference_Jacktrip_Jamlink         @"Preference_Jacktrip_Jamlink"
 #define Preference_Jacktrip_UseIpv6         @"Preference_Jacktrip_UseIpv6"
+#define Preference_Jacktrip_HubPatch        @"Preference_Jacktrip_HubPatch"
+#define Preference_Jacktrip_BufStrategy     @"Preference_Jacktrip_BufStrategy"
+#define Preference_Jacktrip_IncludeServer   @"Preference_Jacktrip_IncludeServer"
+#define Preference_Jacktrip_MonoToStereo    @"Preference_Jacktrip_MonoToStereo"
 
 /////////////////////////iPerf Default/////////////////////////
 #define Preference_iPerf_Role               @"Preference_iPerf_Role"

@@ -1,6 +1,0 @@
-framework module TL_TCPSyphonSDK {
-  umbrella header "TL_TCPSyphonSDK.h"
-
-  export *
-  module * { export * }
-}

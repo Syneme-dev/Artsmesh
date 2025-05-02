@@ -278,12 +278,15 @@ shouldRemoveDevice:(NSString *)deviceID;
 // the Pop-Up view, the whole NSPopover window disappear. So change it to window implentation.
 - (IBAction)startJackTrip:(NSButton *)sender
 {
+    
+    /* 
     if ([[AMAudio sharedInstance] audioJackManager].jackState == JackState_Stopped) {
         
         NSAlert *alert = [NSAlert alertWithMessageText:@"Jack is not running" defaultButton:@"Ok" alternateButton:nil otherButton:nil informativeTextWithFormat:@"To start jacktrip you must start JACK first!"];
         [alert runModal];
         return;
     }
+     */
 //    NSBundle* myBundle = [NSBundle bundleWithIdentifier:@"com.artsmesh.audioFramework"];
 
     [self initJackTripConfig];

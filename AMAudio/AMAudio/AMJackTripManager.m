@@ -38,25 +38,39 @@
 
 -(BOOL)startJacktrip:(AMJacktripConfigs *)cfgs
 {
-    NSBundle* mainBundle = [NSBundle mainBundle];
-    NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", [mainBundle pathForAuxiliaryExecutable:@"jacktrip"]];
+    //NSBundle* mainBundle = [NSBundle mainBundle];
+   // NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"\"%@\"", ..[mainBundle pathForAuxiliaryExecutable:@"jacktrip"]];
+    NSMutableString* commandline = [[NSMutableString alloc] initWithFormat:@"/usr/local/bin/jacktrip"];
     
     //-s or -c
-    if([cfgs.role isEqualToString:@"SERVER"]){
+    if([cfgs.role isEqualToString:@"P2P SERVER"]){
         [commandline appendFormat:@" -s"];
-    }else{
+    }else if([cfgs.role isEqualToString:@"P2P CLIENT"]){
         [commandline appendFormat:@" -c %@", cfgs.serverAddr];
+    }else if([cfgs.role isEqualToString:@"HUB SERVER"]){
+        [commandline appendFormat:@" -S"];
+    }else{
+        [commandline appendFormat:@" -C %@", cfgs.serverAddr];
+    }
+    
+    // RT Audio
+    if([cfgs.backend isEqualToString:@"RtAudio"]){
+        [commandline appendFormat:@" --rtaudio"];
     }
 
     //port offset
     [commandline appendFormat:@" -o %@", cfgs.portOffset];
 
     //channel numbers
-    [commandline appendFormat:@" -n %@", cfgs.channelCount];
+    //[commandline appendFormat:@" -n %@", cfgs.channelCount];
+    [commandline appendFormat:@" --sendchannels %@",   cfgs.channelCount];
+    [commandline appendFormat:@" --receivechannels %@", cfgs.recvCount];
+    
 
     //-q
-    [commandline appendFormat:@" -q %@", cfgs.qBufferLen];
-
+    //[commandline appendFormat:@" -q %@", cfgs.qBufferLen];
+    [commandline appendFormat:@" -q auto"];
+    
     //-r
     [commandline appendFormat:@" -r %@", cfgs.rCount];
 
@@ -82,6 +96,32 @@
     if (cfgs.useIpv6) {
         [commandline appendFormat:@" -V"];
     }
+    
+    if([cfgs.role isEqualToString:@"HUB SERVER"]){
+        [commandline appendFormat:@" -p %@", cfgs.hubPatch];
+        
+        if([cfgs.hubPatch isEqualToString:@"3"] ||
+           [cfgs.hubPatch isEqualToString:@"4"])
+        {
+            if(cfgs.includeServer)
+            {
+                [commandline appendFormat:@" -i"];
+            }
+        }
+        
+        //
+        if(cfgs.monoToStereo){
+            [commandline appendFormat:@" -u"];
+        }
+    }
+    
+    if(![cfgs.bufStrategy isEqualToString:@"0"] &&
+       ![cfgs.bufStrategy isEqualToString:@"1"])
+    {
+        [commandline appendFormat:@" --bufstrategy %@", cfgs.bufStrategy];
+    }
+    
+    [commandline appendFormat:@" --udprt"];
     
     NSString *systemLogPath = AMLogDirectory();
 

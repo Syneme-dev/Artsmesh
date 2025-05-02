@@ -7,12 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
-#import "AMSyphonClientsManager.h"
+//#import "AMSyphonClientsManager.h"
 #import "AMPanelViewController.h"
 
 @interface AMVideoMixerViewController : NSViewController<AMActionDelegate>
 
-@property (strong, nonatomic) AMSyphonClientsManager*   syphonClientsManager;
-@property (strong, nonatomic) AMP2PViewManager*         p2pViewManager;
+//@property (strong, nonatomic) AMSyphonClientsManager*   syphonClientsManager;
+//@property (strong, nonatomic) AMP2PViewManager*         p2pViewManager;
 
 @end

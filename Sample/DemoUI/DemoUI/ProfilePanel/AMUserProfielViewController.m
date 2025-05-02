@@ -294,7 +294,7 @@
         
         self.myPopover.animates = YES;
         self.myPopover.behavior = NSPopoverBehaviorTransient;
-        self.myPopover.appearance = NSPopoverAppearanceHUD;
+        //! self.myPopover.appearance = NSPopoverAppearanceHUD;
         self.myPopover.delegate = self;
     }
     

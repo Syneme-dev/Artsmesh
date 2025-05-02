@@ -149,6 +149,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 			);
 			mainGroup = 37FCB95E18710E8600C1FD1B;
@@ -275,6 +276,7 @@
 				GCC_PREFIX_HEADER = "AMNotificationManager/AMNotificationManager-Prefix.pch";
 				INFOPLIST_FILE = "AMNotificationManager/AMNotificationManager-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
@@ -292,6 +294,7 @@
 				GCC_PREFIX_HEADER = "AMNotificationManager/AMNotificationManager-Prefix.pch";
 				INFOPLIST_FILE = "AMNotificationManager/AMNotificationManager-Info.plist";
 				INSTALL_PATH = "@executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = framework;
 			};

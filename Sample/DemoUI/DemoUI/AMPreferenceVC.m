@@ -9,11 +9,11 @@
 #import "AMPreferenceVC.h"
 #import "UIFramework/AMButtonHandler.h"
 #import "AMJackSettingsVC.h"
-#import "AMAccountSettingsVC.h"
+//#import "AMAccountSettingsVC.h"
 #import "AMOSCGroupSettingsVC.h"
 #import "AMJacktripSettingsVC.h"
 #import "AMGeneralSettingsVC.h"
-#import "AMVideoSettingsVC.h"
+//#import "AMVideoSettingsVC.h"
 #import "UIFramework/NSView_Constrains.h"
 
 
@@ -123,10 +123,12 @@
 
 -(void)loadVideoPage:(NSView *)tabView
 {
+    /*
     _videoSettingsVC = [[AMVideoSettingsVC alloc] init];
     if (_videoSettingsVC) {
         [tabView addConstrainsToSubview:_videoSettingsVC.view leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
     }
+     */
 }
 
 
@@ -145,6 +147,7 @@
 
 -(void)loadAccountPage:(NSView*)tabView
 {
+    /*
     if (_accountSettingsVC == nil) {
         _accountSettingsVC = [[AMAccountSettingsVC alloc] init];
     }
@@ -153,6 +156,7 @@
         [tabView addConstrainsToSubview:_accountSettingsVC.view
                            leadingSpace:0 trailingSpace:0 topSpace:0 bottomSpace:0];
     }
+     */
 }
 
 

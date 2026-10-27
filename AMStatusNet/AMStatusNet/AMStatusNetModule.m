@@ -21,7 +21,6 @@
                  withUserName:(NSString*)username
                  withPassword:(NSString*)password
 {
-    //curl -m 10 -u wangwei:wangwei1982 'http://syneme-asia.ccom.edu.cn/statusnet/index.php/api/statuses/update.xml'  -d status='xxxxcccc'  -D /dev/stdout -o /dev/null 2>/dev/null | head -1 | awk '{print $2}'
     
     NSString* commandStr = [NSString stringWithFormat:@"curl -m 10 -u %@:%@ \'%@/api/statuses/update.xml\'  -d status=\'%@\'  -D /dev/stdout -o /dev/null 2>/dev/null | head -1 | awk '{print $2}'", username, password, url, status];
     
